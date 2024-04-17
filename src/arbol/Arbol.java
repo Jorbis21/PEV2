@@ -3,18 +3,14 @@ package src.arbol;
 import java.util.ArrayList;
 import java.util.Random;
 
-import cromosoma.Cromosoma;
+import src.cromosoma.Cromosoma;
 
 public class Arbol {
     private String valor;
     private ArrayList<Arbol> hijos;
     private int numHijos;
-    private int numNodos;
     private int max_prof;
     private int profundidad;
-    private boolean useIF;
-    private boolean esHoja;
-    private boolean esRaiz;
 
     public Arbol(){
         hijos = new ArrayList<Arbol>();
@@ -29,13 +25,12 @@ public class Arbol {
         numHijos = 0;
     }
 
-    public Arbol(int profundidad, boolean useIf){
+    public Arbol(int profundidad){
         hijos = new ArrayList<Arbol>();
         numHijos = 0;
         numNodos = 0;
         valor = "";
         this.profundidad = profundidad;
-        this.useIF = useIf;
         esHoja = false;
         esRaiz = false;
     }
@@ -91,23 +86,15 @@ public class Arbol {
 		return s;
 	}
 
-    public int inicializacionCompleta(int profundidad, int nodos){
+    public int inicializacionCompleta(Cromosoma cr, int profundidad, int nodos){
         int n = nodos;
         int nHijos = 2;
         if(profundidad < max_prof){
             setProfundidad(profundidad);
             Random rnd = new Random();
-            int func = 0;
-            if(useIF)
-                func = rnd.nextInt(Cromosoma.funciones.length);
-            else
-                func = rnd.nextInt(Cromosoma.funciones.length-1);
-            
+
             this.valor = Cromosoma.funciones[func];
             this.setEsRaiz(true);
-            
-            //... AQUI se acaba lo que nos da el profesor xdxdxd
-           
         }
         
         return n;
@@ -163,14 +150,6 @@ public class Arbol {
         this.profundidad = profundidad;
     }
 
-    public boolean isUseIF() {
-        return useIF;
-    }
-
-    public void setUseIF(boolean useIF) {
-        this.useIF = useIF;
-    }
-
     public boolean isEsHoja() {
         return esHoja;
     }
@@ -185,6 +164,13 @@ public class Arbol {
 
     public void setEsRaiz(boolean esRaiz) {
         this.esRaiz = esRaiz;
+    }
+    private class Nodo{
+    	String valor;
+    	boolean esHijo;
+    	boolean esRaiz;
+    	boolean esNodo;
+    	
     }
 }
 

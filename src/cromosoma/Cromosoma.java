@@ -5,9 +5,8 @@ import src.arbol.Arbol;
 public class Cromosoma{
     // aqui el profe nos pone puntos suspensivos
 
-    public static String terminales[];
-    public static String terminales6[] = {"A0", "A1", "D0", "D1", "D2", "D3"};
-    public static String funciones[] = {"AND", "OR", "NOT", "IF"}; 
+    public static String terminales[] = {"IZQUIERDA", "AVANZA", "CONSTANTE"};
+    public static String funciones[] = {"SUMA", "SALTO", "PROGN"}; 
 
     private Arbol arbol;
     private double fitness;
