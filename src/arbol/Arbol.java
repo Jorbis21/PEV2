@@ -7,13 +7,13 @@ import src.cromosoma.Cromosoma;
 import src.utils.Pair;
 
 public class Arbol {
-	
 	static int max_prof;
 	
 	private Nodo raiz;
     private int numNodos;
     private int profundidad;
-
+    Random rand = new Random();
+    
     public Arbol(){
         numNodos = 0;
     }
@@ -49,33 +49,41 @@ public class Arbol {
 			hijos.set(index, a);
 	}
 
-    public Arbol at(int index){
-		return at(this, 0, index);
-	}
-	
-	private Arbol at(Arbol a, int pos, int index){
-		Arbol s = null;
-		if(pos >= index) s = a;
-		else if(a.getNumHijos() > 0)
-		{
-			for(int i = 0; i < a.getNumHijos(); i++)
-				if(s == null) s = at(a.getHijos().get(i), pos+i+1, index);
-		}
-		return s;
-	}
-
-    public int inicializacionCompleta(Cromosoma cr, int profundidad, int nodos){
-        int n = nodos;
-        int nHijos = 2;
+    public Nodo inicializacionCompleta(int profundidad, Nodo ant){
+    	int numHijos = 0, aleat;
+    	String valor; Nodo aux = new Nodo();
         if(profundidad < max_prof){
             setProfundidad(profundidad);
-            Random rnd = new Random();
-
-            this.valor = Cromosoma.funciones[func];
-            this.setEsRaiz(true);
+            numHijos = 0; aleat = rand.nextInt(Cromosoma.funciones.length);
+            valor = Cromosoma.funciones[aleat];
+            if(valor == "SUMA" || valor == "PROGN")
+            	numHijos = 2;
+            else
+            	numHijos = 1;
+            aux = new Nodo(valor, ant, null, null, numHijos);
+            if(numHijos == 2) {
+            	aux.izq = inicializacionCompleta(profundidad+1, aux);
+            	aux.der = inicializacionCompleta(profundidad+1, aux);
+            }
+            else {
+            	aux.izq = inicializacionCompleta(profundidad+1, aux);
+            }
+            if(aux.esRaiz()) {
+            	this.raiz = aux;
+            }
         }
-        
-        return n;
+        else if(profundidad == (max_prof - 1)) {
+        	setProfundidad(profundidad);
+            numHijos = 0; aleat = rand.nextInt(Cromosoma.terminales.length);
+            valor = Cromosoma.terminales[aleat];
+            Pair numVal = new Pair();
+            aux = new Nodo(valor, ant, null, null, numHijos);
+            if(valor == "CONSTANTE") {
+            	numVal = new Pair(rand.nextInt(Cromosoma.dimension), rand.nextInt(Cromosoma.dimension));
+            	aux.setNumval(numVal);
+            }
+        }
+        return aux;
     }
 
 
@@ -110,6 +118,15 @@ public class Arbol {
     	Pair numVal;
     	Nodo ant, izq, der;
     	int numHijos;
+    	
+    	public Nodo(){
+    		this.valor = null;
+    		numVal = new Pair();
+    		this.ant = null;
+    		this.izq = null;
+    		this.der = null;
+    		this.numHijos = 0;
+    	}
     	
     	public Nodo(String valor, Nodo ant, Nodo izq, Nodo der, int numHijos){
     		this.valor = null;
@@ -157,23 +174,23 @@ public class Arbol {
     		this.valor = valor;
     	}
     	
-    	public void getNumval(Pair numVal) {
+    	public void setNumval(Pair numVal) {
     		this.numVal = numVal;
     	}
     	
-    	public void getNumhijos(int numHijos) {
+    	public void setNumhijos(int numHijos) {
     		this.numHijos = numHijos;
     	}
     	
-    	public void getAnt(Nodo ant) {
+    	public void setAnt(Nodo ant) {
     		this.ant = ant;
     	}
     	
-    	public void getIzq(Nodo izq) {
+    	public void setIzq(Nodo izq) {
     		this.izq = izq;
     	}
     	
-    	public void getDer(Nodo der) {
+    	public void setDer(Nodo der) {
     		this.der = der;
     	}
     }

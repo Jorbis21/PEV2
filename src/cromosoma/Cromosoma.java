@@ -6,7 +6,8 @@ public class Cromosoma{
     // aqui el profe nos pone puntos suspensivos
 
     public static String terminales[] = {"IZQUIERDA", "AVANZA", "CONSTANTE"};
-    public static String funciones[] = {"SUMA", "SALTO", "PROGN"}; 
+    public static String funciones[] = {"SUMA", "SALTO", "PROGN"};
+    public static int dimension = 8;
 
     private Arbol arbol;
     private double fitness;
@@ -22,14 +23,14 @@ public class Cromosoma{
                 arbol.inicializacionCreciente(0);
                 break;
             case 1:
-                arbol.inicializacionCompleta(0, 0);
+                arbol.inicializacionCompleta(0, null);
                 break;
             case 2:
                 int ini = new Random().nextInt(2);
                 if(ini == 0)
                     arbol.inicializacionCreciente(0);
                 else
-                    arbol.inicializacionCompleta(0, 0);
+                    arbol.inicializacionCompleta(0, null);
                 break;
         }
     }
