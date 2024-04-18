@@ -4,35 +4,24 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import src.cromosoma.Cromosoma;
+import src.utils.Pair;
 
 public class Arbol {
-    private String valor;
-    private ArrayList<Arbol> hijos;
-    private int numHijos;
-    private int max_prof;
+	
+	static int max_prof;
+	
+	private Nodo raiz;
+    private int numNodos;
     private int profundidad;
 
     public Arbol(){
-        hijos = new ArrayList<Arbol>();
-        numHijos = 0;
         numNodos = 0;
-        valor = "";
     }
 
-    public Arbol(String v){
-        valor = v;
-        hijos = new ArrayList<Arbol>();
-        numHijos = 0;
-    }
 
     public Arbol(int profundidad){
-        hijos = new ArrayList<Arbol>();
-        numHijos = 0;
         numNodos = 0;
-        valor = "";
         this.profundidad = profundidad;
-        esHoja = false;
-        esRaiz = false;
     }
 
     // Develeve el arbol en forma de array
@@ -49,17 +38,6 @@ public class Arbol {
         }
     }
 
-    // Insertar un valor en el arbol (nodo simple)
-    public Arbol insert(String v, int index){
-		Arbol a = new Arbol(v);
-		if(index == -1){
-			hijos.add(a);
-			numHijos = hijos.size();
-		}
-		else
-			hijos.set(index, a);
-		return a;
-	}
 
     // Insertar un arbol en otro arbol.
 	public void insert(Arbol a, int index){
@@ -102,29 +80,6 @@ public class Arbol {
 
 
     /// Getters & Setters ---------------------------------------------------------
-    public String getValor() {
-        return valor;
-    }
-
-    public void setValor(String valor) {
-        this.valor = valor;
-    }
-
-    public ArrayList<Arbol> getHijos() {
-        return hijos;
-    }
-
-    public void setHijos(ArrayList<Arbol> hijos) {
-        this.hijos = hijos;
-    }
-
-    public int getNumHijos() {
-        return numHijos;
-    }
-
-    public void setNumHijos(int numHijos) {
-        this.numHijos = numHijos;
-    }
 
     public int getNumNodos() {
         return numNodos;
@@ -150,27 +105,77 @@ public class Arbol {
         this.profundidad = profundidad;
     }
 
-    public boolean isEsHoja() {
-        return esHoja;
-    }
-
-    public void setEsHoja(boolean esHoja) {
-        this.esHoja = esHoja;
-    }
-
-    public boolean isEsRaiz() {
-        return esRaiz;
-    }
-
-    public void setEsRaiz(boolean esRaiz) {
-        this.esRaiz = esRaiz;
-    }
     private class Nodo{
     	String valor;
-    	boolean esHijo;
-    	boolean esRaiz;
-    	boolean esNodo;
+    	Pair numVal;
+    	Nodo ant, izq, der;
+    	int numHijos;
     	
+    	public Nodo(String valor, Nodo ant, Nodo izq, Nodo der, int numHijos){
+    		this.valor = null;
+    		numVal = new Pair();
+    		this.ant = ant;
+    		this.izq = izq;
+    		this.der = der;
+    		this.numHijos = numHijos;
+    	}
+    	
+    	public boolean esRaiz() {
+    		return this.ant == null;
+    	}
+    	
+    	public boolean esHoja() {
+    		return this.izq == null && this.der == null;
+    	}
+    	
+    	public String getValor() {
+    		return this.valor;
+    	}
+    	
+    	public Pair getNumval() {
+    		return this.numVal;
+    	}
+    	
+    	public int getNumhijos() {
+    		return this.numHijos;
+    	}
+    	
+    	public Nodo getAnt() {
+    		return this.ant;
+    	}
+    	
+    	public Nodo getIzq() {
+    		return this.izq;
+    	}
+    	
+    	public Nodo getDer() {
+    		return this.der;
+    	}
+    	
+    	
+    	public void setValor(String valor) {
+    		this.valor = valor;
+    	}
+    	
+    	public void getNumval(Pair numVal) {
+    		this.numVal = numVal;
+    	}
+    	
+    	public void getNumhijos(int numHijos) {
+    		this.numHijos = numHijos;
+    	}
+    	
+    	public void getAnt(Nodo ant) {
+    		this.ant = ant;
+    	}
+    	
+    	public void getIzq(Nodo izq) {
+    		this.izq = izq;
+    	}
+    	
+    	public void getDer(Nodo der) {
+    		this.der = der;
+    	}
     }
 }
 
