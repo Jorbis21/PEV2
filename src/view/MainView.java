@@ -15,13 +15,10 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 import org.math.plot.Plot2DPanel;
 
-import src.aeropuerto.Aeropuerto;
 import src.cruce.ICruce;
-import src.individuo.Individuo;
 import src.mutacion.IMutacion;
 import src.seleccion.ISeleccion;
 import src.utils.Pair;
-import src.utils.Solution;
 import src.AlgoritmoGenetico;
 
 import org.eclipse.swt.widgets.Button;
@@ -53,8 +50,6 @@ public class MainView {
 	private ArrayList<String> crucesString = new ArrayList<String>();
 	private ArrayList<IMutacion> mutaciones = new ArrayList<IMutacion>();
 	private ArrayList<String> mutacionesString = new ArrayList<String>();
-	private ArrayList<Aeropuerto> aeropuertos = new ArrayList<Aeropuerto>();
-	private ArrayList<String> aeropuertosString = new ArrayList<String>();
 
 
 	/**

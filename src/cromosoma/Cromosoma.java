@@ -1,5 +1,7 @@
 package src.cromosoma;
 
+import java.util.Random;
+
 import src.arbol.Arbol;
 
 public class Cromosoma{
@@ -17,18 +19,18 @@ public class Cromosoma{
     private String fenotipo;
 
     public Cromosoma(int profundidad, int tipoCreacion, boolean useIf, int tipoMultiplexor){
-        arbol = new Arbol(profundidad, useIf);
+        arbol = new Arbol(profundidad);
         switch(tipoCreacion){
             case 0:
-                arbol.inicializacionCreciente(0);
+                arbol.inicializacionCreciente(0, null);
                 break;
             case 1:
                 arbol.inicializacionCompleta(0, null);
                 break;
             case 2:
-                int ini = new Random().nextInt(2);
-                if(ini == 0)
-                    arbol.inicializacionCreciente(0);
+                Random rand = new Random();
+                if(rand.nextDouble() >= 0.5)
+                    arbol.inicializacionCreciente(0, null);
                 else
                     arbol.inicializacionCompleta(0, null);
                 break;

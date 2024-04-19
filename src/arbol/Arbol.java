@@ -23,70 +23,82 @@ public class Arbol {
         numNodos = 0;
         this.profundidad = profundidad;
     }
-
-    // Develeve el arbol en forma de array
-    public ArrayList<String> toArray(){
-        ArrayList<String> array = new ArrayList<String>();
-        toArrayAux(array, this);
-        return array;
+    
+    
+    public void insert() {
+    	
     }
     
-    private void toArrayAux(ArrayList<String> array, Arbol a){
-        array.add(a.valor);
-        for(int i = 0; i < a.hijos.size(); i++){
-            toArrayAux(array, a.hijos.get(i));
+    public void toArray() {
+    	
+    }
+    
+    private void iniFunc(int numHijos, int aleat, int profundidad, String valor, Nodo aux, Nodo ant) {
+    	setProfundidad(profundidad);
+        numHijos = 0; aleat = rand.nextInt(Cromosoma.funciones.length);
+        valor = Cromosoma.funciones[aleat];
+        if(valor == "SUMA" || valor == "PROGN")
+        	numHijos = 2;
+        else
+        	numHijos = 1;
+        aux = new Nodo(valor, ant, null, null, numHijos);
+        if(numHijos == 2) {
+        	aux.izq = inicializacionCompleta(profundidad+1, aux);
+        	aux.der = inicializacionCompleta(profundidad+1, aux);
+        }
+        else {
+        	aux.izq = inicializacionCompleta(profundidad+1, aux);
+        }
+        if(aux.esRaiz()) {
+        	this.raiz = aux;
         }
     }
-
-
-    // Insertar un arbol en otro arbol.
-	public void insert(Arbol a, int index){
-		if(index == -1){
-			hijos.add(a);
-			numHijos = hijos.size();
-		}
-		else
-			hijos.set(index, a);
-	}
-
+    
+    private void iniTerm(int numHijos, int aleat, int profundidad, String valor, Nodo aux, Nodo ant) {
+    	setProfundidad(profundidad);
+        numHijos = 0; aleat = rand.nextInt(Cromosoma.terminales.length);
+        valor = Cromosoma.terminales[aleat];
+        Pair numVal = new Pair();
+        aux = new Nodo(valor, ant, null, null, numHijos);
+        if(valor == "CONSTANTE") {
+        	numVal = new Pair(rand.nextInt(Cromosoma.dimension), rand.nextInt(Cromosoma.dimension));
+        	aux.setNumval(numVal);
+        }
+    }
     public Nodo inicializacionCompleta(int profundidad, Nodo ant){
-    	int numHijos = 0, aleat;
-    	String valor; Nodo aux = new Nodo();
+    	int numHijos = 0, aleat = -1;
+    	String valor = null; Nodo aux = new Nodo();
         if(profundidad < max_prof){
-            setProfundidad(profundidad);
-            numHijos = 0; aleat = rand.nextInt(Cromosoma.funciones.length);
-            valor = Cromosoma.funciones[aleat];
-            if(valor == "SUMA" || valor == "PROGN")
-            	numHijos = 2;
-            else
-            	numHijos = 1;
-            aux = new Nodo(valor, ant, null, null, numHijos);
-            if(numHijos == 2) {
-            	aux.izq = inicializacionCompleta(profundidad+1, aux);
-            	aux.der = inicializacionCompleta(profundidad+1, aux);
-            }
-            else {
-            	aux.izq = inicializacionCompleta(profundidad+1, aux);
-            }
-            if(aux.esRaiz()) {
-            	this.raiz = aux;
-            }
+        	iniFunc(numHijos, aleat, profundidad, valor, aux, ant);
         }
         else if(profundidad == (max_prof - 1)) {
-        	setProfundidad(profundidad);
-            numHijos = 0; aleat = rand.nextInt(Cromosoma.terminales.length);
-            valor = Cromosoma.terminales[aleat];
-            Pair numVal = new Pair();
-            aux = new Nodo(valor, ant, null, null, numHijos);
-            if(valor == "CONSTANTE") {
-            	numVal = new Pair(rand.nextInt(Cromosoma.dimension), rand.nextInt(Cromosoma.dimension));
-            	aux.setNumval(numVal);
-            }
+        	iniTerm(numHijos, aleat, profundidad, valor, aux, ant);
         }
         return aux;
     }
-
-
+    
+  
+    public Nodo inicializacionCreciente(int profundidad, Nodo ant){
+    	int numHijos = 0, aleat = -1;
+    	String valor = null; Nodo aux = new Nodo();
+        if(profundidad < max_prof){
+            if(profundidad == 0) {
+            	iniFunc(numHijos, aleat, profundidad, valor, aux, ant);
+            }
+            else {
+            	if(rand.nextDouble() >= 0.5) {
+            		iniFunc(numHijos, aleat, profundidad, valor, aux, ant);
+            	}
+            	else {
+            		iniTerm(numHijos, aleat, profundidad, valor, aux, ant);
+            	}
+            }
+        }
+        else {
+        	iniTerm(numHijos, aleat, profundidad, valor, aux, ant);
+        }
+        return aux;
+    }
     /// Getters & Setters ---------------------------------------------------------
 
     public int getNumNodos() {
