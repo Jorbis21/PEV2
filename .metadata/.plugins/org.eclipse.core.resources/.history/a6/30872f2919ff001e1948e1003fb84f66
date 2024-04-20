@@ -1,0 +1,39 @@
+package src.view;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import java.awt.GridLayout;
+import javax.swing.JTabbedPane;
+
+public class MainView{
+	public MainView() {
+		JFrame frame = new JFrame("Grid");
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setSize(800, 800);
+
+		JTabbedPane tabbedPane = new JTabbedPane();
+
+		// First tab - Grid
+		JPanel mainPanel = new JPanel(new GridLayout(1, 2, 10, 2));
+		// Existing code...
+
+		tabbedPane.addTab("Grid", mainPanel);
+
+		// Second tab - Graph
+		JPanel graphPanel = new JPanel();
+		// Add your graph-related components and logic here...
+
+		tabbedPane.addTab("Graph", graphPanel);
+
+		frame.add(tabbedPane);
+		frame.pack();
+		frame.setVisible(true);
+	}
+	
+	public static void main(String args[]) {
+		new MainView();
+	}
+}
