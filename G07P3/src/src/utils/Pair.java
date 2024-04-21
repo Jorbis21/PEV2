@@ -10,14 +10,14 @@ public class Pair {
   }
   
   public Pair() {
-	this.first = -1;
-	this.second = -1;
+	this.first = 0;
+	this.second = 0;
   }
   
   public Pair suma(Pair that, int dimension) {
 	  this.first += that.first;
 	  this.second += that.second;
-	  if(this.first > dimension) {
+	  if(this.first > 8) {
 		  this.first = this.first % dimension;
 	  }
 	  if(this.second > dimension) {
@@ -41,4 +41,7 @@ public class Pair {
     this.second = second;
   }
 
+  public String toString() {
+	  return "(" + first + "," + second + ")";
+  }
 }

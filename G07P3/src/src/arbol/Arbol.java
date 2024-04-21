@@ -23,13 +23,11 @@ public class Arbol {
         this.profundidad = profundidad;
     }
     
-    
-    public void insert() {
-    	
-    }
-    
-    public void toArray() {
-    	
+    public String toString(Nodo act) {
+    	if(act.esHoja()) {
+    		
+    	}
+    	return "";
     }
     
     private void iniFunc(int numHijos, int aleat, int profundidad, String valor, Nodo aux, Nodo ant) {
@@ -61,8 +59,8 @@ public class Arbol {
         aux = new Nodo(valor, ant, null, null, numHijos);
         if(valor == "CONSTANTE") {
         	numVal = new Pair(rand.nextInt(Cromosoma.dimension), rand.nextInt(Cromosoma.dimension));
-        	aux.setNumval(numVal);
         }
+        aux.setNumval(numVal);
     }
     public Nodo inicializacionCompleta(int profundidad, Nodo ant){
     	int numHijos = 0, aleat = -1;
