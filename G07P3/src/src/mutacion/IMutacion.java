@@ -1,5 +1,9 @@
 package src.mutacion;
 
-public interface IMutacion {
+import java.util.Random;
 
+import src.cromosoma.Cromosoma;
+
+public interface IMutacion {
+    public Cromosoma mutar(Cromosoma programa, Random rand, double probMut);
 }

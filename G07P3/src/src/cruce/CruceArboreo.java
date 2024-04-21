@@ -16,11 +16,11 @@ public class CruceArboreo implements ICruce {
 
     if (rand.nextDouble() < probCruce) {
       // get random nodes from both parents
-      Cromosoma hijo1 = new Cromosoma(padre1.copia());
-      Cromosoma hijo2 = new Cromosoma(padre2.copia());
+      //Cromosoma hijo1 = new Cromosoma(padre1.copia());
+      //Cromosoma hijo2 = new Cromosoma(padre2.copia());
 
-      Nodo nodo1 = hijo1.getArbol().getRandomNode();
-      Nodo nodo2 = hijo2.getArbol().getRandomNode();
+      //Nodo nodo1 = hijo1.getArbol().getRandomNode();
+      //Nodo nodo2 = hijo2.getArbol().getRandomNode();
 
       /*
        * swap nodes -- no se muy bien como hacerlo sin romper la encapsulacion que
@@ -29,8 +29,8 @@ public class CruceArboreo implements ICruce {
        */
 
       // despues de hacer el swap
-      nuevaGeneracion.add(hijo1);
-      nuevaGeneracion.add(hijo2);
+      //nuevaGeneracion.add(hijo1);
+      //nuevaGeneracion.add(hijo2);
     } else {
       nuevaGeneracion.add(padre1);
       nuevaGeneracion.add(padre2);
