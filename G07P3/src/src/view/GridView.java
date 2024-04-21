@@ -12,13 +12,13 @@ public class GridView {
 	JPanel buttonPanel;
 	JPanel rightPanel;
 
-	public GridView(int dim) {
+	public GridView(int x, int y) {
 		// Button panel ----------------------------------------------------
 		buttonPanel = new JPanel();
-		buttonPanel.setLayout(new GridLayout(dim, dim));
-		JButton[][] buttons = new JButton[dim][dim];
-		for (int i = 0; i < dim; i++) {
-			for (int j = 0; j < dim; j++) {
+		buttonPanel.setLayout(new GridLayout(x, y));
+		JButton[][] buttons = new JButton[x][y];
+		for (int i = 0; i < x; i++) {
+			for (int j = 0; j < y; j++) {
 				buttons[i][j] = new JButton();
 				buttons[i][j].addActionListener(e -> {
 					JButton button = (JButton) e.getSource();

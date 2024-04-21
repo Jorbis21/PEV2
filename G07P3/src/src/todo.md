@@ -1,0 +1,2 @@
+-[] getNodoTerminalAleatorio(rand) // devuelvo un nodo terminal aleatorio
+-[] getNodoNoHojaAleatorio(rand)  // devuelvo un nodo no hoja aleatorio 

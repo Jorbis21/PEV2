@@ -30,7 +30,7 @@ public class MainView{
 
 		// Left panel
 		
-		GridView gridView = new GridView(8);
+		GridView gridView = new GridView(8, 8);
 		JPanel buttonPanel = gridView.getButtonPanel();
 		mainPanel.add(buttonPanel);
 
