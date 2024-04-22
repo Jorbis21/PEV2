@@ -23,6 +23,8 @@ public class Cromosoma{
     private String dir = direcciones[posDir];
     private int fitness;
     private String fenotipo;
+    private int numIz = 0;
+    private int numOp = 0;
     
 
     public Cromosoma(int profundidad, int tipoCreacion){
@@ -57,6 +59,7 @@ public class Cromosoma{
     	}
     }
     private void avanza() {
+    	numOp++;
     	switch(dir) {
 		case "Arriba":
 			posicion = posicion.suma(new Pair(0,1), dimension);
@@ -85,6 +88,7 @@ public class Cromosoma{
 		fitness += 9;
     }
     private void ejecIzq() {
+    	numIz++;
     	posDir++;
 		if(posDir == direcciones.length)
 			posDir = 0;
@@ -118,6 +122,7 @@ public class Cromosoma{
 		return izqVal.suma(derVal, dimension);
     }
     private Pair calcSalta(Nodo act) {
+    	numOp++;
     	Pair newPos = calcFit(act.getIzq());
 		posicion = posicion.suma(newPos, dimension);
 		if(tablero[posicion.getFirst()][posicion.getSecond()] == 0) {
@@ -140,27 +145,29 @@ public class Cromosoma{
 		return newPos;
     }
     private Pair calcFit(Nodo act) {
-    	String val = act.getValor();
-    	if(act.esHoja()) {
-    		if(val == "IZQUIERDA") {
-    			ejecIzq();
-    		}
-    		else if(val == "AVANZA") {
-    			ejecAvanza();
-    		}
-    		return act.getNumval();
-    	}
-    	else {
-    		if(val == "SUMA") {
-    			return calcSum(act);
-    		}
-    		else if(val == "SALTA") {
-    			return calcSalta(act);
-    		}
-    		else if(val == "PROGN") {
-    			calcFit(act.getIzq());
-    			return calcFit(act.getDer());
-    		}
+    	if(numOp < 100 && numIz < 100) {
+    		String val = act.getValor();
+        	if(act.esHoja()) {
+        		if(val == "IZQUIERDA") {
+        			ejecIzq();
+        		}
+        		else if(val == "AVANZA") {
+        			ejecAvanza();
+        		}
+        		return act.getNumval();
+        	}
+        	else {
+        		if(val == "SUMA") {
+        			return calcSum(act);
+        		}
+        		else if(val == "SALTA") {
+        			return calcSalta(act);
+        		}
+        		else if(val == "PROGN") {
+        			calcFit(act.getIzq());
+        			return calcFit(act.getDer());
+        		}
+        	}
     	}
     	return new Pair();
     }
