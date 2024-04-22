@@ -26,8 +26,20 @@ public class Cromosoma{
     private int numIz = 0;
     private int numOp = 0;
     
+	// Constructor copia
+	public Cromosoma(Cromosoma cromosoma) {
+		arbol = new Arbol(cromosoma.getProfundidadArbol());
+		tablero = cromosoma.tablero;
+		fitness = cromosoma.fitness;
+		fenotipo = cromosoma.fenotipo;
+		posicion = cromosoma.posicion;
+		posDir = cromosoma.posDir;
+		dir = cromosoma.dir;
+		numIz = cromosoma.numIz;
+		numOp = cromosoma.numOp;
+	}
 
-    public Cromosoma(int profundidad, int tipoCreacion){
+	public Cromosoma(int profundidad, int tipoCreacion){
         arbol = new Arbol(profundidad);
         //puede haber lio con lo de la dimension
         tablero = new int[8][dimension];
@@ -172,16 +184,32 @@ public class Cromosoma{
     	return new Pair();
     }
 
+	// Getters & Setters ----------------------------------------------
+	public Nodo getHojaRand(){
+		return arbol.getHojaRand(arbol.getRaiz());
+	}
 
-    // Getters & Setters ----------------------------------------------
+	public Nodo getNodoRand(){
+		return arbol.getNodoRand(arbol.getRaiz(), 0);
+	}
+    
     public String getFenotipo() {
     	return this.fenotipo;
     }
+
     public Arbol getGenotipo() {
     	return this.arbol;
     }
+
     public int getFitness() {
     	return this.fitness;
     }
    
+	public int getProfundidadArbol() {
+		return this.arbol.getProfundidad();
+	}
+
+	public String getRandomTerminal() {
+		return terminales[rand.nextInt(terminales.length)];
+	}
 }

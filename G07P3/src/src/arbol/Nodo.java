@@ -25,6 +25,19 @@ public class Nodo{
 		this.der = der;
 		this.numHijos = numHijos;
 	}
+
+	public void permutaHijos(){
+		Nodo aux = this.izq;
+		this.izq = this.der;
+		this.der = aux;
+	}
+
+	public void contrae(String valor){
+		this.valor = valor;
+		this.izq = null;
+		this.der = null;
+		this.numHijos = 0;
+	}
 	
 	public boolean esRaiz() {
 		return this.ant == null;

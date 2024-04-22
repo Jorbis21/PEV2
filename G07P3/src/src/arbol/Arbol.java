@@ -17,7 +17,6 @@ public class Arbol {
         numNodos = 0;
     }
 
-
     public Arbol(int profundidad){
         numNodos = 0;
         this.profundidad = profundidad;
@@ -135,6 +134,7 @@ public class Arbol {
         }
         aux.setNumval(numVal);
     }
+
     public Nodo inicializacionCompleta(int profundidad, Nodo ant){
     	int numHijos = 0, aleat = -1;
     	String valor = null; Nodo aux = new Nodo();
@@ -146,7 +146,6 @@ public class Arbol {
         }
         return aux;
     }
-    
   
     public Nodo inicializacionCreciente(int profundidad, Nodo ant){
     	int numHijos = 0, aleat = -1;
@@ -167,8 +166,9 @@ public class Arbol {
         else {
         	iniTerm(numHijos, aleat, profundidad, valor, aux, ant);
         }
-        return aux;
+      return aux;
     }
+
     /// Getters & Setters ---------------------------------------------------------
     
     public Nodo getRaiz() {
