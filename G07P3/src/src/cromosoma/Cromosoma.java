@@ -211,9 +211,14 @@ public class Cromosoma{
 	public String getRandomTerminal() {
 		return terminales[rand.nextInt(terminales.length)];
 	}
-
+	//posiblemente lo acabe quitando
 	public void setArbol(Arbol arbol) {
 		this.arbol = arbol;
+		posicion = new Pair(4,4);
+		posDir = 0;
+		dir = direcciones[posDir];
+		numIz = 0;
+		numOp = 0;
 		calcFit(arbol.getRaiz());
         fenotipo = arbol.toString(arbol.getRaiz());
 	}
