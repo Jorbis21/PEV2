@@ -15,6 +15,6 @@ public class MutacionPermutacion implements IMutacion{
             Nodo nodo = progMutado.getNodoRand();
             nodo.permutaHijos();
         }
-        return progMutado;  
+        return new Cromosoma(progMutado);  
     }
 }

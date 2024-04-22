@@ -13,6 +13,6 @@ public class MutacionContraccion implements IMutacion{
             String s = progMutado.getRandomTerminal();
             progMutado.getNodoRand().contrae(s);
         }
-        return progMutado;
+        return new Cromosoma(progMutado);
     }
 }

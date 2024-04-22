@@ -29,11 +29,11 @@ public class CruceArboreo implements ICruce {
        */
 
       // despues de hacer el swap
-      //nuevaGeneracion.add(hijo1);
-      //nuevaGeneracion.add(hijo2);
+      //nuevaGeneracion.add(new Cromosoma(hijo1));
+      //nuevaGeneracion.add(new Cromosoma(hijo2));
     } else {
-      nuevaGeneracion.add(padre1);
-      nuevaGeneracion.add(padre2);
+      nuevaGeneracion.add(new Cromosoma(padre1));
+      nuevaGeneracion.add(new Cromosoma(padre2));
     }
 
     return nuevaGeneracion;

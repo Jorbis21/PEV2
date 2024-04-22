@@ -13,7 +13,7 @@ public class MutacionHoist implements IMutacion{
         if(rand.nextDouble() < probMut) {
         
         }
-        return progMutado;
+        return new Cromosoma(progMutado);
     }   
 }
 

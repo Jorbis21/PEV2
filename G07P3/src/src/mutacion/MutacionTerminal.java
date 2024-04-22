@@ -13,7 +13,7 @@ public class MutacionTerminal implements IMutacion {
             String s = progMutado.getRandomTerminal();
             progMutado.getHojaRand().setValor(s);
         }
-        return progMutado;
+        return new Cromosoma(progMutado);
     }
     
 }

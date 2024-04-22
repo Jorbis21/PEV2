@@ -10,7 +10,7 @@ public class Cromosoma{
 
     public static String terminales[] = {"IZQUIERDA", "AVANZA", "CONSTANTE"};
     public static String funciones[] = {"SUMA", "SALTA", "PROGN"};
-    public static int tablero[][];
+    public static int tablero[][] = iniTablero();
     public static double probObs = 0.9;
     public static int dimension = 8;
     
@@ -28,22 +28,19 @@ public class Cromosoma{
     
 	// Constructor copia
 	public Cromosoma(Cromosoma cromosoma) {
-		arbol = new Arbol(cromosoma.getProfundidadArbol());
-		tablero = cromosoma.tablero;
-		fitness = cromosoma.fitness;
-		fenotipo = cromosoma.fenotipo;
-		posicion = cromosoma.posicion;
-		posDir = cromosoma.posDir;
-		dir = cromosoma.dir;
-		numIz = cromosoma.numIz;
-		numOp = cromosoma.numOp;
+		this.arbol = cromosoma.getGenotipo();
+		posicion = new Pair(4,4);
+		posDir = 0;
+		dir = direcciones[posDir];
+		numIz = 0;
+		numOp = 0;
+		calcFit(arbol.getRaiz());
+		fenotipo = arbol.toString(arbol.getRaiz());
 	}
 
 	public Cromosoma(int profundidad, int tipoCreacion){
         arbol = new Arbol(profundidad);
         //puede haber lio con lo de la dimension
-        tablero = new int[8][dimension];
-        iniTablero();
         switch(tipoCreacion){
             case 0:
                 arbol.inicializacionCreciente(0, null);
@@ -63,12 +60,14 @@ public class Cromosoma{
         fenotipo = arbol.toString(arbol.getRaiz());
     }
     
-    private void iniTablero() {
+    static int[][] iniTablero() {
+    	int[][] aux = new int[8][dimension];
     	for(int i = 0; i < 8; i++) {
     		for(int j = 0; j < dimension; j++ ) {
-    			tablero[i][j] = 0;
+    			aux[i][j] = 0;
     		}
     	}
+    	return aux;
     }
     private void avanza() {
     	numOp++;
@@ -215,5 +214,7 @@ public class Cromosoma{
 
 	public void setArbol(Arbol arbol) {
 		this.arbol = arbol;
+		calcFit(arbol.getRaiz());
+        fenotipo = arbol.toString(arbol.getRaiz());
 	}
 }
