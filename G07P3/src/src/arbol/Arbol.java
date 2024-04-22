@@ -23,11 +23,84 @@ public class Arbol {
         this.profundidad = profundidad;
     }
     
+    public Nodo getHojaRand(Nodo act) {
+    	if(act.esHoja()) {
+    		return act;
+    	}
+    	else {
+    		if(act.getNumhijos() == 1) {
+				return getHojaRand(act.getIzq());
+			}
+			else {
+				if(rand.nextDouble() > 0.5) {
+    				return getHojaRand(act.getIzq());
+    			}
+    			else {
+    				return getHojaRand(act.getDer());
+    			}
+			}
+    	}
+    }
+    
+    public Nodo getNodoRand(Nodo act, int prof) {
+    	if(prof == profundidad - 1) {
+    		return act;
+    	}
+    	else {
+    		if(prof == 0) {
+    			if(act.getNumhijos() == 1) {
+    				return getNodoRand(act.getIzq(), prof + 1);
+    			}
+    			else {
+    				if(rand.nextDouble() > 0.5) {
+        				return getNodoRand(act.getIzq(), prof + 1);
+        			}
+        			else {
+        				return getNodoRand(act.getDer(), prof + 1);
+        			}
+    			}
+    		}
+    		else {
+    			if(rand.nextDouble() > 0.5) {
+        			return act;
+        		}
+    			else {
+    				if(act.getNumhijos() == 1) {
+        				return getNodoRand(act.getIzq(), prof + 1);
+        			}
+        			else {
+        				if(rand.nextDouble() > 0.5) {
+            				return getNodoRand(act.getIzq(), prof + 1);
+            			}
+            			else {
+            				return getNodoRand(act.getDer(), prof + 1);
+            			}
+        			}
+    			}
+    		}
+    	}
+    }
+    
     public String toString(Nodo act) {
     	if(act.esHoja()) {
-    		
+    		if(act.getValor() == "CONSTANTE") {
+    			return act.getNumval().toString();
+    		}
+    		else {
+    			return "(" + act.getValor() + ")";
+    		}
     	}
-    	return "";
+    	else {
+    		if(act.getNumhijos() == 1) {
+    			return "(" + act.getValor() + toString(act.getIzq()) + ")";
+    		}
+    		else {
+    			String hijoIzq, hijoDer;
+    			hijoIzq = toString(act.getIzq());
+    			hijoDer = toString(act.getDer());
+    			return "(" + act.getValor() + hijoIzq + hijoDer + ")";
+    		}
+    	}
     }
     
     private void iniFunc(int numHijos, int aleat, int profundidad, String valor, Nodo aux, Nodo ant) {

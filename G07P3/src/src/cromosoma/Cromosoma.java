@@ -7,21 +7,23 @@ import src.arbol.Nodo;
 import src.utils.Pair;
 
 public class Cromosoma{
-    // aqui el profe nos pone puntos suspensivos
 
     public static String terminales[] = {"IZQUIERDA", "AVANZA", "CONSTANTE"};
     public static String funciones[] = {"SUMA", "SALTA", "PROGN"};
+    public static int tablero[][];
+    public static double probObs = 0.9;
     public static int dimension = 8;
     
     private static String direcciones[] = {"Arriba", "Izquierda", "Abajo", "Derecha"};
-    private static int tablero[][];
-
+   
+    private Random rand = new Random();
     private Arbol arbol;
     private Pair posicion = new Pair(4, 4);
     private int posDir = 0;
     private String dir = direcciones[posDir];
     private int fitness;
     private String fenotipo;
+    
 
     public Cromosoma(int profundidad, int tipoCreacion){
         arbol = new Arbol(profundidad);
@@ -44,6 +46,7 @@ public class Cromosoma{
                 break;
         }
         calcFit(arbol.getRaiz());
+        fenotipo = arbol.toString(arbol.getRaiz());
     }
     
     private void iniTablero() {
@@ -53,53 +56,106 @@ public class Cromosoma{
     		}
     	}
     }
-    
+    private void avanza() {
+    	switch(dir) {
+		case "Arriba":
+			posicion = posicion.suma(new Pair(0,1), dimension);
+		break;
+		case "Izquierda":
+			posicion = posicion.suma(new Pair(-1,0), dimension);
+		break;
+		case "Abajo":
+			posicion = posicion.suma(new Pair(0,-1), dimension);
+		break;
+		case "Derecha":
+			posicion = posicion.suma(new Pair(1,0), dimension);
+		break;
+    	}
+    }
+    private void explosion() {
+    	tablero[posicion.getFirst() - 1][posicion.getSecond() - 1] = 1;
+		tablero[posicion.getFirst() - 1][posicion.getSecond()] = 1;
+		tablero[posicion.getFirst() - 1][posicion.getSecond() + 1] = 1;
+		tablero[posicion.getFirst()][posicion.getSecond() - 1] = 1;
+		tablero[posicion.getFirst()][posicion.getSecond()] = 1;
+		tablero[posicion.getFirst()][posicion.getSecond() + 1] = 1;
+		tablero[posicion.getFirst() + 1][posicion.getSecond() - 1] = 1;
+		tablero[posicion.getFirst() + 1][posicion.getSecond()] = 1;
+		tablero[posicion.getFirst() + 1][posicion.getSecond() + 1] = 1;
+		fitness += 9;
+    }
+    private void ejecIzq() {
+    	posDir++;
+		if(posDir == direcciones.length)
+			posDir = 0;
+		dir = direcciones[posDir];
+    }
+    private void ejecAvanza() {
+    	avanza();
+		if(tablero[posicion.getFirst()][posicion.getSecond()] == 0) {
+			tablero[posicion.getFirst()][posicion.getSecond()] = 1;
+			fitness++;
+		}
+		else if (tablero[posicion.getFirst()][posicion.getSecond()] == 3){
+			while(tablero[posicion.getFirst()][posicion.getSecond()] == 3) {
+				if(rand.nextDouble() < probObs) {
+					if(fitness > 0) {
+						fitness--;
+					}
+					avanza();
+				}
+				else {
+					explosion();
+				}
+			}
+			
+		}
+    }
+    private Pair calcSum(Nodo act) {
+    	Pair izqVal, derVal;
+		izqVal = calcFit(act.getIzq());
+		derVal = calcFit(act.getDer());
+		return izqVal.suma(derVal, dimension);
+    }
+    private Pair calcSalta(Nodo act) {
+    	Pair newPos = calcFit(act.getIzq());
+		posicion = posicion.suma(newPos, dimension);
+		if(tablero[posicion.getFirst()][posicion.getSecond()] == 0) {
+			tablero[posicion.getFirst()][posicion.getSecond()] = 1;
+			fitness++;
+		}
+		else if (tablero[posicion.getFirst()][posicion.getSecond()] == 3){
+			while(tablero[posicion.getFirst()][posicion.getSecond()] == 3) {
+				if(rand.nextDouble() < probObs) {
+					if(fitness > 0) {
+						fitness--;
+					}
+					avanza();
+				}
+				else {
+					explosion();
+				}
+			}
+		}
+		return newPos;
+    }
     private Pair calcFit(Nodo act) {
     	String val = act.getValor();
     	if(act.esHoja()) {
     		if(val == "IZQUIERDA") {
-    			posDir++;
-    			if(posDir == direcciones.length)
-    				posDir = 0;
-    			dir = direcciones[posDir];
+    			ejecIzq();
     		}
     		else if(val == "AVANZA") {
-    			switch(dir) {
-    				case "Arriba":
-    					posicion = posicion.suma(new Pair(0,1), dimension);
-    				break;
-    				case "Izquierda":
-    					posicion = posicion.suma(new Pair(-1,0), dimension);
-    				break;
-    				case "Abajo":
-    					posicion = posicion.suma(new Pair(0,-1), dimension);
-    				break;
-    				case "Derecha":
-    					posicion = posicion.suma(new Pair(1,0), dimension);
-    				break;
-    			}
-    			if(tablero[posicion.getFirst()][posicion.getSecond()] == 0) {
-    				tablero[posicion.getFirst()][posicion.getSecond()] = 1;
-    				fitness++;
-    			}
+    			ejecAvanza();
     		}
     		return act.getNumval();
     	}
     	else {
     		if(val == "SUMA") {
-    			Pair izqVal, derVal;
-    			izqVal = calcFit(act.getIzq());
-    			derVal = calcFit(act.getDer());
-    			return izqVal.suma(derVal, dimension);
+    			return calcSum(act);
     		}
     		else if(val == "SALTA") {
-    			Pair newPos = calcFit(act.getIzq());
-    			posicion = posicion.suma(newPos, dimension);
-    			if(tablero[posicion.getFirst()][posicion.getSecond()] == 0) {
-    				tablero[posicion.getFirst()][posicion.getSecond()] = 1;
-    				fitness++;
-    			}
-    			return newPos;
+    			return calcSalta(act);
     		}
     		else if(val == "PROGN") {
     			calcFit(act.getIzq());
@@ -111,6 +167,9 @@ public class Cromosoma{
 
 
     // Getters & Setters ----------------------------------------------
+    public String getFenotipo() {
+    	return this.fenotipo;
+    }
     public Arbol getGenotipo() {
     	return this.arbol;
     }
