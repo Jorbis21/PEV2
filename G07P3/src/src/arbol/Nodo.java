@@ -39,6 +39,13 @@ public class Nodo{
 		this.numHijos = 0;
 	}
 	
+	public void terminate(String valor){
+		this.valor = valor;
+		this.izq = null;
+		this.der = null;
+		this.numHijos = 0;
+	}
+	
 	public boolean esRaiz() {
 		return this.ant == null;
 	}

@@ -212,4 +212,8 @@ public class Cromosoma{
 	public String getRandomTerminal() {
 		return terminales[rand.nextInt(terminales.length)];
 	}
+
+	public void setArbol(Arbol arbol) {
+		this.arbol = arbol;
+	}
 }

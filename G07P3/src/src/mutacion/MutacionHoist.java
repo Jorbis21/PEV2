@@ -21,10 +21,24 @@ public class MutacionHoist implements IMutacion{
 /* OPCION 1
  * 
  * Se coge un subarbol aleatorio y ese pasa a ser el nuevo cromosoma
+ * 
+ * Cromosoma progMutado = new Cromosoma(programa);
+ * if(rand.nextDouble() < probMut) {
+ *     Arbol subarbol = new Arbol(progMutado.getNodoRand());
+ *     progMutado.setArbol(subarbol);
+ * }
+ * return progMutado;
  */
 
 /* OPCION 2
  * 
  * Se coge un subarbol aleatorio y ese arbol se elimina. Aqui hay que chequar que se cambie la raiz 
  * del arbol eliminado por un nodo terminal
+ * 
+ * Cromosoma progMutado = new Cromosoma(programa);
+ * if(rand.nextDouble() < probMut) {
+ *      String s = progMutado.getRandomTerminal();
+ *      Nodo nodo = progMutado.getNodoRand();
+ *      nodo.terminate(s);
+ * }
  */
