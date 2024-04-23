@@ -88,6 +88,7 @@ public class AlgoritmoGenetico {
 		int i = tamPob - 1, j = 0;
 		while(j < elite.size()) {
 			poblacion.set(i, elite.get(j));
+			i--; j++;
 		}
 	}
 	private void seleccion() {
