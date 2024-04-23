@@ -8,8 +8,8 @@ public class GraphView {
 	
 	public GraphView() {
 		// define your data
-		double[] x = { 1, 2, 3, 4, 5, 6 };
-		double[] y = { 45, 89, 6, 32, 63, 12 };
+		double[] x = { 0, 1, 2, 3, 4, 5, 6 };
+		double[] y = { 1, 4, 14, 32, 36, 40, 42};
 		// create your PlotPanel (you can use it as a JPanel)
 		plot = new Plot2DPanel();
 		// define the legend position

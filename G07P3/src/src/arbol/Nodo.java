@@ -16,6 +16,15 @@ public class Nodo{
 		this.der = null;
 		this.numHijos = 0;
 	}
+
+	public Nodo(Nodo nodo){
+		this.valor = nodo.valor;
+		this.numVal = nodo.numVal;
+		this.ant = nodo.ant;
+		this.izq = nodo.izq;
+		this.der = nodo.der;
+		this.numHijos = nodo.numHijos;
+	}
 	
 	public Nodo(String valor, Nodo ant, Nodo izq, Nodo der, int numHijos){
 		this.valor = null;
@@ -77,7 +86,6 @@ public class Nodo{
 	public Nodo getDer() {
 		return this.der;
 	}
-	
 	
 	public void setValor(String valor) {
 		this.valor = valor;

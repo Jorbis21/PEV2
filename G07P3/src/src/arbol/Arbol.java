@@ -169,6 +169,25 @@ public class Arbol {
       return aux;
     }
 
+		public void swapSubtrees(Nodo nodo1, Nodo nodo2) {
+			Nodo antN2 = nodo2.getAnt();
+			nodo2.setAnt(nodo1.getAnt());
+			if(nodo1.getAnt().getIzq() == nodo1) {
+				nodo1.getAnt().izq = nodo2;
+			}
+			else {
+				nodo1.getAnt().der = nodo2;
+			}
+
+			nodo1.setAnt(antN2);
+			if(antN2.getIzq() == nodo2) {
+				antN2.izq = nodo1;
+			}
+			else {
+				antN2.der = nodo1;
+			}
+		}
+
     /// Getters & Setters ---------------------------------------------------------
     
     public Nodo getRaiz() {

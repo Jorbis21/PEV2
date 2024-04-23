@@ -3,6 +3,7 @@ package src.cruce;
 import java.util.ArrayList;
 import java.util.Random;
 
+import src.arbol.Nodo;
 import src.cromosoma.Cromosoma;
 
 public class CruceArboreo implements ICruce {
@@ -15,22 +16,16 @@ public class CruceArboreo implements ICruce {
     Cromosoma padre2 = padres.get(1);
 
     if (rand.nextDouble() < probCruce) {
-      // get random nodes from both parents
-      //Cromosoma hijo1 = new Cromosoma(padre1.copia());
-      //Cromosoma hijo2 = new Cromosoma(padre2.copia());
+      Cromosoma hijo1 = new Cromosoma(padre1);
+      Cromosoma hijo2 = new Cromosoma(padre2);
 
-      //Nodo nodo1 = hijo1.getArbol().getRandomNode();
-      //Nodo nodo2 = hijo2.getArbol().getRandomNode();
+      Nodo nodoHijo1 = hijo1.getNodoRand();
+      Nodo nodoHijo2 = hijo2.getNodoRand();
 
-      /*
-       * swap nodes -- no se muy bien como hacerlo sin romper la encapsulacion que
-       * tenemos. Podriamos implementar un metodo en Arbol
-       * que haga el swap
-       */
-
-      // despues de hacer el swap
-      //nuevaGeneracion.add(new Cromosoma(hijo1));
-      //nuevaGeneracion.add(new Cromosoma(hijo2));
+      hijo1.swapSubtrees(nodoHijo1, nodoHijo2);
+      
+      nuevaGeneracion.add(hijo1);
+      nuevaGeneracion.add(hijo2);
     } else {
       nuevaGeneracion.add(new Cromosoma(padre1));
       nuevaGeneracion.add(new Cromosoma(padre2));
