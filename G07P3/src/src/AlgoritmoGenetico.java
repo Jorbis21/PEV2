@@ -41,8 +41,28 @@ public class AlgoritmoGenetico {
 	
 	private Random rand = new Random();
 	
-	public AlgoritmoGenetico() {
-		
+	public AlgoritmoGenetico(int tamPob, int numGen, int tipoCreacion, int profundidad, double probCruce, double probMutacion, double probMuerte, double elitismo, ICruce cruce, IMutacion mutacion, ISeleccion seleccion, IBloating bloating) {
+		this.tamPob = tamPob;
+		this.numGen = numGen;
+		this.tipoCreacion = tipoCreacion;
+		this.profundidad = profundidad;
+		this.probCruce = probCruce;
+		this.probMutacion = probMutacion;
+		this.probMuerte = probMuerte;
+		this.elitismo = elitismo;
+		this.cruce = cruce;
+		this.mutacion = mutacion;
+		this.seleccion = seleccion;
+		this.bloating = bloating;
+		this.poblacion = new ArrayList<Cromosoma>();
+		this.elite = new ArrayList<Cromosoma>();
+		this.mediaFitnessArray = new int[numGen];
+		this.mejorHistoricoArray = new int[numGen];
+		this.mejorGeneracionArray = new int[numGen];
+		this.actGen = 0;
+		this.mediaFitness = 0;
+		this.mejorHistorico = null;
+		this.mejorGeneracion = null;
 	}
 	
 	private void iniPoblacion() {
@@ -105,10 +125,12 @@ public class AlgoritmoGenetico {
 			poblacion.set(i, mutacion.mutar(poblacion.get(i), rand, probMutacion));
 		}
 	}
-	
+
 	public void run() {
 		iniPoblacion();
-		
+
+		// meter tablero base a todos los cromosomas
+
 		do {
 			extraerElite();
 			seleccion();
@@ -120,6 +142,9 @@ public class AlgoritmoGenetico {
 			System.out.println("[Generacion]: " + actGen + " || [MejorGeneracion]: " + mejorGeneracion.getFitness() + " || [MediaFitness]: " + mediaFitness);
 			++actGen;
 		} while(actGen < numGen);
+
+		// Extraer programa de mejorHistorico y meterlo en JPanel correspondiente 
+		// Extraer tablero de mejorHistorico y meterlo en los botones
 	}
 	
 	//Faltan Getters y setters

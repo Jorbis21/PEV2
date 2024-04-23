@@ -14,7 +14,12 @@ public class MutacionHoist implements IMutacion{
         
         }
         return new Cromosoma(progMutado);
-    }   
+    }
+    
+    @Override
+    public String toString() {
+        return "Mutacion Hoist";
+    }
 }
 
 

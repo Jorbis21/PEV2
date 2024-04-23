@@ -10,12 +10,13 @@ public class Cromosoma {
 
 	public static String terminales[] = { "IZQUIERDA", "AVANZA", "CONSTANTE" };
 	public static String funciones[] = { "SUMA", "SALTA", "PROGN" };
-	public static int tablero[][] = iniTablero();
+	//public static int tablero[][] = iniTablero();
 	public static double probObs = 0.9;
 	public static int dimension = 8;
 
 	private static String direcciones[] = { "Arriba", "Izquierda", "Abajo", "Derecha" };
 
+	private int[][] tablero = iniTablero();
 	private Random rand = new Random();
 	private Arbol arbol;
 	private Pair posicion = new Pair(4, 4);
@@ -227,5 +228,13 @@ public class Cromosoma {
 		numOp = 0;
 		calcFit(arbol.getRaiz());
 		fenotipo = arbol.toString(arbol.getRaiz());
+	}
+
+	public void setTablero(int[][] tablero) {
+		this.tablero = tablero;
+	}
+
+	public int[][] getTablero() {
+		return this.tablero;
 	}
 }

@@ -15,4 +15,9 @@ public class MutacionContraccion implements IMutacion{
         }
         return new Cromosoma(progMutado);
     }
+
+    @Override
+    public String toString() {
+        return "Mutacion Contraccion";
+    }
 }

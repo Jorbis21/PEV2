@@ -19,7 +19,7 @@ import src.view.GridView;
 public class MainView{
 	public MainView() {
 		// grid baglayout variables
-		final boolean shouldFill = true;
+		final boolean shouldFill = false;
 
 		JFrame frame = new JFrame("Grid");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -29,21 +29,13 @@ public class MainView{
 
 		// First tab - Grid ---------------------------------------------------------------------------------
 		JPanel mainPanel = new JPanel();
-		/* 
-	   * The right panel will have two Panels, one below the other and the left panel will only have one
-		 * The right panel will have a text panel that will be placed under the button panel.
-		 */
-
 
 		mainPanel.setPreferredSize(new Dimension(1500, 800)); // Set preferred size of mainPanel
 		tabbedPane.addTab("Grid", mainPanel);
-		// Grid bag layout
 		mainPanel.setLayout(new GridBagLayout());
 		GridBagConstraints c = new GridBagConstraints();
-		if (shouldFill) {
-			//natural height, maximum width
+		if (shouldFill)
 			c.fill = GridBagConstraints.HORIZONTAL;
-		}
 
 		// Left panel that be placed bottom left. will be 2 columns wide and 2 rows tall.
 		GridView gridView = new GridView(8, 8);
@@ -80,7 +72,6 @@ public class MainView{
 		c.gridx = 4; //rightmost column
 		c.gridy = 0; //top row
 		mainPanel.add(rightPanel, c);
-		
 		
 		// Second tab - Graph --------------------------------------------------------------------------------
 		JPanel graphPanel = new JPanel();
