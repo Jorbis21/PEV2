@@ -214,7 +214,9 @@ public class Cromosoma {
 	public String getRandomTerminal() {
 		return terminales[rand.nextInt(terminales.length)];
 	}
-
+	public void setFitness(int fit) {
+		this.fitness = fit;
+	}
 	// posiblemente lo acabe quitando
 	public void setArbol(Arbol arbol) {
 		this.arbol = arbol;

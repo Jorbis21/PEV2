@@ -112,11 +112,11 @@ public class Arbol {
         	numHijos = 1;
         aux = new Nodo(valor, ant, null, null, numHijos);
         if(numHijos == 2) {
-        	aux.izq = inicializacionCompleta(profundidad+1, aux);
-        	aux.der = inicializacionCompleta(profundidad+1, aux);
+        	aux.setIzq(inicializacionCompleta(profundidad+1, aux));
+        	aux.setDer(inicializacionCompleta(profundidad+1, aux));
         }
         else {
-        	aux.izq = inicializacionCompleta(profundidad+1, aux);
+        	aux.setIzq(inicializacionCompleta(profundidad+1, aux));
         }
         if(aux.esRaiz()) {
         	this.raiz = aux;
@@ -169,24 +169,24 @@ public class Arbol {
       return aux;
     }
 
-		public void swapSubtrees(Nodo nodo1, Nodo nodo2) {
-			Nodo antN2 = nodo2.getAnt();
-			nodo2.setAnt(nodo1.getAnt());
-			if(nodo1.getAnt().getIzq() == nodo1) {
-				nodo1.getAnt().izq = nodo2;
-			}
-			else {
-				nodo1.getAnt().der = nodo2;
-			}
-
-			nodo1.setAnt(antN2);
-			if(antN2.getIzq() == nodo2) {
-				antN2.izq = nodo1;
-			}
-			else {
-				antN2.der = nodo1;
-			}
+	public void swapSubtrees(Nodo nodo1, Nodo nodo2) {
+		Nodo antN2 = nodo2.getAnt();
+		nodo2.setAnt(nodo1.getAnt());
+		if(nodo1.getAnt().getIzq() == nodo1) {
+			nodo1.getAnt().setIzq(nodo2);
 		}
+		else {
+			nodo1.getAnt().setDer(nodo2);
+		}
+
+		nodo1.setAnt(antN2);
+		if(antN2.getIzq() == nodo2) {
+			antN2.setIzq(nodo1);
+		}
+		else {
+			antN2.setDer(nodo1);
+		}
+	}
 
     /// Getters & Setters ---------------------------------------------------------
     

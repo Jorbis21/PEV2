@@ -3,10 +3,10 @@ package src.arbol;
 import src.utils.Pair;
 
 public class Nodo{
-	String valor;
-	Pair numVal;
-	Nodo ant, izq, der;
-	int numHijos;
+	private String valor;
+	private Pair numVal;
+	private Nodo ant, izq, der;
+	private int numHijos;
 	
 	public Nodo(){
 		this.valor = null;
