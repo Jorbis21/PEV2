@@ -130,7 +130,7 @@ public class Arbol {
         Pair numVal = new Pair();
         aux = new Nodo(valor, ant, null, null, numHijos);
         if(valor == "CONSTANTE") {
-        	numVal = new Pair(rand.nextInt(Cromosoma.dimension), rand.nextInt(Cromosoma.dimension));
+        	numVal = new Pair(rand.nextInt(8), rand.nextInt(Cromosoma.dimension));
         }
         aux.setNumval(numVal);
     }

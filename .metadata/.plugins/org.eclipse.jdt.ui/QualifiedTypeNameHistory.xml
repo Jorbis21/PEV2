@@ -5,6 +5,11 @@
     <fullyQualifiedTypeName name="javax.swing.JTextField"/>
     <fullyQualifiedTypeName name="javax.swing.JButton"/>
     <fullyQualifiedTypeName name="java.awt.event.ActionListener"/>
-    <fullyQualifiedTypeName name="src.utils.Pair"/>
+    <fullyQualifiedTypeName name="java.util.ArrayList"/>
+    <fullyQualifiedTypeName name="src.cromosoma.Cromosoma"/>
+    <fullyQualifiedTypeName name="src.mutacion.IMutacion"/>
+    <fullyQualifiedTypeName name="src.cruce.ICruce"/>
+    <fullyQualifiedTypeName name="src.seleccion.ISeleccion"/>
     <fullyQualifiedTypeName name="src.arbol.Nodo"/>
+    <fullyQualifiedTypeName name="src.utils.Pair"/>
 </qualifiedTypeNameHistroy>

@@ -1,3 +1,0 @@
--[x] getNodoTerminalAleatorio(rand) // devuelvo un nodo terminal aleatorio
--[x] getNodoNoHojaAleatorio(rand)  // devuelvo un nodo no hoja aleatorio 
--[ ] Arbol(Nodo raiz) // constructor de arbol por copia
