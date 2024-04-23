@@ -66,6 +66,8 @@ public class AlgoritmoGenetico {
 	}
 	
 	private void iniPoblacion() {
+		Cromosoma.tableroGlobal = Cromosoma.iniTablero();
+		//Aqui pillar lo que sea de la gui para meterlo en el tablero
 		for(int i = 0; i < tamPob; i++) {
 			poblacion.add(new Cromosoma(profundidad, tipoCreacion));
 		}
@@ -128,8 +130,6 @@ public class AlgoritmoGenetico {
 
 	public void run() {
 		iniPoblacion();
-
-		// meter tablero base a todos los cromosomas
 
 		do {
 			extraerElite();
