@@ -2,6 +2,7 @@ package src.cromosoma;
 
 import java.util.Random;
 
+import src.TableroGlobal;
 import src.arbol.Arbol;
 import src.arbol.Nodo;
 import src.utils.Pair;
@@ -10,26 +11,31 @@ public class Cromosoma {
 
 	public static String terminales[] = { "IZQUIERDA", "AVANZA", "CONSTANTE" };
 	public static String funciones[] = { "SUMA", "SALTA", "PROGN" };
-	public static double probObs = 0.9;
-	public static int dimension = 8;
-	public static int tableroGlobal[][] = new int[8][dimension]; //= iniTablero();
-
+	
 	private static String direcciones[] = { "Arriba", "Izquierda", "Abajo", "Derecha" };
 
 	private int[][] tablero;
+	private double probObs = 0.95;
 	private Random rand = new Random();
 	private Arbol arbol;
-	private Pair posicion = new Pair(4, 4);
-	private int posDir = 0;
-	private String dir = direcciones[posDir];
+	private Pair posicion;
+	private int posDir;
+	private String dir;
 	private double fitness = 0.0;
 	private String fenotipo;
-	private int numIz = 0;
-	private int numOp = 0;
+	private int numIz;
+	private int numOp;
+	private TableroGlobal tab;
 
 	// Constructor copia
-	public Cromosoma(Cromosoma cromosoma) {
-		tablero = tableroGlobal;
+	public Cromosoma(Cromosoma cromosoma, TableroGlobal tab) {
+		this.tab = tab;
+		this.tablero = new int[8][tab.getDim()];
+		for(int i = 0; i < 8; i++) {
+			for(int j = 0; j < tab.getDim(); j++) {
+				this.tablero[i][j] = tab.getTab()[i][j];
+			}
+		}
 		this.arbol = cromosoma.getGenotipo();
 		posicion = new Pair(4, 4);
 		posDir = 0;
@@ -41,10 +47,15 @@ public class Cromosoma {
 		fenotipo = arbol.toString(arbol.getRaiz());
 	}
 
-	public Cromosoma(int tipoCreacion) {
-		arbol = new Arbol(tipoCreacion);
-		tablero = tableroGlobal;
-		// puede haber lio con lo de la dimension
+	public Cromosoma(int tipoCreacion, TableroGlobal tab) {
+		this.tab = tab;
+		arbol = new Arbol(tipoCreacion, tab);
+		this.tablero = new int[8][tab.getDim()];
+		for(int i = 0; i < 8; i++) {
+			for(int j = 0; j < tab.getDim(); j++) {
+				tablero[i][j] = tab.getTab()[i][j];
+			}
+		}
 		posicion = new Pair(4, 4);
 		posDir = 0;
 		dir = direcciones[posDir];
@@ -59,16 +70,16 @@ public class Cromosoma {
 		numOp++;
 		switch (dir) {
 			case "Arriba":
-				posicion = posicion.suma(new Pair(0, 1), dimension);
+				posicion = posicion.suma(new Pair(0, 1), tab.getDim());
 				break;
 			case "Izquierda":
-				posicion = posicion.suma(new Pair(-1, 0), dimension);
+				posicion = posicion.suma(new Pair(-1, 0), tab.getDim());
 				break;
 			case "Abajo":
-				posicion = posicion.suma(new Pair(0, -1), dimension);
+				posicion = posicion.suma(new Pair(0, -1), tab.getDim());
 				break;
 			case "Derecha":
-				posicion = posicion.suma(new Pair(1, 0), dimension);
+				posicion = posicion.suma(new Pair(1, 0), tab.getDim());
 				break;
 		}
 	}
@@ -118,13 +129,13 @@ public class Cromosoma {
 		Pair izqVal, derVal;
 		izqVal = calcFit(act.getIzq());
 		derVal = calcFit(act.getDer());
-		return izqVal.suma(derVal, dimension);
+		return izqVal.suma(derVal, tab.getDim());
 	}
 
 	private Pair calcSalta(Nodo act) {
 		numOp++;
 		Pair newPos = calcFit(act.getIzq());
-		posicion = posicion.suma(newPos, dimension);
+		posicion = posicion.suma(newPos, tab.getDim());
 		if (tablero[posicion.getFirst()][posicion.getSecond()] == 0) {
 			tablero[posicion.getFirst()][posicion.getSecond()] = 1;
 			fitness+=1.0;
@@ -202,24 +213,6 @@ public class Cromosoma {
 	public void setFitness(double fit) {
 		this.fitness = fit;
 	}
-	
-	// posiblemente lo acabe quitando
-	public void setArbol(Arbol arbol) {
-		this.arbol = arbol;
-		posicion = new Pair(4, 4);
-		posDir = 0;
-		dir = direcciones[posDir];
-		numIz = 0;
-		numOp = 0;
-		calcFit(arbol.getRaiz());
-		fenotipo = arbol.toString(arbol.getRaiz());
-	}
-
-	public static void setTableroGlobal(int[][] tablero) {
-		if(tableroGlobal == null) {
-			tableroGlobal = tablero;
-		}
-	}
 
 	public void setTablero(int[][] tablero) {
 		this.tablero = tablero;
@@ -227,8 +220,5 @@ public class Cromosoma {
 
 	public int[][] getTablero() {
 		return this.tablero;
-	}
-	public int[][] getTableroGlobal() {
-		return tableroGlobal;
 	}
 }

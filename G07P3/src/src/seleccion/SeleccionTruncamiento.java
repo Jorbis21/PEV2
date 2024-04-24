@@ -3,12 +3,13 @@ package src.seleccion;
 import java.util.ArrayList;
 import java.util.Random;
 
+import src.TableroGlobal;
 import src.cromosoma.Cromosoma;
 
 public class SeleccionTruncamiento implements ISeleccion{
 
 	@Override
-	public ArrayList<Cromosoma> select(ArrayList<Cromosoma> poblacion, Random rand) {
+	public ArrayList<Cromosoma> select(ArrayList<Cromosoma> poblacion, Random rand, TableroGlobal tab) {
 		double trunc = 0.5;
 		ArrayList<Cromosoma> selection = new ArrayList<Cromosoma>();
 		
@@ -17,7 +18,7 @@ public class SeleccionTruncamiento implements ISeleccion{
 		
 		for(int i = 0; i < numSeleccionados; ++i) {
 			for(int j = 0; j < vecesReproducido; ++j) {
-				selection.add(new Cromosoma(poblacion.get(i)));
+				selection.add(new Cromosoma(poblacion.get(i), tab));
 			}
 		}
 		return selection;

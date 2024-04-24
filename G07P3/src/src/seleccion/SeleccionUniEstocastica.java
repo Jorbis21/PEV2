@@ -3,13 +3,14 @@ package src.seleccion;
 import java.util.ArrayList;
 import java.util.Random;
 
+import src.TableroGlobal;
 import src.cromosoma.Cromosoma;
 import src.utils.Utils;
 
 public class SeleccionUniEstocastica implements ISeleccion{
 
   @Override
-  public ArrayList<Cromosoma> select(ArrayList<Cromosoma> poblacion, Random random) {
+  public ArrayList<Cromosoma> select(ArrayList<Cromosoma> poblacion, Random random, TableroGlobal tab) {
 	  	ArrayList<Double> probability = new ArrayList<Double>();
 		ArrayList<Cromosoma> selection = new ArrayList<Cromosoma>();
 		double totalFit = 0;
@@ -28,7 +29,7 @@ public class SeleccionUniEstocastica implements ISeleccion{
 		
 		for(int i = 0; i < tamPob; ++i) { // procedemos a seleccionar
 			int ind = Utils.findInterval(rand, probability); // usamos busqueda binaria de forma que qi-1 < random < q
-			selection.add(new Cromosoma(poblacion.get(ind))); // añadimos nuestro Cromosoma a la seleccion
+			selection.add(new Cromosoma(poblacion.get(ind), tab)); // añadimos nuestro Cromosoma a la seleccion
 			//rand = ((distPtr + i - 1) / tamPob);
 			rand += distPtr % 1.0;
 		}

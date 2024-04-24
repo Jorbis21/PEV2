@@ -3,17 +3,18 @@ package src.mutacion;
 import java.util.Random;
 
 import src.cromosoma.Cromosoma;
+import src.TableroGlobal;
 import src.arbol.Arbol;
 
 public class MutacionHoist implements IMutacion{
 
     @Override
-    public Cromosoma mutar(Cromosoma programa, Random rand, double probMut) {
-        Cromosoma progMutado = new Cromosoma(programa);
+    public Cromosoma mutar(Cromosoma programa, Random rand, double probMut, TableroGlobal tab) {
+        Cromosoma progMutado = new Cromosoma(programa, tab);
         if(rand.nextDouble() < probMut) {
         
         }
-        return new Cromosoma(progMutado);
+        return new Cromosoma(progMutado, tab);
     }
     
     @Override

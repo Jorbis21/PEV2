@@ -2,6 +2,7 @@ package src.arbol;
 
 import java.util.Random;
 
+import src.TableroGlobal;
 import src.cromosoma.Cromosoma;
 import src.utils.Pair;
 
@@ -11,8 +12,10 @@ public class Arbol {
 	private Nodo raiz;
     private int profundidad = 0;
     Random rand = new Random();
+    private TableroGlobal tab;
 
-    public Arbol(int tipoCreacion) {
+    public Arbol(int tipoCreacion, TableroGlobal tab) {
+    	this.tab = tab;
     	switch (tipoCreacion) {
 		case 0:
 			inicializacionCreciente(0, null);
@@ -30,7 +33,8 @@ public class Arbol {
     	calcProf(raiz, 0);
     }
     
-    public Arbol(int tipoCreacion, Nodo act) {
+    public Arbol(int tipoCreacion, Nodo act, TableroGlobal tab) {
+    	this.tab = tab;
     	switch (tipoCreacion) {
 		case 0:
 			inicializacionCreciente(0, act);
@@ -187,7 +191,7 @@ public class Arbol {
     	setProfundidad(profundidad);
         aux.setValor(Cromosoma.terminales[rand.nextInt(Cromosoma.terminales.length)]);
         if(aux.getValor() == "CONSTANTE") {
-        	aux.setNumval(new Pair(rand.nextInt(8), rand.nextInt(Cromosoma.dimension)));
+        	aux.setNumval(new Pair(rand.nextInt(8), rand.nextInt(tab.getDim())));
         }
         aux.setAnt(ant);
     }

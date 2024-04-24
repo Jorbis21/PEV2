@@ -16,4 +16,5 @@
     <fullyQualifiedTypeName name="java.util.Random"/>
     <fullyQualifiedTypeName name="src.cromosoma.Cromosoma"/>
     <fullyQualifiedTypeName name="src.arbol.Arbol"/>
+    <fullyQualifiedTypeName name="src.view.GridView"/>
 </qualifiedTypeNameHistroy>

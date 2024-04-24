@@ -15,6 +15,7 @@ import javax.swing.JTextField;
 import javax.swing.SpinnerNumberModel;
 
 import src.AlgoritmoGenetico;
+import src.TableroGlobal;
 import src.bloating.Fundamentado;
 import src.bloating.IBloating;
 import src.bloating.Tarpeian;
@@ -65,7 +66,6 @@ public class GridView {
 		initArrayLists();
 
 		dimensionY = y;
-		Cromosoma.dimension = dimensionY;
 		// Button panel ----------------------------------------------------
 		buttonPanel = new JPanel();
 		drawButtonGrid(x, y);
@@ -241,7 +241,11 @@ public class GridView {
 
 		// puede que aqui este un error bien tocho pero creo que esta en el orden
 		// correcto
+		
 		startButton.addActionListener(e -> {
+			//Hay que hacer bien la limpieza
+			//finalButtonGrid(x, dimensionY, new int[x][dimensionY]);
+			TableroGlobal tab = new TableroGlobal(dimensionY,buttonsToGrid(x, dimensionY, buttons));
 			ag = new AlgoritmoGenetico(Integer.parseInt(tamPobText.getText()),
 					Integer.parseInt(numGenText.getText()),
 					creacionList.get(tipoCreacionDropdown.getSelectedIndex()),
@@ -253,9 +257,8 @@ public class GridView {
 					new CruceArboreo(),
 					mutacionList.get(mutacionDropdown.getSelectedIndex()),
 					seleccionList.get(seleccionDropdown.getSelectedIndex()),
-					bloatingList.get(controlBloatingDropdown.getSelectedIndex()));
-					
-			Cromosoma.setTableroGlobal(buttonsToGrid(x, dimensionY, buttons));
+					bloatingList.get(controlBloatingDropdown.getSelectedIndex()), 
+					tab);
 
 			// ejecutar el algoritmo genetico
 			ag.run();

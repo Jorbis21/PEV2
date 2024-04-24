@@ -3,13 +3,14 @@ package src.seleccion;
 import java.util.ArrayList;
 import java.util.Random;
 
+import src.TableroGlobal;
 import src.cromosoma.Cromosoma;
 
 public class SeleccionRestos implements ISeleccion{
 
 //REVISAR>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
     @Override
-    public ArrayList<Cromosoma> select(ArrayList<Cromosoma> poblacion, Random rand) {
+    public ArrayList<Cromosoma> select(ArrayList<Cromosoma> poblacion, Random rand, TableroGlobal tab) {
         SeleccionRuleta ruleta = new SeleccionRuleta();
         ArrayList<Double> prob = new ArrayList<Double>();
 		ArrayList<Cromosoma> selection = new ArrayList<Cromosoma>();
@@ -27,12 +28,12 @@ public class SeleccionRestos implements ISeleccion{
 
         for(int i = 0; i < totalNum; ++i) {
             for(int j = 0; j < Math.floor(prob.get(i) * totalNum); ++j) 
-                selection.add(new Cromosoma(poblacion.get(i)));
+                selection.add(new Cromosoma(poblacion.get(i), tab));
         }
 
-        ArrayList<Cromosoma> remaining = ruleta.select(poblacion, rand);
+        ArrayList<Cromosoma> remaining = ruleta.select(poblacion, rand, tab);
         for(int i = 0; i < remaining.size()	&& selection.size() < totalNum; ++i)
-            selection.add(new Cromosoma(remaining.get(i)));
+            selection.add(new Cromosoma(remaining.get(i), tab));
 
 		return selection;
     }

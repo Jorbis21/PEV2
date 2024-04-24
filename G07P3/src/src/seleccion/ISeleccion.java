@@ -3,11 +3,12 @@ package src.seleccion;
 import java.util.ArrayList;
 import java.util.Random;
 
+import src.TableroGlobal;
 import src.cromosoma.Cromosoma;
 import src.utils.Utils;
 
 public interface ISeleccion {
-  public ArrayList<Cromosoma> select(ArrayList<Cromosoma> poblacion, Random rand);
+  public ArrayList<Cromosoma> select(ArrayList<Cromosoma> poblacion, Random rand, TableroGlobal tab);
 
   default public ArrayList<Double> group(ArrayList<Cromosoma> poblacion){
 		ArrayList<Double> groupedFitness = new ArrayList<Double>();

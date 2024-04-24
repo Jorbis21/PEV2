@@ -3,13 +3,14 @@ package src.seleccion;
 import java.util.ArrayList;
 import java.util.Random;
 
+import src.TableroGlobal;
 import src.cromosoma.Cromosoma;
 import src.utils.Utils;
 
 public class SeleccionRanking implements ISeleccion{
     double BETA = 2.0;
     @Override
-    public ArrayList<Cromosoma> select(ArrayList<Cromosoma> poblacion, Random rand) {
+    public ArrayList<Cromosoma> select(ArrayList<Cromosoma> poblacion, Random rand, TableroGlobal tab) {
         ArrayList<Cromosoma> selection = new ArrayList<Cromosoma>();
         ArrayList<Cromosoma> copy = poblacion;
 
@@ -22,7 +23,7 @@ public class SeleccionRanking implements ISeleccion{
 
         for(int i = 0; i < copy.size(); i++){
             int index = rand.nextInt(fit.size());
-            selection.add(new Cromosoma(copy.get(index)));
+            selection.add(new Cromosoma(copy.get(index), tab));
         }
 
         return selection;

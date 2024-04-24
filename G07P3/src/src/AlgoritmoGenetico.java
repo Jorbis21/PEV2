@@ -38,12 +38,14 @@ public class AlgoritmoGenetico {
 	private double mediaFitness;
 	private Cromosoma mejorHistorico;
 	private Cromosoma mejorGeneracion;
+	private TableroGlobal tab;
 
 	private Random rand = new Random();
 
 	public AlgoritmoGenetico(int tamPob, int numGen, int tipoCreacion, int profundidad, double probCruce,
 			double probMutacion, double probMuerte, double elitismo, ICruce cruce, IMutacion mutacion, ISeleccion seleccion,
-			IBloating bloating) {
+			IBloating bloating, TableroGlobal tab) {
+		this.tab = tab;
 		this.tamPob = tamPob;
 		this.numGen = numGen;
 		this.tipoCreacion = tipoCreacion;
@@ -69,7 +71,7 @@ public class AlgoritmoGenetico {
 
 	private void iniPoblacion() {
 		for (int i = 0; i < tamPob; i++) {
-			poblacion.add(new Cromosoma(tipoCreacion));
+			poblacion.add(new Cromosoma(tipoCreacion, tab));
 		}
 		bloating();
 		cogerDatos();
@@ -118,17 +120,17 @@ public class AlgoritmoGenetico {
 	}
 
 	private void seleccion() {
-		poblacion = seleccion.select(poblacion, rand);
+		poblacion = seleccion.select(poblacion, rand, tab);
 	}
 
 	private void cruce() {
 		Collections.shuffle(poblacion);
-		poblacion = cruce.cruzar(poblacion, rand, probCruce);
+		poblacion = cruce.cruzar(poblacion, rand, probCruce, tab);
 	}
 
 	private void mutacion() {
 		for (int i = 0; i < tamPob; i++) {
-			poblacion.set(i, mutacion.mutar(poblacion.get(i), rand, probMutacion));
+			poblacion.set(i, mutacion.mutar(poblacion.get(i), rand, probMutacion, tab));
 		}
 	}
 
