@@ -17,4 +17,5 @@
     <fullyQualifiedTypeName name="src.cromosoma.Cromosoma"/>
     <fullyQualifiedTypeName name="src.arbol.Arbol"/>
     <fullyQualifiedTypeName name="src.view.GridView"/>
+    <fullyQualifiedTypeName name="src.TableroGlobal"/>
 </qualifiedTypeNameHistroy>

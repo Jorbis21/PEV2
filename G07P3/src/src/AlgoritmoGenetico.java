@@ -97,7 +97,7 @@ public class AlgoritmoGenetico {
 
 		poblacion = Utils.sortSample(poblacion);
 		mejorGeneracion = poblacion.get(0);
-		Cromosoma aux = new Cromosoma(poblacion.get(0));
+		Cromosoma aux = new Cromosoma(poblacion.get(0), tab);
 		if (aux.getFitness() > mejorGeneracion.getFitness()) {
 			mejorHistorico = aux;
 		}

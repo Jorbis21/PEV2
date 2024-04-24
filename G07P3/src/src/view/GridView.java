@@ -254,7 +254,7 @@ public class GridView {
 		startButton.addActionListener(e -> {
 			//Hay que hacer bien la limpieza
 			//finalButtonGrid(x, dimensionY, new int[x][dimensionY]);
-			TableroGlobal tab = new TableroGlobal(dimensionY,buttonsToGrid(x, dimensionY, buttons));
+			TableroGlobal tab = new TableroGlobal(dimensionY, buttonsToGrid(x, dimensionY, buttons));
 			ag = new AlgoritmoGenetico(Integer.parseInt(tamPobText.getText()),
 					Integer.parseInt(numGenText.getText()),
 					creacionList.get(tipoCreacionDropdown.getSelectedIndex()),
@@ -291,7 +291,22 @@ public class GridView {
 		});
 
 	}
-
+	
+	private int[][] buttonsToGrid(int x, int y, JButton[][] buttons) {
+		int[][] res = new int[x][y];
+		for (int i = 0; i < x; i++) {
+			for (int j = 0; j < y; j++) {
+				if (buttons[i][j].getBackground() == darkGreen)
+					res[i][j] = 0;
+				else if (buttons[i][j].getBackground() == lightGreen)
+					res[i][j] = 1;
+				else
+					res[i][j] = 2;
+			}
+		}
+		return res;
+	}
+	
 	private void drawButtonGrid(int x, int y) {
 		buttonPanel.removeAll();
 
