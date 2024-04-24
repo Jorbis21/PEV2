@@ -10,9 +10,9 @@ public class Cromosoma {
 
 	public static String terminales[] = { "IZQUIERDA", "AVANZA", "CONSTANTE" };
 	public static String funciones[] = { "SUMA", "SALTA", "PROGN" };
-	public static int tableroGlobal[][] = iniTablero();
 	public static double probObs = 0.9;
 	public static int dimension = 8;
+	public static int tableroGlobal[][] = new int[8][dimension]; //= iniTablero();
 
 	private static String direcciones[] = { "Arriba", "Izquierda", "Abajo", "Derecha" };
 
@@ -53,16 +53,6 @@ public class Cromosoma {
 		arbol.calcProf(arbol.getRaiz(), 0);
 		calcFit(arbol.getRaiz());
 		fenotipo = arbol.toString(arbol.getRaiz());
-	}
-
-	static public int[][] iniTablero() {
-		int[][] aux = new int[8][dimension];
-		for (int i = 0; i < 8; i++) {
-			for (int j = 0; j < dimension; j++) {
-				aux[i][j] = 0;
-			}
-		}
-		return aux;
 	}
 
 	private void avanza() {
@@ -223,6 +213,10 @@ public class Cromosoma {
 		numOp = 0;
 		calcFit(arbol.getRaiz());
 		fenotipo = arbol.toString(arbol.getRaiz());
+	}
+
+	public static void setTableroGlobal(int[][] tablero) {
+		tableroGlobal = tablero;
 	}
 
 	public void setTablero(int[][] tablero) {

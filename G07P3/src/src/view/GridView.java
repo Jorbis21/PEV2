@@ -241,7 +241,6 @@ public class GridView {
 		// puede que aqui este un error bien tocho pero creo que esta en el orden
 		// correcto
 		startButton.addActionListener(e -> {
-			drawButtonGrid(x, y);
 			ag = new AlgoritmoGenetico(Integer.parseInt(tamPobText.getText()),
 					Integer.parseInt(numGenText.getText()),
 					creacionList.get(tipoCreacionDropdown.getSelectedIndex()),
@@ -256,7 +255,8 @@ public class GridView {
 					bloatingList.get(controlBloatingDropdown.getSelectedIndex()));
 
 			// transformar los botones a grid y estaticamente a Cromosoma.tableroGlobal
-			Cromosoma.tableroGlobal = buttonsToGrid(x, dimensionY, buttons);
+
+			Cromosoma.setTableroGlobal(buttonsToGrid(x, dimensionY, buttons));
 
 			// ejecutar el algoritmo genetico
 			ag.run();
