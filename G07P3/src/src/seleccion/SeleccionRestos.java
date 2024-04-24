@@ -11,7 +11,7 @@ public class SeleccionRestos implements ISeleccion{
     @Override
     public ArrayList<Cromosoma> select(ArrayList<Cromosoma> poblacion, Random rand) {
         SeleccionRuleta ruleta = new SeleccionRuleta();
-        ArrayList<Integer> prob = new ArrayList<Integer>();
+        ArrayList<Double> prob = new ArrayList<Double>();
 		ArrayList<Cromosoma> selection = new ArrayList<Cromosoma>();
         int totalFit = 0;
         int totalNum = poblacion.size();

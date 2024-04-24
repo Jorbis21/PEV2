@@ -15,7 +15,7 @@ public class SeleccionRanking implements ISeleccion{
 
         selection = Utils.sortSample(selection);
 
-        ArrayList<Integer> fit = new ArrayList<Integer>();
+        ArrayList<Double> fit = new ArrayList<Double>();
 
         fit = group(copy);
         rankingPunctuation(fit);
@@ -28,8 +28,8 @@ public class SeleccionRanking implements ISeleccion{
         return selection;
     }
 
-    private void rankingPunctuation(ArrayList<Integer> fit){
-        int accPunc = 0;
+    private void rankingPunctuation(ArrayList<Double> fit){
+        double accPunc = 0;
         for(int i = 0; i < fit.size(); ++i){
             double probOfIth = (double) i / fit.size();
             probOfIth *= 2*(BETA-1);

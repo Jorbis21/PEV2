@@ -11,7 +11,7 @@ public class SeleccionRuleta implements ISeleccion{
 
   @Override
   public ArrayList<Cromosoma> select(ArrayList<Cromosoma> poblacion, Random random) {
-    ArrayList<Integer> fitness = new ArrayList<Integer>();
+    ArrayList<Double> fitness = new ArrayList<Double>();
 	ArrayList<Cromosoma> selection = new ArrayList<Cromosoma>();
 	double totalFit = 0;
 		
@@ -21,7 +21,7 @@ public class SeleccionRuleta implements ISeleccion{
     totalFit += fitness.get(i);
   }
 
-  	fitness.set(0, 0);
+  	fitness.set(0, 0.0);
 	for(int i = 1; i < fitness.size(); ++i)
 		fitness.set(i, (int)(fitness.get(i) / totalFit) + fitness.get(i - 1));
 

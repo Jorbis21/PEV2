@@ -86,7 +86,7 @@ public class AlgoritmoGenetico {
 	}
 
 	private void cogerDatos() {
-		int sumaFit = 0;
+		double sumaFit = 0;
 		for (Cromosoma cr : poblacion) {
 			sumaFit += cr.getFitness();
 		}

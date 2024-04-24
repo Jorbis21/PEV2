@@ -22,7 +22,7 @@ public class Cromosoma {
 	private Pair posicion = new Pair(4, 4);
 	private int posDir = 0;
 	private String dir = direcciones[posDir];
-	private int fitness = 0;
+	private double fitness = 0.0;
 	private String fenotipo;
 	private int numIz = 0;
 	private int numOp = 0;
@@ -108,12 +108,12 @@ public class Cromosoma {
 		avanza();
 		if (tablero[posicion.getFirst()][posicion.getSecond()] == 0) {
 			tablero[posicion.getFirst()][posicion.getSecond()] = 1;
-			fitness+=1;
+			fitness+=1.0;
 		} else if (tablero[posicion.getFirst()][posicion.getSecond()] == 3) {
 			while (tablero[posicion.getFirst()][posicion.getSecond()] == 3) {
 				if (rand.nextDouble() < probObs) {
 					if (fitness > 0) {
-						fitness-=1;
+						fitness-=1.0;
 					}
 					avanza();
 				} else {
@@ -137,12 +137,12 @@ public class Cromosoma {
 		posicion = posicion.suma(newPos, dimension);
 		if (tablero[posicion.getFirst()][posicion.getSecond()] == 0) {
 			tablero[posicion.getFirst()][posicion.getSecond()] = 1;
-			fitness++;
+			fitness+=1.0;
 		} else if (tablero[posicion.getFirst()][posicion.getSecond()] == 3) {
 			while (tablero[posicion.getFirst()][posicion.getSecond()] == 3) {
 				if (rand.nextDouble() < probObs) {
 					if (fitness > 0) {
-						fitness-=1;
+						fitness-=1.0;
 					}
 					avanza();
 				} else {
@@ -198,7 +198,7 @@ public class Cromosoma {
 		return this.arbol;
 	}
 
-	public int getFitness() {
+	public double getFitness() {
 		return this.fitness;
 	}
 
@@ -209,7 +209,7 @@ public class Cromosoma {
 	public String getRandomTerminal() {
 		return terminales[rand.nextInt(terminales.length)];
 	}
-	public void setFitness(int fit) {
+	public void setFitness(double fit) {
 		this.fitness = fit;
 	}
 	
