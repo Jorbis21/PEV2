@@ -241,6 +241,7 @@ public class GridView {
 		// puede que aqui este un error bien tocho pero creo que esta en el orden
 		// correcto
 		startButton.addActionListener(e -> {
+			drawButtonGrid(x, y);
 			ag = new AlgoritmoGenetico(Integer.parseInt(tamPobText.getText()),
 					Integer.parseInt(numGenText.getText()),
 					creacionList.get(tipoCreacionDropdown.getSelectedIndex()),
@@ -334,6 +335,7 @@ public class GridView {
 		JButton[][] res = new JButton[x][y];
 		for (int i = 0; i < x; i++) {
 			for (int j = 0; j < y; j++) {
+				res[i][j] = new JButton();
 				switch (grid[i][j]) {
 					case 0:
 						res[i][j].setBackground(darkGreen);
