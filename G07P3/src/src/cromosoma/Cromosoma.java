@@ -36,29 +36,15 @@ public class Cromosoma {
 		dir = direcciones[posDir];
 		numIz = 0;
 		numOp = 0;
+		arbol.calcProf(arbol.getRaiz(), 0);
 		calcFit(arbol.getRaiz());
 		fenotipo = arbol.toString(arbol.getRaiz());
 	}
 
-	public Cromosoma(int profundidad, int tipoCreacion) {
-		arbol = new Arbol(profundidad);
+	public Cromosoma(int tipoCreacion) {
+		arbol = new Arbol(tipoCreacion);
 		tablero = tableroGlobal;
 		// puede haber lio con lo de la dimension
-		switch (tipoCreacion) {
-			case 0:
-				arbol.inicializacionCreciente(0, null);
-				break;
-			case 1:
-				arbol.inicializacionCompleta(0, null);
-				break;
-			case 2:
-				Random rand = new Random();
-				if (rand.nextDouble() >= 0.5)
-					arbol.inicializacionCreciente(0, null);
-				else
-					arbol.inicializacionCompleta(0, null);
-				break;
-		}
 		posicion = new Pair(4, 4);
 		posDir = 0;
 		dir = direcciones[posDir];

@@ -9,19 +9,61 @@ public class Arbol {
 	public static int max_prof;
 	
 	private Nodo raiz;
-    private int numNodos;
     private int profundidad;
     Random rand = new Random();
-    
-    public Arbol(){
-        numNodos = 0;
-    }
 
-    public Arbol(int profundidad){
-        numNodos = 0;
-        this.profundidad = profundidad;
+    public Arbol(int tipoCreacion) {
+    	switch (tipoCreacion) {
+		case 0:
+			inicializacionCreciente(0, null);
+			break;
+		case 1:
+			inicializacionCompleta(0, null);
+			break;
+		case 2:
+			if (rand.nextDouble() >= 0.5)
+				inicializacionCreciente(0, null);
+			else
+				inicializacionCompleta(0, null);
+			break;
+	}
     }
     
+    public Arbol(int tipoCreacion, Nodo act) {
+    	switch (tipoCreacion) {
+		case 0:
+			inicializacionCreciente(0, act);
+			break;
+		case 1:
+			inicializacionCompleta(0, act);
+			break;
+		case 2:
+			if (rand.nextDouble() >= 0.5)
+				inicializacionCreciente(0, act);
+			else
+				inicializacionCompleta(0, act);
+			break;
+	}
+    }
+    public void calcProf(Nodo act, int prof) {
+    	if(act.esHoja()) {
+    		if(prof > profundidad) {
+    			setProfundidad(prof);
+    		}
+    	}
+    	else {
+    		if(prof > profundidad) {
+    			setProfundidad(prof);
+    		}
+    		if(act.getNumhijos() == 1) {
+    			calcProf(act.getIzq(), prof+1);
+    		}
+    		else {
+    			calcProf(act.getIzq(), prof+1);
+    			calcProf(act.getDer(), prof+1);
+    		}
+    	}
+    }
     public Nodo getHojaRand(Nodo act) {
     	if(act.esHoja()) {
     		return act;
@@ -192,14 +234,6 @@ public class Arbol {
     
     public Nodo getRaiz() {
     	return raiz;
-    }
-    
-    public int getNumNodos() {
-        return numNodos;
-    }
-
-    public void setNumNodos(int numNodos) {
-        this.numNodos = numNodos;
     }
 
     public int getMax_prof() {

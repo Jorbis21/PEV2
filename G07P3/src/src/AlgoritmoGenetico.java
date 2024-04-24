@@ -69,7 +69,7 @@ public class AlgoritmoGenetico {
 		Cromosoma.tableroGlobal = Cromosoma.iniTablero();
 		//Aqui pillar lo que sea de la gui para meterlo en el tablero
 		for(int i = 0; i < tamPob; i++) {
-			poblacion.add(new Cromosoma(profundidad, tipoCreacion));
+			poblacion.add(new Cromosoma(tipoCreacion));
 		}
 		bloating();
 		cogerDatos();
