@@ -53,8 +53,8 @@ public class Utils {
   
 
 	public static ArrayList<Cromosoma> sortSample(ArrayList<Cromosoma> array){
-		// order from largest to smallest
-    Collections.sort(array, (a, b) -> Double.compare(b.getFitness(), a.getFitness()));
+		// order from largest to smallest by array.get(i).getFitness()
+		Collections.sort(array, (a, b) -> Double.compare(b.getFitness(), a.getFitness()));
 		return array;
 	}
 }

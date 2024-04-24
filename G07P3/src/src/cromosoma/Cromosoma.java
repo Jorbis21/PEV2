@@ -84,6 +84,7 @@ public class Cromosoma {
 		}
 	}
 
+	/* 
 	private void explosion() {
 		tablero[posicion.getFirst() - 1][posicion.getSecond() - 1] = 1;
 		tablero[posicion.getFirst() - 1][posicion.getSecond()] = 1;
@@ -96,7 +97,8 @@ public class Cromosoma {
 		tablero[posicion.getFirst() + 1][posicion.getSecond() + 1] = 1;
 		fitness += 9;
 	}
-
+	*/
+	
 	private void ejecIzq() {
 		numIz++;
 		posDir++;
@@ -117,9 +119,11 @@ public class Cromosoma {
 						fitness-=1.0;
 					}
 					avanza();
-				} else {
+				
+				}/* else {
 					explosion();
 				}
+				*/
 			}
 
 		}
@@ -146,9 +150,10 @@ public class Cromosoma {
 						fitness-=1.0;
 					}
 					avanza();
-				} else {
+				
+				} /* else {
 					explosion();
-				}
+				}*/
 			}
 		}
 		return newPos;
@@ -188,7 +193,7 @@ public class Cromosoma {
 	}
 
 	public Nodo getNodoRand() {
-		return arbol.getNodoRand(arbol.getRaiz(), 0);
+		return arbol.getNodoRand(arbol.getRaiz());
 	}
 
 	public String getFenotipo() {
