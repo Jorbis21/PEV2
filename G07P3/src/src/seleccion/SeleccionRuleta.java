@@ -13,7 +13,7 @@ public class SeleccionRuleta implements ISeleccion{
   public ArrayList<Cromosoma> select(ArrayList<Cromosoma> poblacion, Random random) {
     ArrayList<Integer> fitness = new ArrayList<Integer>();
 	ArrayList<Cromosoma> selection = new ArrayList<Cromosoma>();
-	int totalFit = 0;
+	double totalFit = 0;
 		
 	fitness = group(poblacion);
 
@@ -23,7 +23,7 @@ public class SeleccionRuleta implements ISeleccion{
 
   	fitness.set(0, 0);
 	for(int i = 1; i < fitness.size(); ++i)
-		fitness.set(i, (fitness.get(i) / totalFit) + fitness.get(i - 1));
+		fitness.set(i, (int)(fitness.get(i) / totalFit) + fitness.get(i - 1));
 
     for(int i = 0; i < poblacion.size(); ++i) { // procedemos a seleccionar
       double rand = random.nextDouble(); // generamos un numero aleatorio entre [0..1]
