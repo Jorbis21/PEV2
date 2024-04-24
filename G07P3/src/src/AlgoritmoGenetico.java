@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
 
+import src.arbol.Arbol;
 import src.bloating.IBloating;
 import src.cromosoma.Cromosoma;
 import src.cruce.ICruce;
@@ -20,7 +21,6 @@ public class AlgoritmoGenetico {
 	private int numGen;
 	private int actGen;
 	private int tipoCreacion;
-	private int profundidad;
 	private double probCruce;
 	private double probMutacion;
 	private double probMuerte;
@@ -47,7 +47,7 @@ public class AlgoritmoGenetico {
 		this.tamPob = tamPob;
 		this.numGen = numGen;
 		this.tipoCreacion = tipoCreacion;
-		this.profundidad = profundidad;
+		Arbol.max_prof = profundidad;
 		this.probCruce = probCruce;
 		this.probMutacion = probMutacion;
 		this.probMuerte = probMuerte;

@@ -9,7 +9,7 @@ import src.utils.Utils;
 public interface ISeleccion {
   public ArrayList<Cromosoma> select(ArrayList<Cromosoma> poblacion, Random rand);
 
-	default public ArrayList<Integer> group(ArrayList<Cromosoma> poblacion){
+  default public ArrayList<Integer> group(ArrayList<Cromosoma> poblacion){
 		ArrayList<Integer> groupedFitness = new ArrayList<Integer>();
 		
 		for(Cromosoma i : poblacion){

@@ -21,9 +21,9 @@ public class SeleccionRuleta implements ISeleccion{
     totalFit += fitness.get(i);
   }
 
-  fitness.set(0, 0);
+  	fitness.set(0, 0);
 	for(int i = 1; i < fitness.size(); ++i)
-  fitness.set(i, (fitness.get(i) / totalFit) + fitness.get(i - 1));
+		fitness.set(i, (fitness.get(i) / totalFit) + fitness.get(i - 1));
 
     for(int i = 0; i < poblacion.size(); ++i) { // procedemos a seleccionar
       double rand = random.nextDouble(); // generamos un numero aleatorio entre [0..1]

@@ -107,12 +107,12 @@ public class Cromosoma {
 		avanza();
 		if (tablero[posicion.getFirst()][posicion.getSecond()] == 0) {
 			tablero[posicion.getFirst()][posicion.getSecond()] = 1;
-			fitness++;
+			fitness+=1;
 		} else if (tablero[posicion.getFirst()][posicion.getSecond()] == 3) {
 			while (tablero[posicion.getFirst()][posicion.getSecond()] == 3) {
 				if (rand.nextDouble() < probObs) {
 					if (fitness > 0) {
-						fitness--;
+						fitness-=1;
 					}
 					avanza();
 				} else {
@@ -141,7 +141,7 @@ public class Cromosoma {
 			while (tablero[posicion.getFirst()][posicion.getSecond()] == 3) {
 				if (rand.nextDouble() < probObs) {
 					if (fitness > 0) {
-						fitness--;
+						fitness-=1;
 					}
 					avanza();
 				} else {
