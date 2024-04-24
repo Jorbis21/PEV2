@@ -216,7 +216,9 @@ public class Cromosoma {
 	}
 
 	public static void setTableroGlobal(int[][] tablero) {
-		tableroGlobal = tablero;
+		if(tableroGlobal == null) {
+			tableroGlobal = tablero;
+		}
 	}
 
 	public void setTablero(int[][] tablero) {
@@ -225,5 +227,8 @@ public class Cromosoma {
 
 	public int[][] getTablero() {
 		return this.tablero;
+	}
+	public int[][] getTableroGlobal() {
+		return tableroGlobal;
 	}
 }

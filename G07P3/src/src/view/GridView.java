@@ -65,6 +65,7 @@ public class GridView {
 		initArrayLists();
 
 		dimensionY = y;
+		Cromosoma.dimension = dimensionY;
 		// Button panel ----------------------------------------------------
 		buttonPanel = new JPanel();
 		drawButtonGrid(x, y);

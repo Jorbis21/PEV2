@@ -134,7 +134,7 @@ public class AlgoritmoGenetico {
 
 	public void run() {
 		iniPoblacion();
-
+	
 		do {
 			extraerElite();
 			seleccion();
