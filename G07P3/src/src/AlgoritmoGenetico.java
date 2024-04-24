@@ -35,7 +35,7 @@ public class AlgoritmoGenetico {
 	private double[] mejorHistoricoArray;
 	private double[] mejorGeneracionArray;
 
-	private int mediaFitness;
+	private double mediaFitness;
 	private Cromosoma mejorHistorico;
 	private Cromosoma mejorGeneracion;
 

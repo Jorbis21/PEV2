@@ -8,7 +8,7 @@ import src.cromosoma.Cromosoma;
 public class Fundamentado implements IBloating{
 
 	@Override
-	public void control(int profundidadMedia, int mediaFitness, ArrayList<Cromosoma> poblacion, Random rand,
+	public void control(int profundidadMedia, double mediaFitness, ArrayList<Cromosoma> poblacion, Random rand,
 			double probMuerte, int actGen, int numGen) {
 		double coeficiente;
 		double[] fitness = new double[poblacion.size()];

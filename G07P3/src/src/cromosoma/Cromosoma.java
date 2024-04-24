@@ -22,7 +22,7 @@ public class Cromosoma {
 	private Pair posicion = new Pair(4, 4);
 	private int posDir = 0;
 	private String dir = direcciones[posDir];
-	private int fitness;
+	private int fitness = 0;
 	private String fenotipo;
 	private int numIz = 0;
 	private int numOp = 0;
@@ -50,6 +50,7 @@ public class Cromosoma {
 		dir = direcciones[posDir];
 		numIz = 0;
 		numOp = 0;
+		arbol.calcProf(arbol.getRaiz(), 0);
 		calcFit(arbol.getRaiz());
 		fenotipo = arbol.toString(arbol.getRaiz());
 	}
