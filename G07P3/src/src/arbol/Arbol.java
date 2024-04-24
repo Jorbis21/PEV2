@@ -146,13 +146,12 @@ public class Arbol {
     
     private void iniFuncCr(int numHijos, int aleat, int profundidad, String valor, Nodo aux, Nodo ant) {
     	setProfundidad(profundidad);
-        numHijos = 0; aleat = rand.nextInt(Cromosoma.funciones.length);
-        valor = Cromosoma.funciones[aleat];
+    	aleat = rand.nextInt(Cromosoma.funciones.length);
+        aux.setValor(Cromosoma.funciones[aleat]);
         if(valor == "SUMA" || valor == "PROGN")
-        	numHijos = 2;
+        	aux.setNumhijos(2);
         else
-        	numHijos = 1;
-        aux = new Nodo(valor, ant, null, null, numHijos);
+        	aux.setNumhijos(1);
         if(numHijos == 2) {
         	aux.setIzq(inicializacionCreciente(profundidad+1, aux));
         	aux.setDer(inicializacionCreciente(profundidad+1, aux));
@@ -166,13 +165,12 @@ public class Arbol {
     }
     private void iniFuncC(int numHijos, int aleat, int profundidad, String valor, Nodo aux, Nodo ant) {
     	setProfundidad(profundidad);
-        numHijos = 0; aleat = rand.nextInt(Cromosoma.funciones.length);
-        valor = Cromosoma.funciones[aleat];
+    	aleat = rand.nextInt(Cromosoma.funciones.length);
+        aux.setValor(Cromosoma.funciones[aleat]);
         if(valor == "SUMA" || valor == "PROGN")
-        	numHijos = 2;
+        	aux.setNumhijos(2);
         else
-        	numHijos = 1;
-        aux = new Nodo(valor, ant, null, null, numHijos);
+        	aux.setNumhijos(1);
         if(numHijos == 2) {
         	aux.setIzq(inicializacionCompleta(profundidad+1, aux));
         	aux.setDer(inicializacionCompleta(profundidad+1, aux));
@@ -187,14 +185,12 @@ public class Arbol {
     
     private void iniTerm(int numHijos, int aleat, int profundidad, String valor, Nodo aux, Nodo ant) {
     	setProfundidad(profundidad);
-        numHijos = 0; aleat = rand.nextInt(Cromosoma.terminales.length);
-        valor = Cromosoma.terminales[aleat];
-        Pair numVal = new Pair();
-        aux = new Nodo(valor, ant, null, null, numHijos);
+        aleat = rand.nextInt(Cromosoma.terminales.length);
+        aux.setValor(Cromosoma.terminales[aleat]);
         if(valor == "CONSTANTE") {
-        	numVal = new Pair(rand.nextInt(8), rand.nextInt(Cromosoma.dimension));
+        	aux.setNumval(new Pair(rand.nextInt(8), rand.nextInt(Cromosoma.dimension)));
         }
-        aux.setNumval(numVal);
+        aux.setAnt(ant);
     }
 
     public Nodo inicializacionCompleta(int profundidad, Nodo ant){
