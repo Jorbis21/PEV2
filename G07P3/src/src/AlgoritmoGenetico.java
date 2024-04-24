@@ -68,8 +68,6 @@ public class AlgoritmoGenetico {
 	}
 
 	private void iniPoblacion() {
-		// en teoria esto lo hago dentro de run
-		// Cromosoma.tableroGlobal = Cromosoma.iniTablero();
 		for (int i = 0; i < tamPob; i++) {
 			poblacion.add(new Cromosoma(tipoCreacion));
 		}
