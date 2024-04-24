@@ -21,7 +21,6 @@ public class ErrorView extends JFrame{
         PopupFactory  pf = new PopupFactory();
 
         JPanel p2 = new JPanel();
-        p2.setBackground(java.awt.Color.red);
         p2.add(mainError);
         p2.add(errors);
 

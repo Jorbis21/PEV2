@@ -211,6 +211,7 @@ public class Cromosoma {
 	public void setFitness(int fit) {
 		this.fitness = fit;
 	}
+	
 	// posiblemente lo acabe quitando
 	public void setArbol(Arbol arbol) {
 		this.arbol = arbol;
