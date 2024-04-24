@@ -83,7 +83,7 @@ public class Cromosoma {
 		fitness += 9;
 	}
 	*/
-
+	
 	private void ejecIzq() {
 		numIz++;
 		posDir++;
@@ -178,7 +178,7 @@ public class Cromosoma {
 	}
 
 	public Nodo getNodoRand() {
-		return arbol.getNodoRand(arbol.getRaiz(), 0);
+		return arbol.getNodoRand(arbol.getRaiz());
 	}
 
 	public String getFenotipo() {

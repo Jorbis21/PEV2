@@ -67,62 +67,43 @@ public class Arbol {
     	}
     }
     public Nodo getHojaRand(Nodo act) {
-    	if(act.esHoja()) {
-    		return act;
-    	}
-    	else {
-    		if(act.getNumhijos() == 1) {
+		if (act.esHoja()) {
+			return act;
+		} else {
+			if (act.getNumhijos() == 1) {
 				return getHojaRand(act.getIzq());
+			} else {
+				if (rand.nextDouble() > 0.5) {
+					return getHojaRand(act.getIzq());
+				} else {
+					return getHojaRand(act.getDer());
+				}
 			}
-			else {
-				if(rand.nextDouble() > 0.5) {
-    				return getHojaRand(act.getIzq());
-    			}
-    			else {
-    				return getHojaRand(act.getDer());
-    			}
-			}
-    	}
+		}
     }
     
-    public Nodo getNodoRand(Nodo act, int prof) {
-    	if(prof == profundidad - 1) {
-    		return act;
-    	}
-    	else {
-    		if(prof == 0) {
-    			if(act.getNumhijos() == 1) {
-    				return getNodoRand(act.getIzq(), prof + 1);
-    			}
-    			else {
-    				if(rand.nextDouble() > 0.5) {
-        				return getNodoRand(act.getIzq(), prof + 1);
-        			}
-        			else {
-        				return getNodoRand(act.getDer(), prof + 1);
-        			}
-    			}
-    		}
-    		else {
-    			if(rand.nextDouble() > 0.5) {
-        			return act;
-        		}
-    			else {
-    				if(act.getNumhijos() == 1) {
-        				return getNodoRand(act.getIzq(), prof + 1);
-        			}
-        			else {
-        				if(rand.nextDouble() > 0.5) {
-            				return getNodoRand(act.getIzq(), prof + 1);
-            			}
-            			else {
-            				return getNodoRand(act.getDer(), prof + 1);
-            			}
-        			}
-    			}
-    		}
-    	}
-    }
+    public Nodo getNodoRand(Nodo raiz) {
+		Nodo act = raiz;
+		while(act.esHoja() || act.esRaiz()) {
+			if(act.esHoja()) {
+				return act;
+			}
+			else {
+				if(act.getNumhijos() == 1) {
+					act = act.getIzq();
+				}
+				else {
+					if(rand.nextDouble() > 0.5) {
+						act = act.getIzq();
+					}
+					else {
+						act = act.getDer();
+					}
+				}
+			}
+		}
+		return act;
+	}
     
     public String toString(Nodo act) {
     	if(act.esHoja()) {

@@ -3,6 +3,7 @@ package src.view;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 
 import org.math.plot.Plot2DPanel;
 
@@ -23,35 +24,34 @@ public class MainView{
 
 		JFrame frame = new JFrame("Grid");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setSize(1500, 800);
+		frame.setSize(new Dimension(java.awt.Toolkit.getDefaultToolkit().getScreenSize().width - 10, java.awt.Toolkit.getDefaultToolkit().getScreenSize().height - 10));
 
 		JTabbedPane tabbedPane = new JTabbedPane();
 
 		// First tab - Grid ---------------------------------------------------------------------------------
 		JPanel mainPanel = new JPanel();
 
-		mainPanel.setPreferredSize(new Dimension(1500, 800)); // Set preferred size of mainPanel
+		mainPanel.setSize(new Dimension(java.awt.Toolkit.getDefaultToolkit().getScreenSize().width - 10, java.awt.Toolkit.getDefaultToolkit().getScreenSize().height - 10));
 		tabbedPane.addTab("Grid", mainPanel);
 		mainPanel.setLayout(new GridBagLayout());
 		GridBagConstraints c = new GridBagConstraints();
 		if (shouldFill)
 			c.fill = GridBagConstraints.HORIZONTAL;
 
-		// Left panel that be placed bottom left. will be 2 columns wide and 2 rows tall.
 		GridView gridView = new GridView(8, 8);
 		JPanel buttonPanel = gridView.getButtonPanel();
 		c.fill = GridBagConstraints.BOTH; // Fill both horizontally and vertically
-		c.ipady = 0;	//reset to default 
-		c.weightx = 2.0; // Fill the available horizontal space, 2 times wider
-		c.weighty = 2.0; // Fill the available vertical space, 2 times taller
-		c.gridwidth = 4; //2 columns wide, 2 times wider
-		c.gridheight = 4; //2 rows tall, 2 times taller
-		c.gridx = 0; //leftmost column
-		c.gridy = 0; //top row
+		c.ipady = 0; // reset to default
+		c.weightx = 1.0 / 3.0; // Fill one-third of the available horizontal space
+		c.weighty = 1.0 / 3.0; // Fill one-third of the available vertical space
+		c.gridwidth = 4; // 2 columns wide, 2 times wider
+		c.gridheight = 4; // 2 rows tall, 2 times taller
+		c.gridx = 0; // leftmost column
+		c.gridy = 0; // top row
 		mainPanel.add(buttonPanel, c);
 
 		// Text panel placed at the bottom of the bottomPanel, 2 columns wide and 1 row tall
-		JPanel bottomRightPanel = gridView.getTextPanel();
+		JScrollPane bottomRightPanel = gridView.getTextPanel();
 		c.fill = GridBagConstraints.BOTH; // Fill both horizontally and vertically
 		c.ipady = 0;	//reset to default
 		c.weightx = 2.0; // Fill the available horizontal space, 2 times wider

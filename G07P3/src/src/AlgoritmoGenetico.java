@@ -72,6 +72,8 @@ public class AlgoritmoGenetico {
 			poblacion.add(new Cromosoma(tipoCreacion));
 		}
 		bloating();
+		Utils.sortSample(poblacion);
+		mejorHistorico = poblacion.get(0);
 		cogerDatos();
 	}
 
@@ -89,12 +91,14 @@ public class AlgoritmoGenetico {
 			sumaFit += cr.getFitness();
 		}
 		mediaFitness = sumaFit / tamPob;
+		mediaFitnessArray[actGen] = mediaFitness;
+
 		poblacion = Utils.sortSample(poblacion);
 		mejorGeneracion = poblacion.get(0);
-		if (mejorHistorico == null || mejorHistorico.getFitness() < mejorGeneracion.getFitness()) {
-			mejorHistorico = mejorGeneracion;
+		Cromosoma aux = new Cromosoma(poblacion.get(0));
+		if (aux.getFitness() > mejorGeneracion.getFitness()) {
+			mejorHistorico = aux;
 		}
-		mediaFitnessArray[actGen] = mediaFitness;
 		mejorHistoricoArray[actGen] = mejorHistorico.getFitness();
 		mejorGeneracionArray[actGen] = mejorGeneracion.getFitness();
 	}

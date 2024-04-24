@@ -10,6 +10,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JSpinner;
 import javax.swing.JTextField;
 import javax.swing.SpinnerNumberModel;
@@ -44,7 +45,7 @@ public class GridView {
 
 	JPanel buttonPanel;
 	JPanel rightPanel;
-	JPanel textPanel;
+	JScrollPane textPanel;
 
 	ArrayList<Integer> creacionList = new ArrayList<>();
 	String[] creacionNames;
@@ -68,11 +69,19 @@ public class GridView {
 		// Button panel ----------------------------------------------------
 		buttonPanel = new JPanel();
 		drawButtonGrid(x, y);
+		// set size limits
+		buttonPanel.setMinimumSize(buttonPanel.getPreferredSize());
+		// set maximum size to half the screen
+		
+
 
 		// Text panel ----------------------------------------------------
-		textPanel = new JPanel();
-		JLabel textLabel = new JLabel("");
-		textPanel.add(textLabel);
+		textPanel = new JScrollPane();
+		JLabel textLabel = new JLabel();
+		textPanel.setViewportView(textLabel);
+		textPanel.setMinimumSize(textPanel.getPreferredSize());
+		textPanel.setMaximumSize(textPanel.getPreferredSize());
+
 		// Right panel ----------------------------------------------------
 		rightPanel = new JPanel();
 		rightPanel.setLayout(new GridBagLayout());
@@ -269,7 +278,9 @@ public class GridView {
 			GraphView.plotLines(numGeneraciones, mejorHistoricoArray, mejorGeneracionArray, mediaFitnessArray);
 			finalButtonGrid(x, dimensionY, mejorHistorico.getTablero());
 
-			textLabel.setText(mejorHistorico.getFenotipo());
+			//Show the best individual wrapping it in a string
+			String mejor = "Mejor Individuo \n: " + mejorHistorico.getFenotipo();
+			textLabel.setText(mejor);
 
 		});
 
@@ -310,21 +321,6 @@ public class GridView {
 			}
 		}
 		buttonPanel.revalidate();
-	}
-
-	private int[][] buttonsToGrid(int x, int y, JButton[][] buttons) {
-		int[][] res = new int[x][y];
-		for (int i = 0; i < x; i++) {
-			for (int j = 0; j < y; j++) {
-				if (buttons[i][j].getBackground() == darkGreen)
-					res[i][j] = 0;
-				else if (buttons[i][j].getBackground() == lightGreen)
-					res[i][j] = 1;
-				else
-					res[i][j] = 2;
-			}
-		}
-		return res;
 	}
 
 	private JButton[][] gridToButtons(int x, int y, int[][] grid) {
@@ -400,7 +396,7 @@ public class GridView {
 		return rightPanel;
 	}
 
-	public JPanel getTextPanel() {
+	public JScrollPane getTextPanel() {
 		return textPanel;
 	}
 }
