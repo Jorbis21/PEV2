@@ -87,6 +87,10 @@ public class Nodo{
 		return this.der;
 	}
 	
+	public void setValorNum(String valor, Pair numVal) {
+		this.valor = valor;
+		this.numVal = numVal;
+	}
 	public void setValor(String valor) {
 		this.valor = valor;
 	}

@@ -15,4 +15,5 @@
     <fullyQualifiedTypeName name="java.util.ArrayList"/>
     <fullyQualifiedTypeName name="java.util.Random"/>
     <fullyQualifiedTypeName name="src.cromosoma.Cromosoma"/>
+    <fullyQualifiedTypeName name="src.arbol.Arbol"/>
 </qualifiedTypeNameHistroy>

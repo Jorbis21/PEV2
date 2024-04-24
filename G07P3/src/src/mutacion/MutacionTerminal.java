@@ -13,11 +13,10 @@ public class MutacionTerminal implements IMutacion {
         Cromosoma progMutado = new Cromosoma(programa);
         if(rand.nextDouble() < probMut) {
             String s = progMutado.getRandomTerminal();
-            Nodo x = progMutado.getHojaRand();
             if(s == "CONSTANTE") {
-            	x.setNumval(new Pair(rand.nextInt(8), rand.nextInt(Cromosoma.dimension)));
+            	progMutado.getHojaRand().setValorNum(s,(new Pair(rand.nextInt(8), rand.nextInt(Cromosoma.dimension))));
             }
-            x.setValor(s);
+            progMutado.getHojaRand().setValorNum(s,new Pair());
         }
         return new Cromosoma(progMutado);
     }
