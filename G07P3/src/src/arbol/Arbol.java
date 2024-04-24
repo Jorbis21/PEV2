@@ -144,15 +144,15 @@ public class Arbol {
     	}
     }
     
-    private void iniFuncCr(int numHijos, int aleat, int profundidad, String valor, Nodo aux, Nodo ant) {
+    private void iniFuncCr(int profundidad, Nodo aux, Nodo ant) {
     	setProfundidad(profundidad);
-    	aleat = rand.nextInt(Cromosoma.funciones.length);
-        aux.setValor(Cromosoma.funciones[aleat]);
-        if(valor == "SUMA" || valor == "PROGN")
+    	aux.setAnt(ant);
+        aux.setValor(Cromosoma.funciones[rand.nextInt(Cromosoma.funciones.length)]);
+        if(aux.getValor() == "SUMA" || aux.getValor() == "PROGN")
         	aux.setNumhijos(2);
         else
         	aux.setNumhijos(1);
-        if(numHijos == 2) {
+        if(aux.getNumhijos() == 2) {
         	aux.setIzq(inicializacionCreciente(profundidad+1, aux));
         	aux.setDer(inicializacionCreciente(profundidad+1, aux));
         }
@@ -163,15 +163,15 @@ public class Arbol {
         	this.raiz = aux;
         }
     }
-    private void iniFuncC(int numHijos, int aleat, int profundidad, String valor, Nodo aux, Nodo ant) {
+    private void iniFuncC(int profundidad, Nodo aux, Nodo ant) {
     	setProfundidad(profundidad);
-    	aleat = rand.nextInt(Cromosoma.funciones.length);
-        aux.setValor(Cromosoma.funciones[aleat]);
-        if(valor == "SUMA" || valor == "PROGN")
+    	aux.setAnt(ant);
+        aux.setValor(Cromosoma.funciones[rand.nextInt(Cromosoma.funciones.length)]);
+        if(aux.getValor() == "SUMA" || aux.getValor() == "PROGN")
         	aux.setNumhijos(2);
         else
         	aux.setNumhijos(1);
-        if(numHijos == 2) {
+        if(aux.getNumhijos() == 2) {
         	aux.setIzq(inicializacionCompleta(profundidad+1, aux));
         	aux.setDer(inicializacionCompleta(profundidad+1, aux));
         }
@@ -183,24 +183,22 @@ public class Arbol {
         }
     }
     
-    private void iniTerm(int numHijos, int aleat, int profundidad, String valor, Nodo aux, Nodo ant) {
+    private void iniTerm(int profundidad, Nodo aux, Nodo ant) {
     	setProfundidad(profundidad);
-        aleat = rand.nextInt(Cromosoma.terminales.length);
-        aux.setValor(Cromosoma.terminales[aleat]);
-        if(valor == "CONSTANTE") {
+        aux.setValor(Cromosoma.terminales[rand.nextInt(Cromosoma.terminales.length)]);
+        if(aux.getValor() == "CONSTANTE") {
         	aux.setNumval(new Pair(rand.nextInt(8), rand.nextInt(Cromosoma.dimension)));
         }
         aux.setAnt(ant);
     }
 
     public Nodo inicializacionCompleta(int profundidad, Nodo ant){
-    	int numHijos = 0, aleat = -1;
-    	String valor = null; Nodo aux = new Nodo();
+    	Nodo aux = new Nodo();
         if(profundidad < max_prof){
-        	iniFuncC(numHijos, aleat, profundidad, valor, aux, ant);
+        	iniFuncC(profundidad, aux, ant);
         }
         else if(profundidad == (max_prof - 1)) {
-        	iniTerm(numHijos, aleat, profundidad, valor, aux, ant);
+        	iniTerm(profundidad, aux, ant);
         }
         return aux;
     }
@@ -210,19 +208,19 @@ public class Arbol {
     	String valor = null; Nodo aux = new Nodo();
         if(profundidad < max_prof){
             if(profundidad == 0) {
-            	iniFuncCr(numHijos, aleat, profundidad, valor, aux, ant);
+            	iniFuncCr(profundidad, aux, ant);
             }
             else {
             	if(rand.nextDouble() >= 0.5) {
-            		iniFuncCr(numHijos, aleat, profundidad, valor, aux, ant);
+            		iniFuncCr(profundidad, aux, ant);
             	}
             	else {
-            		iniTerm(numHijos, aleat, profundidad, valor, aux, ant);
+            		iniTerm(profundidad, aux, ant);
             	}
             }
         }
         else {
-        	iniTerm(numHijos, aleat, profundidad, valor, aux, ant);
+        	iniTerm(profundidad, aux, ant);
         }
       return aux;
     }
