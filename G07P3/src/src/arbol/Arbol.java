@@ -9,7 +9,7 @@ public class Arbol {
 	public static int max_prof;
 	
 	private Nodo raiz;
-    private int profundidad;
+    private int profundidad = 0;
     Random rand = new Random();
 
     public Arbol(int tipoCreacion) {
@@ -21,12 +21,13 @@ public class Arbol {
 			inicializacionCompleta(0, null);
 			break;
 		case 2:
-			if (rand.nextDouble() >= 0.5)
+			if (rand.nextDouble() > 0.5)
 				inicializacionCreciente(0, null);
 			else
 				inicializacionCompleta(0, null);
 			break;
-	}
+    	}
+    	calcProf(raiz, 0);
     }
     
     public Arbol(int tipoCreacion, Nodo act) {
@@ -38,12 +39,13 @@ public class Arbol {
 			inicializacionCompleta(0, act);
 			break;
 		case 2:
-			if (rand.nextDouble() >= 0.5)
+			if (rand.nextDouble() > 0.5)
 				inicializacionCreciente(0, act);
 			else
 				inicializacionCompleta(0, act);
 			break;
-	}
+    	}
+    	calcProf(raiz, 0);
     }
     public void calcProf(Nodo act, int prof) {
     	if(act.esHoja()) {
@@ -145,7 +147,6 @@ public class Arbol {
     }
     
     private void iniFuncCr(int profundidad, Nodo aux, Nodo ant) {
-    	setProfundidad(profundidad);
     	aux.setAnt(ant);
         aux.setValor(Cromosoma.funciones[rand.nextInt(Cromosoma.funciones.length)]);
         if(aux.getValor() == "SUMA" || aux.getValor() == "PROGN")
@@ -164,7 +165,6 @@ public class Arbol {
         }
     }
     private void iniFuncC(int profundidad, Nodo aux, Nodo ant) {
-    	setProfundidad(profundidad);
     	aux.setAnt(ant);
         aux.setValor(Cromosoma.funciones[rand.nextInt(Cromosoma.funciones.length)]);
         if(aux.getValor() == "SUMA" || aux.getValor() == "PROGN")
@@ -204,14 +204,13 @@ public class Arbol {
     }
   
     public Nodo inicializacionCreciente(int profundidad, Nodo ant){
-    	int numHijos = 0, aleat = -1;
-    	String valor = null; Nodo aux = new Nodo();
+    	Nodo aux = new Nodo();
         if(profundidad < max_prof){
             if(profundidad == 0) {
             	iniFuncCr(profundidad, aux, ant);
             }
             else {
-            	if(rand.nextDouble() >= 0.5) {
+            	if(rand.nextDouble() > 0.5) {
             		iniFuncCr(profundidad, aux, ant);
             	}
             	else {
