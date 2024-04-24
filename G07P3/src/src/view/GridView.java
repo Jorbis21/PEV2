@@ -255,8 +255,7 @@ public class GridView {
 					bloatingList.get(controlBloatingDropdown.getSelectedIndex()));
 
 			// transformar los botones a grid y estaticamente a Cromosoma.tableroGlobal
-			grid = buttonsToGrid(x, dimensionY, buttons);
-			Cromosoma.tableroGlobal = grid;
+			Cromosoma.tableroGlobal = buttonsToGrid(x, dimensionY, buttons);
 
 			// ejecutar el algoritmo genetico
 			ag.run();
