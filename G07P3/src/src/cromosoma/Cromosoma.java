@@ -12,11 +12,10 @@ public class Cromosoma {
 	public static String funciones[] = { "SUMA", "SALTA", "PROGN" };
 	public static double probObs = 0.9;
 	public static int dimension = 8;
-	public static int tableroGlobal[][] = new int[8][dimension]; //= iniTablero();
 
 	private static String direcciones[] = { "Arriba", "Izquierda", "Abajo", "Derecha" };
 
-	private int[][] tablero;
+	private int[][] tablero = new int[8][dimension];
 	private Random rand = new Random();
 	private Arbol arbol;
 	private Pair posicion = new Pair(4, 4);
@@ -29,7 +28,6 @@ public class Cromosoma {
 
 	// Constructor copia
 	public Cromosoma(Cromosoma cromosoma) {
-		tablero = tableroGlobal;
 		this.arbol = cromosoma.getGenotipo();
 		posicion = new Pair(4, 4);
 		posDir = 0;
@@ -43,8 +41,6 @@ public class Cromosoma {
 
 	public Cromosoma(int tipoCreacion) {
 		arbol = new Arbol(tipoCreacion);
-		tablero = tableroGlobal;
-		// puede haber lio con lo de la dimension
 		posicion = new Pair(4, 4);
 		posDir = 0;
 		dir = direcciones[posDir];
@@ -73,6 +69,7 @@ public class Cromosoma {
 		}
 	}
 
+	/* 
 	private void explosion() {
 		tablero[posicion.getFirst() - 1][posicion.getSecond() - 1] = 1;
 		tablero[posicion.getFirst() - 1][posicion.getSecond()] = 1;
@@ -85,6 +82,7 @@ public class Cromosoma {
 		tablero[posicion.getFirst() + 1][posicion.getSecond() + 1] = 1;
 		fitness += 9;
 	}
+	*/
 
 	private void ejecIzq() {
 		numIz++;
@@ -106,9 +104,11 @@ public class Cromosoma {
 						fitness-=1.0;
 					}
 					avanza();
-				} else {
+				
+				}/* else {
 					explosion();
 				}
+				*/
 			}
 
 		}
@@ -135,9 +135,10 @@ public class Cromosoma {
 						fitness-=1.0;
 					}
 					avanza();
-				} else {
+				
+				} /* else {
 					explosion();
-				}
+				}*/
 			}
 		}
 		return newPos;
@@ -213,10 +214,6 @@ public class Cromosoma {
 		numOp = 0;
 		calcFit(arbol.getRaiz());
 		fenotipo = arbol.toString(arbol.getRaiz());
-	}
-
-	public static void setTableroGlobal(int[][] tablero) {
-		tableroGlobal = tablero;
 	}
 
 	public void setTablero(int[][] tablero) {

@@ -127,9 +127,8 @@ public class AlgoritmoGenetico {
 	}
 
 	private void mutacion() {
-		for (int i = 0; i < tamPob; i++) {
-			poblacion.set(i, mutacion.mutar(poblacion.get(i), rand, probMutacion));
-		}
+		for(Cromosoma cr : poblacion) 
+			cr = this.mutacion.mutar(cr, rand, probMutacion);
 	}
 
 	public void run() {

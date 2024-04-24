@@ -253,8 +253,6 @@ public class GridView {
 					mutacionList.get(mutacionDropdown.getSelectedIndex()),
 					seleccionList.get(seleccionDropdown.getSelectedIndex()),
 					bloatingList.get(controlBloatingDropdown.getSelectedIndex()));
-					
-			Cromosoma.setTableroGlobal(buttonsToGrid(x, dimensionY, buttons));
 
 			// ejecutar el algoritmo genetico
 			ag.run();
