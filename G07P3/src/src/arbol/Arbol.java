@@ -19,18 +19,19 @@ public class Arbol {
 
     public Arbol(int tipoCreacion, TableroGlobal tab) {
     	this.tab = tab;
+    	raiz = new Nodo();
     	switch (tipoCreacion) {
 		case 0:
-			inicializacionCreciente(0, null);
+			inicializacionCreciente(0, null, raiz);
 			break;
 		case 1:
-			inicializacionCompleta(0, null);
+			inicializacionCompleta(0, null, raiz);
 			break;
 		case 2:
 			if (rand.nextDouble() > 0.5)
-				inicializacionCreciente(0, null);
+				inicializacionCreciente(0, null, raiz);
 			else
-				inicializacionCompleta(0, null);
+				inicializacionCompleta(0, null, raiz);
 			break;
     	}
     	calcProf(raiz, 0);
@@ -38,18 +39,19 @@ public class Arbol {
     
     public Arbol(int tipoCreacion, Nodo act, TableroGlobal tab) {
     	this.tab = tab;
+    	raiz = new Nodo();
     	switch (tipoCreacion) {
 		case 0:
-			inicializacionCreciente(0, act);
+			inicializacionCreciente(0, act, raiz);
 			break;
 		case 1:
-			inicializacionCompleta(0, act);
+			inicializacionCompleta(0, act, raiz);
 			break;
 		case 2:
 			if (rand.nextDouble() > 0.5)
-				inicializacionCreciente(0, act);
+				inicializacionCreciente(0, act, raiz);
 			else
-				inicializacionCompleta(0, act);
+				inicializacionCompleta(0, act, raiz);
 			break;
     	}
     	calcProf(raiz, 0);
@@ -134,82 +136,80 @@ public class Arbol {
     	}
     }
     
-    private void iniFuncCr(int profundidad, Nodo aux, Nodo ant) {
-    	aux.setAnt(ant);
-        aux.setValor(Cromosoma.funciones[rand.nextInt(Cromosoma.funciones.length)]);
-        if(aux.getValor() == "SUMA" || aux.getValor() == "PROGN")
-        	aux.setNumhijos(2);
+    private void iniFuncCr(int profundidad, Nodo act, Nodo ant) {
+    	act.setAnt(ant);
+        act.setValor(Cromosoma.funciones[rand.nextInt(Cromosoma.funciones.length)]);
+        if(act.getValor() == "SUMA" || act.getValor() == "PROGN")
+        	act.setNumhijos(2);
         else
-        	aux.setNumhijos(1);
-        if(aux.getNumhijos() == 2) {
-        	aux.setIzq(inicializacionCreciente(profundidad+1, aux));
-        	aux.setDer(inicializacionCreciente(profundidad+1, aux));
+        	act.setNumhijos(1);
+        if(act.getNumhijos() == 2) {
+        	act.setIzq(inicializacionCreciente(profundidad+1, act, new Nodo()));
+        	act.setDer(inicializacionCreciente(profundidad+1, act, new Nodo()));
         }
         else {
-        	aux.setIzq(inicializacionCreciente(profundidad+1, aux));
+        	act.setIzq(inicializacionCreciente(profundidad+1, act, new Nodo()));
         }
-        if(aux.esRaiz()) {
-        	this.raiz = aux;
+        if(act.esRaiz()) {
+        	this.raiz = act;
         }
     }
-    private void iniFuncC(int profundidad, Nodo aux, Nodo ant) {
-    	aux.setAnt(ant);
-        aux.setValor(Cromosoma.funciones[rand.nextInt(Cromosoma.funciones.length)]);
-        if(aux.getValor() == "SUMA" || aux.getValor() == "PROGN")
-        	aux.setNumhijos(2);
+    private void iniFuncC(int profundidad, Nodo act, Nodo ant) {
+    	act.setAnt(ant);
+        act.setValor(Cromosoma.funciones[rand.nextInt(Cromosoma.funciones.length)]);
+        if(act.getValor() == "SUMA" || act.getValor() == "PROGN")
+        	act.setNumhijos(2);
         else
-        	aux.setNumhijos(1);
-        if(aux.getNumhijos() == 2) {
-        	aux.setIzq(inicializacionCompleta(profundidad+1, aux));
-        	aux.setDer(inicializacionCompleta(profundidad+1, aux));
+        	act.setNumhijos(1);
+        if(act.getNumhijos() == 2) {
+        	act.setIzq(inicializacionCompleta(profundidad+1, act, new Nodo()));
+        	act.setDer(inicializacionCompleta(profundidad+1, act, new Nodo()));
         }
         else {
-        	aux.setIzq(inicializacionCompleta(profundidad+1, aux));
+        	act.setIzq(inicializacionCompleta(profundidad+1, act, new Nodo()));
         }
-        if(aux.esRaiz()) {
-        	this.raiz = aux;
+        if(act.esRaiz()) {
+        	this.raiz = act;
         }
     }
     
-    private void iniTerm(int profundidad, Nodo aux, Nodo ant) {
+    private void iniTerm(int profundidad, Nodo act, Nodo ant) {
     	setProfundidad(profundidad);
-        aux.setValor(Cromosoma.terminales[rand.nextInt(Cromosoma.terminales.length)]);
-        if(aux.getValor() == "CONSTANTE") {
-        	aux.setNumval(new Pair(rand.nextInt(8), rand.nextInt(tab.getDim())));
+        act.setValor(Cromosoma.terminales[rand.nextInt(Cromosoma.terminales.length)]);
+        if(act.getValor() == "CONSTANTE") {
+        	act.setNumval(new Pair(rand.nextInt(8), rand.nextInt(tab.getDim())));
         }
-        aux.setAnt(ant);
+        act.setAnt(ant);
     }
 
-    public Nodo inicializacionCompleta(int profundidad, Nodo ant){
-    	Nodo aux = new Nodo();
+    public Nodo inicializacionCompleta(int profundidad, Nodo ant, Nodo act){
         if(profundidad < max_prof){
-        	iniFuncC(profundidad, aux, ant);
+        	iniFuncC(profundidad, act, ant);
         }
-        else if(profundidad == (max_prof - 1)) {
-        	iniTerm(profundidad, aux, ant);
+        else{
+        	iniTerm(profundidad, act, ant);
         }
-        return aux;
+        return act;
     }
   
-    public Nodo inicializacionCreciente(int profundidad, Nodo ant){
-    	Nodo aux = new Nodo();
+    public Nodo inicializacionCreciente(int profundidad, Nodo ant, Nodo act){
         if(profundidad < max_prof){
             if(profundidad == 0) {
-            	iniFuncCr(profundidad, aux, ant);
+            	iniFuncCr(profundidad, act, ant);
             }
             else {
             	if(rand.nextDouble() > 0.5) {
-            		iniFuncCr(profundidad, aux, ant);
+            		iniFuncCr(profundidad, act, ant);
             	}
             	else {
-            		iniTerm(profundidad, aux, ant);
+            		iniTerm(profundidad, act, ant);
             	}
             }
         }
         else {
-        	iniTerm(profundidad, aux, ant);
+        	iniTerm(profundidad, act, ant);
         }
-      return aux;
+      return act;
     }
 
 	public void swapSubtrees(Nodo nodo1, Nodo nodo2) {
@@ -249,11 +249,5 @@ public class Arbol {
         this.profundidad = profundidad;
     }
 
-	public JTree createGraphFromArbol() {
-	}
-
-	private JTree buildGraphFromArbol(Nodo raiz){
-		
-	}
 }
 
