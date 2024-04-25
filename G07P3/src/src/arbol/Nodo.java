@@ -49,6 +49,14 @@ public class Nodo{
 		this.der = null;
 		this.numHijos = 0;
 	}
+
+	public void contraeConNum(String s, Pair valor){
+		this.valor = s;
+		this.numVal = valor;
+		this.izq = null;
+		this.der = null;
+		this.numHijos = 0;
+	}
 	
 	public void terminate(String valor){
 		this.valor = valor;

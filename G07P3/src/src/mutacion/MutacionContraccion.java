@@ -4,6 +4,7 @@ import java.util.Random;
 
 import src.TableroGlobal;
 import src.cromosoma.Cromosoma;
+import src.utils.Pair;
 
 public class MutacionContraccion implements IMutacion{
 
@@ -12,7 +13,13 @@ public class MutacionContraccion implements IMutacion{
         Cromosoma progMutado = new Cromosoma(programa, tab);
         if(rand.nextDouble() < probMut) {
             String s = progMutado.getRandomTerminal();
-            progMutado.getNodoRand().contrae(s);
+            if(s == "CONSTANTE") {
+                Pair valor = new Pair(rand.nextInt(8), rand.nextInt(tab.getDim()));
+                progMutado.getNodoRand().contraeConNum(s, valor);
+            }else{
+                progMutado.getNodoRand().contrae(s);
+            }
+            
         }
         return new Cromosoma(progMutado, tab);
     }

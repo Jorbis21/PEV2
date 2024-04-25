@@ -161,6 +161,7 @@ public class Cromosoma {
 	}
 
 	// Getters & Setters ----------------------------------------------
+
 	public Nodo getHojaRand() {
 		return arbol.getHojaRand(arbol.getRaiz());
 	}
