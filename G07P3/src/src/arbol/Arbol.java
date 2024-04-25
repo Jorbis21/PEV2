@@ -5,6 +5,9 @@ import java.util.Random;
 import src.TableroGlobal;
 import src.cromosoma.Cromosoma;
 import src.utils.Pair;
+import org.graphstream.graph.Graph;
+import org.graphstream.graph.implementations.SingleGraph;
+
 
 public class Arbol {
 	public static int max_prof;
@@ -245,5 +248,25 @@ public class Arbol {
     public void setProfundidad(int profundidad) {
         this.profundidad = profundidad;
     }
+
+	public Graph createGraphFromArbol() {
+		Graph graph = new SingleGraph("Arbol");
+		//Build the graph recursively from the root
+		graph = buildGraphFromArbol(raiz);
+		return graph;
+	}
+
+	private Graph buildGraphFromArbol(Nodo raiz){
+		Graph res = new SingleGraph("Arbol");
+		if(raiz.esHoja()){
+			res.addNode(raiz.getValor());
+		}
+		else{
+			res.addNode(raiz.getValor());
+			res = buildGraphFromArbol(raiz.getIzq());
+			res = buildGraphFromArbol(raiz.getDer());
+		}
+		return res;
+	}
 }
 

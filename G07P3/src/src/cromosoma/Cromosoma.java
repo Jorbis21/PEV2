@@ -226,4 +226,8 @@ public class Cromosoma {
 	public int[][] getTablero() {
 		return this.tablero;
 	}
+
+	public Arbol getArbol(){
+		return this.arbol;
+	}
 }

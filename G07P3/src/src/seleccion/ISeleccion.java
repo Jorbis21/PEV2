@@ -7,7 +7,7 @@ import src.TableroGlobal;
 import src.cromosoma.Cromosoma;
 
 public interface ISeleccion {
-  public ArrayList<Cromosoma> select(ArrayList<Cromosoma> poblacion, Random rand, TableroGlobal tab);
+  public ArrayList<Cromosoma> select(ArrayList<Cromosoma> poblacion, Random random, TableroGlobal tab);
 
   default public ArrayList<Double> group(ArrayList<Cromosoma> poblacion){
 		ArrayList<Double> groupedFitness = new ArrayList<Double>();

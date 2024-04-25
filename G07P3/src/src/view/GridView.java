@@ -241,10 +241,19 @@ public class GridView {
 			drawButtonGrid(x, dimensionY);
 		});
 
+		JButton clearButton = new JButton("Clear");
+		c.weightx = 1.0; // fill the available horizontal space
+		c.gridx = 0; // first
+		c.gridy = 12; // thirteenth row
+		rightPanel.add(clearButton, c);
+
+		clearButton.addActionListener(e -> {
+			drawButtonGrid(x, dimensionY);
+		});
+
 		JButton startButton = new JButton("Start");
 		c.weightx = 1.0; // fill the available horizontal space
-		c.gridwidth = 2; // 2 columns wide
-		c.gridx = 0; // first
+		c.gridx = 1; // first
 		c.gridy = 12; // thirteenth row
 		rightPanel.add(startButton, c);
 
@@ -287,9 +296,7 @@ public class GridView {
 			//Show the best individual wrapping it in a string
 			String mejor = "Mejor Individuo \n: " + mejorHistorico.getFenotipo();
 			textLabel.setText(mejor);
-
 		});
-
 	}
 	
 	private int[][] buttonsToGrid(int x, int y, JButton[][] buttons) {
