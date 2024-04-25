@@ -81,6 +81,9 @@ public class Arbol {
 				calcProf(act.getIzq(), prof + 1);
 				calcProf(act.getDer(), prof + 1);
 			}
+			if(!act.esRaiz() && (act.getNumhijos() == 1 || act.getNumhijos() == 2)) {
+				middleNodes.add(act);
+			}
 		}
 	}
 
@@ -205,7 +208,7 @@ public class Arbol {
 
 	public Nodo inicializacionCreciente(int profundidad, Nodo ant, Nodo act) {
 		if (profundidad <= max_prof) {
-			if (profundidad == 0) {
+			if (profundidad == 0 || profundidad == 1) {
 				iniFuncCr(profundidad, act, ant);
 			} else {
 				if (rand.nextDouble() > 0.5) {

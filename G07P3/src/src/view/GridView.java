@@ -24,7 +24,6 @@ import src.cromosoma.Cromosoma;
 import src.cruce.CruceArboreo;
 import src.mutacion.IMutacion;
 import src.mutacion.MutacionContraccion;
-import src.mutacion.MutacionHoist;
 import src.mutacion.MutacionPermutacion;
 import src.mutacion.MutacionTerminal;
 import src.seleccion.ISeleccion;
@@ -410,7 +409,6 @@ public class GridView {
 		mutacionList.add(new MutacionTerminal());
 		mutacionList.add(new MutacionContraccion());
 		mutacionList.add(new MutacionPermutacion());
-		mutacionList.add(new MutacionHoist());
 
 		mutacionNames = new String[mutacionList.size()];
 		for (IMutacion mutacion : mutacionList) {

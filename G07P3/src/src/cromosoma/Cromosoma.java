@@ -190,7 +190,7 @@ public class Cromosoma {
 	}
 
 	public ArrayList<Nodo> getMiddleNodes() {
-		return arbol.getMiddleNodes(arbol.getRaiz());
+		return arbol.getMiddleNodes();
 	}
 
 	public String getFenotipo() {
