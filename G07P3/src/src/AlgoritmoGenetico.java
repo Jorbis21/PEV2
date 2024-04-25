@@ -131,7 +131,7 @@ public class AlgoritmoGenetico {
 	}
 
 	private void mutacion() {
-		for (int i = 0; i < tamPob; i++) {
+		for (int i = 0; i < tamPob - (tamPob%2); i++) {
 			poblacion.set(i, mutacion.mutar(poblacion.get(i), rand, probMutacion, tab));
 		}
 	}

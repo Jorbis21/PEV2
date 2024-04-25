@@ -13,7 +13,7 @@ public class CruceArboreo implements ICruce {
   public ArrayList<Cromosoma> cruzar(ArrayList<Cromosoma> padres, Random rand, double probCruce, TableroGlobal tab) {
     ArrayList<Cromosoma> nuevaGeneracion = new ArrayList<Cromosoma>();
 
-    for(int i = 0; i < padres.size() - padres.size()%2; i+=2) {
+    for(int i = 0; i < padres.size() - (padres.size()%2); i+=2) {
     	Cromosoma padre1 = padres.get(i);
         Cromosoma padre2 = padres.get(i+1);
 
