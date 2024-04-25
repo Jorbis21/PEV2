@@ -36,9 +36,11 @@ public class Nodo{
 	}
 
 	public void permutaHijos(){
-		Nodo aux = this.izq;
-		this.izq = this.der;
-		this.der = aux;
+		if(numHijos == 2) {
+			Nodo aux = this.izq;
+			this.izq = this.der;
+			this.der = aux;
+		}
 	}
 
 	public void contrae(String valor){
