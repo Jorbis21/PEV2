@@ -73,11 +73,6 @@ public class AlgoritmoGenetico {
 		for (int i = 0; i < tamPob; i++) {
 			poblacion.add(new Cromosoma(tipoCreacion, tab));
 		}
-		poblacion = Utils.sortSample(poblacion);
-		mejorHistoricoArray[0] = poblacion.get(0).getFitness();
-		mejorGeneracionArray[0] = poblacion.get(0).getFitness();
-		mejorHistorico = this.poblacion.get(0);
-		mejorGeneracion = this.poblacion.get(0);
 		bloating();
 		cogerDatos();
 	}
@@ -100,9 +95,9 @@ public class AlgoritmoGenetico {
 
 		poblacion = Utils.sortSample(poblacion);
 		mejorGeneracion = poblacion.get(0);
-		Cromosoma aux = new Cromosoma(poblacion.get(0), tab);
-		if (aux.getFitness() > mejorGeneracion.getFitness()) {
-			mejorHistorico = aux;
+		
+		if (mejorHistorico == null || mejorHistorico.getFitness() < mejorGeneracion.getFitness()) {
+			mejorHistorico = mejorGeneracion;
 		}
 		mejorHistoricoArray[actGen] = mejorHistorico.getFitness();
 		mejorGeneracionArray[actGen] = mejorGeneracion.getFitness();
