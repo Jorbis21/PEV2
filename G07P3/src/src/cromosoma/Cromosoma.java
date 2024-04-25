@@ -222,4 +222,9 @@ public class Cromosoma {
 	public Arbol getArbol(){
 		return this.arbol;
 	}
+
+	public void setArbol(Arbol newArbol){
+		this.arbol = newArbol;
+	}
+
 }

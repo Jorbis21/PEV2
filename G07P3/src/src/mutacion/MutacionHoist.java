@@ -11,12 +11,12 @@ public class MutacionHoist implements IMutacion{
 
     @Override
     public Cromosoma mutar(Cromosoma programa, Random rand, double probMut, TableroGlobal tab) {
+        Cromosoma progMutado = new Cromosoma(programa, tab);
         if(rand.nextDouble() < probMut) {
-        	Nodo aux = programa.getNodoRand();
-        	aux.setAnt(null);
-        	return new Cromosoma(new Arbol(aux, tab), tab);
+            Arbol subarbol = new Arbol(progMutado.getNodoRand(), tab);
+            progMutado.setArbol(subarbol);
         }
-        return programa;
+        return progMutado;
     }
     
     @Override
