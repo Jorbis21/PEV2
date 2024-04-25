@@ -12,4 +12,11 @@
 	</section>
 	<section name="FileSystemImportWizard">
 	</section>
+	<section name="PropertyDialog.dialogBounds">
+		<item key="DIALOG_X_ORIGIN" value="0"/>
+		<item key="DIALOG_Y_ORIGIN" value="0"/>
+		<item key="DIALOG_WIDTH" value="1011"/>
+		<item key="DIALOG_HEIGHT" value="603"/>
+		<item key="DIALOG_FONT_NAME" value="1|Cantarell|11.0|0|GTK|1|"/>
+	</section>
 </section>

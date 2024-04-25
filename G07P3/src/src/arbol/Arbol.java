@@ -2,11 +2,11 @@ package src.arbol;
 
 import java.util.Random;
 
+import javax.swing.JTree;
+
 import src.TableroGlobal;
 import src.cromosoma.Cromosoma;
 import src.utils.Pair;
-import org.graphstream.graph.Graph;
-import org.graphstream.graph.implementations.SingleGraph;
 
 
 public class Arbol {
@@ -249,24 +249,11 @@ public class Arbol {
         this.profundidad = profundidad;
     }
 
-	public Graph createGraphFromArbol() {
-		Graph graph = new SingleGraph("Arbol");
-		//Build the graph recursively from the root
-		graph = buildGraphFromArbol(raiz);
-		return graph;
+	public JTree createGraphFromArbol() {
 	}
 
-	private Graph buildGraphFromArbol(Nodo raiz){
-		Graph res = new SingleGraph("Arbol");
-		if(raiz.esHoja()){
-			res.addNode(raiz.getValor());
-		}
-		else{
-			res.addNode(raiz.getValor());
-			res = buildGraphFromArbol(raiz.getIzq());
-			res = buildGraphFromArbol(raiz.getDer());
-		}
-		return res;
+	private JTree buildGraphFromArbol(Nodo raiz){
+		
 	}
 }
 
