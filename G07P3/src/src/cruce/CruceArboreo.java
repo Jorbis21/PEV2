@@ -1,5 +1,6 @@
 package src.cruce;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -21,8 +22,11 @@ public class CruceArboreo implements ICruce {
           Cromosoma hijo1 = new Cromosoma(padre1, tab);
           Cromosoma hijo2 = new Cromosoma(padre2, tab);
 
-          Nodo nodoHijo1 = hijo1.getNodoRand();
-          Nodo nodoHijo2 = hijo2.getNodoRand();
+          ArrayList<Nodo> middleNodesPadre1 = padre1.getMiddleNodes();
+          ArrayList<Nodo> middleNodesPadre2 = padre2.getMiddleNodes();
+
+          Nodo nodoHijo1 = getRandom(middleNodesPadre1, rand);
+          Nodo nodoHijo2 = getRandom(middleNodesPadre2, rand);
 
           hijo1.swapSubtrees(nodoHijo1, nodoHijo2);
           
@@ -37,4 +41,7 @@ public class CruceArboreo implements ICruce {
     return nuevaGeneracion;
   }
 
+  private Nodo getRandom(ArrayList<Nodo> nodes, Random rand) {
+    return nodes.get(rand.nextInt(nodes.size()));
+  }
 }

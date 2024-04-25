@@ -1,5 +1,6 @@
 package src.cromosoma;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 import src.TableroGlobal;
@@ -186,6 +187,10 @@ public class Cromosoma {
 
 	public Nodo getNodoRand() {
 		return arbol.getNodoRand(arbol.getRaiz());
+	}
+
+	public ArrayList<Nodo> getMiddleNodes() {
+		return arbol.getMiddleNodes(arbol.getRaiz());
 	}
 
 	public String getFenotipo() {

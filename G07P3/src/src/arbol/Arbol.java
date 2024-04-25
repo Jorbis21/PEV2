@@ -1,5 +1,6 @@
 package src.arbol;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 import org.graphstream.graph.Graph;
@@ -17,6 +18,7 @@ public class Arbol {
 	private int profundidad = 0;
 	Random rand = new Random();
 	private TableroGlobal tab;
+	ArrayList<Nodo> middleNodes = new ArrayList<Nodo>();
 
 	public Arbol(int tipoCreacion, TableroGlobal tab) {
 		this.tab = tab;
@@ -219,19 +221,20 @@ public class Arbol {
 	}
 
 	public void swapSubtrees(Nodo nodo1, Nodo nodo2) {
-		Nodo aux = new Nodo(nodo1);
-		nodo1.setValor(nodo2.getValor());
-		nodo1.setNumhijos(nodo2.getNumhijos());
-		nodo1.setNumval(nodo2.getNumval());
-		nodo1.setIzq(nodo2.getIzq());
-		nodo1.setDer(nodo2.getDer());
-		nodo1.setAnt(nodo2.getAnt());
-		nodo2.setValor(aux.getValor());
-		nodo2.setNumhijos(aux.getNumhijos());
-		nodo2.setNumval(aux.getNumval());
-		nodo2.setIzq(aux.getIzq());
-		nodo2.setDer(aux.getDer());
-		nodo2.setAnt(aux.getAnt());
+		Nodo antN2 = nodo2.getAnt();
+		nodo2.setAnt(nodo1.getAnt());
+		if (nodo1.getAnt().getIzq() == nodo1) {
+			nodo1.getAnt().setIzq(nodo2);
+		} else {
+			nodo1.getAnt().setDer(nodo2);
+		}
+
+		nodo1.setAnt(antN2);
+		if (antN2.getIzq() == nodo2) {
+			antN2.setIzq(nodo1);
+		} else {
+			antN2.setDer(nodo1);
+		}
 	}
 
 	public Graph getTreeView() {
@@ -301,6 +304,10 @@ public class Arbol {
 
 	public void setProfundidad(int profundidad) {
 		this.profundidad = profundidad;
+	}
+
+	public ArrayList<Nodo> getMiddleNodes() {
+		return middleNodes;
 	}
 
 }
