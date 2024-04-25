@@ -193,7 +193,7 @@ public class Arbol {
 	}
 
 	public Nodo inicializacionCompleta(int profundidad, Nodo ant, Nodo act) {
-		if (profundidad < max_prof) {
+		if (profundidad <= max_prof) {
 			iniFuncC(profundidad, act, ant);
 		} else {
 			iniTerm(profundidad, act, ant);
@@ -202,7 +202,7 @@ public class Arbol {
 	}
 
 	public Nodo inicializacionCreciente(int profundidad, Nodo ant, Nodo act) {
-		if (profundidad < max_prof) {
+		if (profundidad <= max_prof) {
 			if (profundidad == 0) {
 				iniFuncCr(profundidad, act, ant);
 			} else {
