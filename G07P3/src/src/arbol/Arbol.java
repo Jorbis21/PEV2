@@ -98,25 +98,35 @@ public class Arbol {
 		}
 	}
 
-	public Nodo getNodoRand(Nodo raiz) {
-		Nodo act = raiz;
-		while (act.esHoja() || act.esRaiz()) {
-			if (act.esHoja()) {
+	public Nodo getNodoRand(Nodo act) {
+		if(act.esRaiz()) {
+			if(act.getDer() != null && !act.getDer().esHoja() && rand.nextDouble() > 0.5) {
+				return getNodoRand(act.getDer());
+			}
+			else if(!act.getIzq().esHoja() ) {
+				return getNodoRand(act.getIzq());
+			}
+			else {
 				return act;
-			} else {
-				if (act.getNumhijos() == 1) {
-					act = act.getIzq();
-				} else {
-					if (rand.nextDouble() > 0.5) {
-						act = act.getIzq();
-					} else {
-						act = act.getDer();
-					}
+			}
+		}
+		else {
+			if(rand.nextDouble() > 0.5) {
+				return act;
+			}
+			else {
+				if(act.getDer() != null && !act.getDer().esHoja() && rand.nextDouble() > 0.5) {
+					return getNodoRand(act.getDer());
+				}
+				else if(!act.getIzq().esHoja() ) {
+					return getNodoRand(act.getIzq());
+				}
+				else {
+					return act;
 				}
 			}
 		}
-		return act;
-	}
+    }
 
 	public String toString(Nodo act) {
 		if (act.esHoja()) {
