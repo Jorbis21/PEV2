@@ -57,6 +57,12 @@ public class Arbol {
 		}
 		calcProf(raiz, 0);
 	}
+	
+	public Arbol(Nodo raiz, TableroGlobal tab) {
+		this.tab = tab;
+		this.raiz = raiz;
+		calcProf(this.raiz, 0);
+	}
 
 	public void calcProf(Nodo act, int prof) {
 		if (act.esHoja()) {

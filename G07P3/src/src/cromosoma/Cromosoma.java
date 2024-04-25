@@ -64,6 +64,24 @@ public class Cromosoma {
 		calcFit(arbol.getRaiz());
 		fenotipo = arbol.toString(arbol.getRaiz());
 	}
+	public Cromosoma(Arbol arbol, TableroGlobal tab) {
+		this.tab = tab;
+		this.arbol = arbol;
+		this.tablero = new int[8][tab.getDim()];
+		for(int i = 0; i < 8; i++) {
+			for(int j = 0; j < tab.getDim(); j++) {
+				tablero[i][j] = tab.getTab()[i][j];
+			}
+		}
+		posicion = new Pair(4, 4);
+		posDir = 0;
+		dir = direcciones[posDir];
+		numIz = 0;
+		numOp = 0;
+		arbol.calcProf(arbol.getRaiz(), 0);
+		calcFit(arbol.getRaiz());
+		fenotipo = arbol.toString(arbol.getRaiz());
+	}
 
 	private void avanza() {
 		numOp++;

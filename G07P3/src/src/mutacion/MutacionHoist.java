@@ -5,16 +5,18 @@ import java.util.Random;
 import src.cromosoma.Cromosoma;
 import src.TableroGlobal;
 import src.arbol.Arbol;
+import src.arbol.Nodo;
 
 public class MutacionHoist implements IMutacion{
 
     @Override
     public Cromosoma mutar(Cromosoma programa, Random rand, double probMut, TableroGlobal tab) {
-        Cromosoma progMutado = new Cromosoma(programa, tab);
         if(rand.nextDouble() < probMut) {
-        
+        	Nodo aux = programa.getNodoRand();
+        	aux.setAnt(null);
+        	return new Cromosoma(new Arbol(aux, tab), tab);
         }
-        return new Cromosoma(progMutado, tab);
+        return programa;
     }
     
     @Override
