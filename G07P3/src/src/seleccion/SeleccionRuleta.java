@@ -11,26 +11,30 @@ public class SeleccionRuleta implements ISeleccion{
 
   @Override
   public ArrayList<Cromosoma> select(ArrayList<Cromosoma> poblacion, Random random, TableroGlobal tab) {
-    ArrayList<Double> fitness = new ArrayList<Double>();
-	  ArrayList<Cromosoma> selection = new ArrayList<Cromosoma>();
-	  double totalFit = 0;
-		
-	  fitness = group(poblacion);
-
-    for(int i = 0; i < fitness.size(); ++i){
-      totalFit += fitness.get(i);
+    ArrayList<Cromosoma> seleccionados = new ArrayList<>();
+    double totalFitness = 0;
+    
+    // Calculate the total fitness of the population
+    for (Cromosoma cromosoma : poblacion) {
+      totalFitness += cromosoma.getFitness();
     }
-
-    fitness.set(0, 0.0);
-	  for(int i = 1; i < fitness.size(); ++i)
-	    fitness.set(i, (fitness.get(i) / totalFit) + fitness.get(i - 1));
-
-    for(int i = 0; i < poblacion.size(); ++i) { // procedemos a seleccionar
-      double rand = random.nextDouble(); // generamos un numero aleatorio entre [0..1]
-      int ind = Utils.findInterval(rand, fitness); // usamos busqueda binaria de forma que qi-1 < random < q
-      selection.add(new Cromosoma(poblacion.get(ind), tab)); // añadimos el Cromosoma a la seleccion
+    
+    // Perform roulette selection
+    while (seleccionados.size() < poblacion.size()) {
+      double randomValue = random.nextDouble() * totalFitness;
+      double cumulativeFitness = 0;
+      
+      for (Cromosoma cromosoma : poblacion) {
+        cumulativeFitness += cromosoma.getFitness();
+        
+        if (cumulativeFitness >= randomValue) {
+          seleccionados.add(cromosoma);
+          break;
+        }
+      }
     }
-    return selection;
+    
+    return seleccionados;
   }
 
   @Override

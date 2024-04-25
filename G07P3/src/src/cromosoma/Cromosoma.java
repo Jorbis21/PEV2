@@ -15,7 +15,6 @@ public class Cromosoma {
 	private static String direcciones[] = { "Arriba", "Izquierda", "Abajo", "Derecha" };
 
 	private int[][] tablero;
-	private double probObs = 0.95;
 	private Random rand = new Random();
 	private Arbol arbol;
 	private Pair posicion;
@@ -70,34 +69,19 @@ public class Cromosoma {
 		numOp++;
 		switch (dir) {
 			case "Arriba":
-				posicion = posicion.suma(new Pair(0, 1), tab.getDim());
-				break;
-			case "Izquierda":
 				posicion = posicion.suma(new Pair(-1, 0), tab.getDim());
 				break;
-			case "Abajo":
+			case "Izquierda":
 				posicion = posicion.suma(new Pair(0, -1), tab.getDim());
 				break;
-			case "Derecha":
+			case "Abajo":
 				posicion = posicion.suma(new Pair(1, 0), tab.getDim());
+				break;
+			case "Derecha":
+				posicion = posicion.suma(new Pair(0, 1), tab.getDim());
 				break;
 		}
 	}
-
-	/* 
-	private void explosion() {
-		tablero[posicion.getFirst() - 1][posicion.getSecond() - 1] = 1;
-		tablero[posicion.getFirst() - 1][posicion.getSecond()] = 1;
-		tablero[posicion.getFirst() - 1][posicion.getSecond() + 1] = 1;
-		tablero[posicion.getFirst()][posicion.getSecond() - 1] = 1;
-		tablero[posicion.getFirst()][posicion.getSecond()] = 1;
-		tablero[posicion.getFirst()][posicion.getSecond() + 1] = 1;
-		tablero[posicion.getFirst() + 1][posicion.getSecond() - 1] = 1;
-		tablero[posicion.getFirst() + 1][posicion.getSecond()] = 1;
-		tablero[posicion.getFirst() + 1][posicion.getSecond() + 1] = 1;
-		fitness += 9;
-	}
-	*/
 	
 	private void ejecIzq() {
 		numIz++;
@@ -112,18 +96,12 @@ public class Cromosoma {
 		if (tablero[posicion.getFirst()][posicion.getSecond()] == 0) {
 			tablero[posicion.getFirst()][posicion.getSecond()] = 1;
 			fitness+=1.0;
-		} else if (tablero[posicion.getFirst()][posicion.getSecond()] == 3) {
-			while (tablero[posicion.getFirst()][posicion.getSecond()] == 3) {
-				if (rand.nextDouble() < probObs) {
-					if (fitness > 0) {
-						fitness-=1.0;
-					}
-					avanza();
-				
-				}/* else {
-					explosion();
+		} else if (tablero[posicion.getFirst()][posicion.getSecond()] == 2) {
+			while (tablero[posicion.getFirst()][posicion.getSecond()] == 2) {
+				if (fitness > 0) {
+					fitness-=1.0;
 				}
-				*/
+				avanza();
 			}
 
 		}
@@ -143,17 +121,12 @@ public class Cromosoma {
 		if (tablero[posicion.getFirst()][posicion.getSecond()] == 0) {
 			tablero[posicion.getFirst()][posicion.getSecond()] = 1;
 			fitness+=1.0;
-		} else if (tablero[posicion.getFirst()][posicion.getSecond()] == 3) {
-			while (tablero[posicion.getFirst()][posicion.getSecond()] == 3) {
-				if (rand.nextDouble() < probObs) {
-					if (fitness > 0) {
-						fitness-=1.0;
-					}
-					avanza();
-				
-				} /* else {
-					explosion();
-				}*/
+		} else if (tablero[posicion.getFirst()][posicion.getSecond()] == 2) {
+			while (tablero[posicion.getFirst()][posicion.getSecond()] == 2) {
+				if (fitness > 0) {
+					fitness-=1.0;
+				}
+				avanza();
 			}
 		}
 		return newPos;

@@ -36,9 +36,11 @@ public class Nodo{
 	}
 
 	public void permutaHijos(){
-		Nodo aux = this.izq;
-		this.izq = this.der;
-		this.der = aux;
+		if(numHijos == 2) {
+			Nodo aux = this.izq;
+			this.izq = this.der;
+			this.der = aux;
+		}
 	}
 
 	public void contrae(String valor){
@@ -64,11 +66,6 @@ public class Nodo{
 	}
 	
 	public String getValor() {
-		return this.valor;
-	}
-	
-	@Override
-	public String toString() {
 		return this.valor;
 	}
 	
