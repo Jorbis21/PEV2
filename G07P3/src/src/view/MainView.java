@@ -14,12 +14,13 @@ import java.awt.GridLayout;
 
 import javax.swing.JTabbedPane;
 
+import src.TableroGlobal;
+import src.cromosoma.Cromosoma;
 import src.view.GraphView;
 import src.view.GridView;
 
 public class MainView{
 	public MainView() {
-		// grid baglayout variables
 		final boolean shouldFill = false;
 
 		JFrame frame = new JFrame("Grid");
@@ -88,6 +89,7 @@ public class MainView{
 	}
 	
 	public static void main(String args[]) {
+		System.setProperty("org.graphstream.ui", "swing");
 		new MainView();
 	}
 }

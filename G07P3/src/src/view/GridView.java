@@ -296,6 +296,9 @@ public class GridView {
 			//Show the best individual wrapping it in a string
 			String mejor = "Mejor Individuo \n: " + mejorHistorico.getFenotipo();
 			textLabel.setText(mejor);
+			
+			TreeView tv = new TreeView();
+			tv.showTree(mejorHistorico);
 		});
 	}
 	

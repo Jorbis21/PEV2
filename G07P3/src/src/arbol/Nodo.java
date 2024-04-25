@@ -67,6 +67,11 @@ public class Nodo{
 		return this.valor;
 	}
 	
+	@Override
+	public String toString() {
+		return this.valor;
+	}
+	
 	public Pair getNumval() {
 		return this.numVal;
 	}

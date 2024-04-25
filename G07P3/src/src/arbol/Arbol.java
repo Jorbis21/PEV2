@@ -2,7 +2,9 @@ package src.arbol;
 
 import java.util.Random;
 
-import javax.swing.JTree;
+import org.graphstream.graph.Graph;
+import org.graphstream.graph.Node;
+import org.graphstream.graph.implementations.*;
 
 import src.TableroGlobal;
 import src.cromosoma.Cromosoma;
@@ -230,6 +232,51 @@ public class Arbol {
 			antN2.setDer(nodo1);
 		}
 	}
+	
+	public Graph getTreeView() {
+		Graph result = new SingleGraph("Arbol");
+		
+		Graph g = new SingleGraph("Arbol");
+		addNodes(g, raiz);
+		addEdges(g, raiz);
+		return g;
+	}
+
+	private void addNodes(Graph g, Nodo nodo) {
+		Node n = g.addNode(nodo.toString());
+		
+		n.setAttribute("ui.label", nodo.toString());
+		if(nodo.esHoja()) {
+			n.setAttribute("ui.class", "hoja");
+		}
+		else {
+			n.setAttribute("ui.class", "funcion");
+		}
+		if(nodo.getNumhijos() == 1) {
+			addNodes(g, nodo.getIzq());
+		}
+		else {
+			addNodes(g, nodo.getIzq());
+			addNodes(g, nodo.getDer());
+		}
+	}
+
+	private void addEdges(Graph g, Nodo nodo) {
+		if(nodo.getNumhijos() == 1) {
+			g.addEdge(nodo.toString() + nodo.getIzq().toString(), nodo.toString(), nodo.getIzq().toString());
+			addEdges(g, nodo.getIzq());
+		}
+		else {
+			g.addEdge(nodo.toString() + nodo.getIzq().toString(), nodo.toString(), nodo.getIzq().toString());
+			addEdges(g, nodo.getIzq());
+			g.addEdge(nodo.toString() + nodo.getDer().toString(), nodo.toString(), nodo.getDer().toString());
+			addEdges(g, nodo.getDer());
+		}
+	}
+
+		public void setMax_prof(int max_prof) {
+				this.max_prof = max_prof;
+	}
 
     /// Getters & Setters ---------------------------------------------------------
     
@@ -249,11 +296,5 @@ public class Arbol {
         this.profundidad = profundidad;
     }
 
-	public JTree createGraphFromArbol() {
-	}
-
-	private JTree buildGraphFromArbol(Nodo raiz){
-		
-	}
 }
 
