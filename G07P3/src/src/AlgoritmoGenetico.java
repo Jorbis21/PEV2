@@ -73,9 +73,12 @@ public class AlgoritmoGenetico {
 		for (int i = 0; i < tamPob; i++) {
 			poblacion.add(new Cromosoma(tipoCreacion, tab));
 		}
+		poblacion = Utils.sortSample(poblacion);
+		mejorHistoricoArray[0] = poblacion.get(0).getFitness();
+		mejorGeneracionArray[0] = poblacion.get(0).getFitness();
+		mejorHistorico = this.poblacion.get(0);
+		mejorGeneracion = this.poblacion.get(0);
 		bloating();
-		Utils.sortSample(poblacion);
-		mejorHistorico = poblacion.get(0);
 		cogerDatos();
 	}
 
