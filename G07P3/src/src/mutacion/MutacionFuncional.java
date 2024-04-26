@@ -4,19 +4,15 @@ import java.util.Random;
 
 import src.TableroGlobal;
 import src.cromosoma.Cromosoma;
-import src.utils.Pair;
 
-public class MutacionTerminal implements IMutacion {
+public class MutacionFuncional implements IMutacion {
 
     @Override
     public Cromosoma mutar(Cromosoma programa, Random rand, double probMut, TableroGlobal tab) {
         Cromosoma progMutado = new Cromosoma(programa, tab);
         if(rand.nextDouble() < probMut) {
-            String s = progMutado.getRandomTerminal();
-            if(s == "CONSTANTE") {
-            	progMutado.getHojaRand().setValorNum(s,(new Pair(rand.nextInt(8), rand.nextInt(tab.getDim()))));
-            }
-            progMutado.getHojaRand().setValorNum(s,new Pair());
+            String s = progMutado.getRandomFuncion();
+            progMutado.getNodoRand().setValor(s);
         }
         return new Cromosoma(progMutado, tab);
     }
@@ -24,6 +20,6 @@ public class MutacionTerminal implements IMutacion {
 
     @Override
     public String toString() {
-        return "Mutacion Terminal";
+        return "Mutacion Funcional";
     }
 }

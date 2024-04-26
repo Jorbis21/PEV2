@@ -23,11 +23,10 @@ import src.bloating.Tarpeian;
 import src.cromosoma.Cromosoma;
 import src.cruce.CruceArboreo;
 import src.mutacion.IMutacion;
-import src.mutacion.MutacionContraccion;
+import src.mutacion.MutacionExpansion;
 import src.mutacion.MutacionPermutacion;
 import src.mutacion.MutacionTerminal;
 import src.seleccion.ISeleccion;
-import src.seleccion.SeleccionRanking;
 import src.seleccion.SeleccionRestos;
 import src.seleccion.SeleccionRuleta;
 import src.seleccion.SeleccionTorneoDet;
@@ -399,7 +398,6 @@ public class GridView {
 		seleccionList.add(new SeleccionRestos());
 		seleccionList.add(new SeleccionTruncamiento());
 		seleccionList.add(new SeleccionUniEstocastica());
-		seleccionList.add(new SeleccionRanking());
 
 		seleccionNames = new String[seleccionList.size()];
 		for (ISeleccion seleccion : seleccionList) {
@@ -407,8 +405,9 @@ public class GridView {
 		}
 
 		mutacionList.add(new MutacionTerminal());
-		mutacionList.add(new MutacionContraccion());
+		mutacionList.add(new MutacionExpansion());
 		mutacionList.add(new MutacionPermutacion());
+
 
 		mutacionNames = new String[mutacionList.size()];
 		for (IMutacion mutacion : mutacionList) {

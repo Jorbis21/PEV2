@@ -43,11 +43,13 @@ public class Nodo{
 		}
 	}
 
-	public void contrae(String valor){
-		this.valor = valor;
-		this.izq = null;
-		this.der = null;
-		this.numHijos = 0;
+	public void expande(Arbol expansion){
+		expansion.getRaiz().setAnt(this.getAnt());
+		this.valor = expansion.getRaiz().getValor();
+		this.numVal = expansion.getRaiz().getNumval();
+		this.izq = expansion.getRaiz().getIzq();
+		this.der = expansion.getRaiz().getDer();
+		this.numHijos = expansion.getRaiz().getNumhijos();
 	}
 
 	public void contraeConNum(String s, Pair valor){

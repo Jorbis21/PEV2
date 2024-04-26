@@ -8,34 +8,44 @@ import src.cromosoma.Cromosoma;
 
 public class SeleccionRestos implements ISeleccion{
 
-//REVISAR>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
     @Override
     public ArrayList<Cromosoma> select(ArrayList<Cromosoma> poblacion, Random rand, TableroGlobal tab) {
-        SeleccionRuleta ruleta = new SeleccionRuleta();
-        ArrayList<Double> prob = new ArrayList<Double>();
-		ArrayList<Cromosoma> selection = new ArrayList<Cromosoma>();
-        int totalFit = 0;
-        int totalNum = poblacion.size();
+        ArrayList<Cromosoma> seleccionados = new ArrayList<>();
 
-        prob = group(poblacion);
-
-        for(double i : prob)
-            totalFit += i;
-
-        for(int i = 0; i < prob.size(); ++i) {
-            prob.set(i, (prob.get(i) / totalFit));
+        final int tamOriginal = poblacion.size();
+        int sel = 0;
+    
+        int fitnessTotal = 0;
+        double[] probs = new double[poblacion.size()];
+    
+        for (int i = 0; i < poblacion.size(); ++i) {
+          probs[i] = poblacion.get(i).getFitness();
+          fitnessTotal += probs[i];
         }
-
-        for(int i = 0; i < totalNum; ++i) {
-            for(int j = 0; j < Math.floor(prob.get(i) * totalNum); ++j) 
-                selection.add(new Cromosoma(poblacion.get(i), tab));
+    
+        for (int i = 0; i < poblacion.size(); ++i) {
+          probs[i] = probs[i] / fitnessTotal;
         }
-
-        ArrayList<Cromosoma> remaining = ruleta.select(poblacion, rand, tab);
-        for(int i = 0; i < remaining.size()	&& selection.size() < totalNum; ++i)
-            selection.add(new Cromosoma(remaining.get(i), tab));
-
-		return selection;
+    
+        for (int i = 0; i < poblacion.size(); ++i) {
+          int vecesSeleccionado = (int) Math.floor(probs[i] * tamOriginal);
+    
+          if (vecesSeleccionado > 0) {
+            sel++;
+            seleccionados.add(new Cromosoma(poblacion.get(i), tab));
+            poblacion.remove(i);
+          }
+        }
+    
+        ISeleccion aux = new SeleccionRuleta();
+    
+        ArrayList<Cromosoma> ultimos = aux.select(poblacion, rand, tab);
+    
+        for (Cromosoma i : ultimos) {
+          seleccionados.add(new Cromosoma(i, tab));
+        }
+    
+        return seleccionados;
     }
 
     public String toString(){

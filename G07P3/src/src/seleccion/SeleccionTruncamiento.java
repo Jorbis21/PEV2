@@ -11,17 +11,21 @@ public class SeleccionTruncamiento implements ISeleccion{
 	@Override
 	public ArrayList<Cromosoma> select(ArrayList<Cromosoma> poblacion, Random rand, TableroGlobal tab) {
 		double trunc = 0.5;
-		ArrayList<Cromosoma> selection = new ArrayList<Cromosoma>();
-		
-		int numSeleccionados = (int) Math.round(trunc * poblacion.size());
+
+		int numSeleccionados = (int) (poblacion.size() * trunc);
 		int vecesReproducido = (int) Math.round(1 / trunc);
-		
-		for(int i = 0; i < numSeleccionados; ++i) {
-			for(int j = 0; j < vecesReproducido; ++j) {
-				selection.add(new Cromosoma(poblacion.get(i), tab));
+		ArrayList<Cromosoma> seleccionados = new ArrayList<>();
+
+		// Sort the population in descending order based on fitness
+		poblacion.sort((c1, c2) -> Double.compare(c2.getFitness(), c1.getFitness()));
+
+		for(int i = 0; i < numSeleccionados; ++i){
+			for (int j = 0; j < vecesReproducido; ++j) {
+				seleccionados.add(poblacion.get(i));
 			}
 		}
-		return selection;
+		
+		return seleccionados;
 	}
 	@Override
 	public String toString() {
