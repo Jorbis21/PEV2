@@ -3,29 +3,24 @@ package src.mutacion;
 import java.util.Random;
 
 import src.TableroGlobal;
+import src.arbol.Arbol;
 import src.cromosoma.Cromosoma;
 import src.utils.Pair;
 
-public class MutacionContraccion implements IMutacion{
+
+public class MutacionExpansion implements IMutacion {
 
     @Override
     public Cromosoma mutar(Cromosoma programa, Random rand, double probMut, TableroGlobal tab) {
         Cromosoma progMutado = new Cromosoma(programa, tab);
         if(rand.nextDouble() < probMut) {
-            String s = progMutado.getRandomTerminal();
-            if(s == "CONSTANTE") {
-                Pair valor = new Pair(rand.nextInt(8), rand.nextInt(tab.getDim()));
-                progMutado.getNodoRand().contraeConNum(s, valor);
-            }else{
-                progMutado.getNodoRand().contrae(s);
-            }
-            
+            Arbol expansion = new Arbol(1, tab);
+            progMutado.getHojaRand().expande(expansion);
         }
         return new Cromosoma(progMutado, tab);
     }
-
     @Override
     public String toString() {
-        return "Mutacion Contraccion";
+        return "Mutacion Expansion";
     }
 }

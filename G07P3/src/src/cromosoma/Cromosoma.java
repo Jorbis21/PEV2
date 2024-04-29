@@ -180,7 +180,6 @@ public class Cromosoma {
 	}
 
 	// Getters & Setters ----------------------------------------------
-
 	public Nodo getHojaRand() {
 		return arbol.getHojaRand(arbol.getRaiz());
 	}
@@ -190,7 +189,7 @@ public class Cromosoma {
 	}
 
 	public ArrayList<Nodo> getMiddleNodes() {
-		return arbol.getMiddleNodes(arbol.getRaiz());
+		return arbol.getMiddleNodes();
 	}
 
 	public String getFenotipo() {
@@ -212,6 +211,11 @@ public class Cromosoma {
 	public String getRandomTerminal() {
 		return terminales[rand.nextInt(terminales.length)];
 	}
+
+	public String getRandomFuncion() {
+		return funciones[rand.nextInt(1, funciones.length)];
+	}
+	
 	public void setFitness(double fit) {
 		this.fitness = fit;
 	}

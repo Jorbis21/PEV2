@@ -63,6 +63,7 @@ public class Arbol {
 	public Arbol(Nodo raiz, TableroGlobal tab) {
 		this.tab = tab;
 		this.raiz = raiz;
+		inicializacionCompleta(0, raiz, raiz.getAnt());
 		calcProf(this.raiz, 0);
 	}
 
@@ -80,6 +81,9 @@ public class Arbol {
 			} else {
 				calcProf(act.getIzq(), prof + 1);
 				calcProf(act.getDer(), prof + 1);
+			}
+			if(!act.esRaiz() && (act.getNumhijos() == 1 || act.getNumhijos() == 2)) {
+				middleNodes.add(act);
 			}
 		}
 	}
@@ -205,7 +209,7 @@ public class Arbol {
 
 	public Nodo inicializacionCreciente(int profundidad, Nodo ant, Nodo act) {
 		if (profundidad <= max_prof) {
-			if (profundidad == 0) {
+			if (profundidad == 0 || profundidad == 1) {
 				iniFuncCr(profundidad, act, ant);
 			} else {
 				if (rand.nextDouble() > 0.5) {
@@ -221,20 +225,20 @@ public class Arbol {
 	}
 
 	public void swapSubtrees(Nodo nodo1, Nodo nodo2) {
-		Nodo antN2 = nodo2.getAnt();
-		nodo2.setAnt(nodo1.getAnt());
-		if (nodo1.getAnt().getIzq() == nodo1) {
-			nodo1.getAnt().setIzq(nodo2);
-		} else {
-			nodo1.getAnt().setDer(nodo2);
-		}
+		Nodo aux = new Nodo(nodo1);
+		nodo1.setValor(nodo2.getValor());
+		nodo1.setNumhijos(nodo2.getNumhijos());
+		nodo1.setNumval(nodo2.getNumval());
+		nodo1.setIzq(nodo2.getIzq());
+		nodo1.setDer(nodo2.getDer());
+		nodo1.setAnt(nodo2.getAnt());
 
-		nodo1.setAnt(antN2);
-		if (antN2.getIzq() == nodo2) {
-			antN2.setIzq(nodo1);
-		} else {
-			antN2.setDer(nodo1);
-		}
+		nodo2.setValor(aux.getValor());
+		nodo2.setNumhijos(aux.getNumhijos());
+		nodo2.setNumval(aux.getNumval());
+		nodo2.setIzq(aux.getIzq());
+		nodo2.setDer(aux.getDer());
+		nodo2.setAnt(aux.getAnt());
 	}
 
 	public Graph getTreeView() {

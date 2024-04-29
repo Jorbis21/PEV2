@@ -8,7 +8,6 @@
     <fullyQualifiedTypeName name="src.mutacion.IMutacion"/>
     <fullyQualifiedTypeName name="src.cruce.ICruce"/>
     <fullyQualifiedTypeName name="src.seleccion.ISeleccion"/>
-    <fullyQualifiedTypeName name="src.arbol.Nodo"/>
     <fullyQualifiedTypeName name="src.utils.Pair"/>
     <fullyQualifiedTypeName name="java.util.Collections"/>
     <fullyQualifiedTypeName name="src.bloating.IBloating"/>
@@ -18,4 +17,5 @@
     <fullyQualifiedTypeName name="src.arbol.Arbol"/>
     <fullyQualifiedTypeName name="src.view.GridView"/>
     <fullyQualifiedTypeName name="src.TableroGlobal"/>
+    <fullyQualifiedTypeName name="src.arbol.Nodo"/>
 </qualifiedTypeNameHistroy>

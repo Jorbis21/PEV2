@@ -17,14 +17,14 @@ public class Pair {
   public Pair suma(Pair that, int dimension) {
     this.first += that.first;
     this.second += that.second;
-    if (this.first >= dimension) {
-      this.first %= dimension;
+    if (this.first >= 8) {
+      this.first %= 8;
     }
     if (this.second >= dimension) {
       this.second %= dimension;
     }
     if (this.first < 0) {
-      this.first = dimension - Math.abs(this.first) % dimension;
+      this.first = 8 - Math.abs(this.first) % 8;
     }
     if (this.second < 0) {
       this.second = dimension - Math.abs(this.second) % dimension;
