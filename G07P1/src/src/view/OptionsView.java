@@ -12,6 +12,8 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import src.cruce.ICruce;
+import src.individuo.Individuo;
+import src.individuo.IndividuoFuncion1;
 import src.mutacion.IMutacion;
 import src.seleccion.ISeleccion;
 
@@ -24,7 +26,7 @@ public class OptionsView {
   final boolean shouldFill = false;
 
   // TODO change to the actual classes
-  ArrayList<String> funcionList = new ArrayList<>();
+  ArrayList<Individuo> funcionList = new ArrayList<>();
   String[] funcionNames;
   ArrayList<String> seleccionList = new ArrayList<>();
   String[] seleccionNames;
@@ -198,10 +200,13 @@ public class OptionsView {
 
   // TODO change to the actual classes
   private void initArrayLists() {
-    funcionList.add("Funcion 1");
-    funcionList.add("Funcion 2");
-    funcionList.add("Funcion 3");
-    funcionNames = funcionList.toArray(new String[0]);
+    funcionList.add(new IndividuoFuncion1());
+
+    funcionNames = new String[funcionList.size()];
+    for (Individuo individuo : funcionList) {
+      funcionNames[funcionList.indexOf(individuo)] = individuo.toString();
+    }
+    
 
     seleccionList.add("Seleccion 1");
     seleccionList.add("Seleccion 2");
