@@ -1,1 +1,5 @@
 /bin/
+
+## ignore metadata files
+*.metadata
+
