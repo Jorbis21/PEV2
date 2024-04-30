@@ -27,14 +27,14 @@ public abstract class Individuo<T> {
     this.tamGenes = new ArrayList<Integer>();
     int tamTotal = 0;
     this.dimension = dimension;
-    for(int i = 0; i < dimension; i++){
-      int aux = tamGen(precision, min.get(i), max.get(i));
-      tamGenes.add(aux);
-      tamTotal += aux;
+    
+    for (int i = 0; i < dimension; i++) {
+      int tamGen = tamGen(precision, min.get(i), max.get(i));
+      this.tamGenes.add(tamGen);
+      tamTotal += tamGen;
     }
-    Individuo.tamCromosoma = tamTotal;
 
-    this.fitness = calcularFitness();
+    Individuo.tamCromosoma = tamTotal;
 	}
   
   public Individuo(Individuo<T> i){

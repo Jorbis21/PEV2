@@ -25,6 +25,8 @@ public class OptionsView {
   // grid baglayout variables
   final boolean shouldFill = false;
 
+  double precision = 0.001;
+
   // TODO change to the actual classes
   ArrayList<Individuo> funcionList = new ArrayList<>();
   String[] funcionNames;
@@ -200,7 +202,7 @@ public class OptionsView {
 
   // TODO change to the actual classes
   private void initArrayLists() {
-    funcionList.add(new IndividuoFuncion1());
+    funcionList.add(new IndividuoFuncion1(precision));
 
     funcionNames = new String[funcionList.size()];
     for (Individuo individuo : funcionList) {
