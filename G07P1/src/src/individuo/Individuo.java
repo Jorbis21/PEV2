@@ -5,34 +5,36 @@ import java.util.Random;
 
 public abstract class Individuo<T> {
   static protected Random rand  = new Random();
-  static protected ArrayList<Integer> tamGenes;
   static protected int tamCromosoma;
   static protected boolean maximizacion;
   static protected ArrayList<Double> min, max;
   static protected double precision;
 
   protected ArrayList<T> cromosoma;
+  protected ArrayList<Integer> tamGenes;
   protected int dimension;
 	protected double fitness;
   
-  abstract public ArrayList<Double> getFenotipo();
-  abstract public <T> ArrayList<T> getGenotipo();
+  abstract public double getFenotipo(int x);
+  abstract public ArrayList<T> getGenotipo();
 
   public Individuo(ArrayList<Double> min, ArrayList<Double> max, int dimension, boolean tipo, double precision) {
 		Individuo.min = min;
     Individuo.max = max;
     Individuo.maximizacion = tipo;
     Individuo.precision = precision;
-    this.dimension = dimension;
-    Individuo.tamGenes = new ArrayList<Integer>();
 
+    this.tamGenes = new ArrayList<Integer>();
     int tamTotal = 0;
+    this.dimension = dimension;
     for(int i = 0; i < dimension; i++){
       int aux = tamGen(precision, min.get(i), max.get(i));
       tamGenes.add(aux);
       tamTotal += aux;
     }
     Individuo.tamCromosoma = tamTotal;
+
+    this.fitness = calcularFitness();
 	}
   
   public Individuo(Individuo<T> i){
@@ -57,5 +59,7 @@ public abstract class Individuo<T> {
   public int getTamCromosoma() {
     return tamCromosoma;
   }
+
+  public abstract double calcularFitness();
 
 }
