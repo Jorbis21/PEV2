@@ -10,10 +10,14 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import src.cruce.CruceMonopunto;
+import src.cruce.ICruce;
 import src.individuo.Individuo;
 import src.individuo.IndividuoFuncion1;
 import src.mutacion.IMutacion;
 import src.mutacion.MutacionBoolean;
+import src.seleccion.ISeleccion;
+import src.seleccion.SeleccionRuleta;
 
 /* 
  * Class where all the options will be added to a panel. Will be later added to the main frame.
@@ -25,12 +29,11 @@ public class OptionsView {
 
   double precision = 0.001;
 
-  // TODO change to the actual classes
   ArrayList<Individuo> funcionList = new ArrayList<>();
   String[] funcionNames;
-  ArrayList<String> seleccionList = new ArrayList<>();
+  ArrayList<ISeleccion> seleccionList = new ArrayList<>();
   String[] seleccionNames;
-  ArrayList<String> cruceList = new ArrayList<>();
+  ArrayList<ICruce> cruceList = new ArrayList<>();
   String[] cruceNames;
   ArrayList<IMutacion> mutacionList = new ArrayList<>();
   String[] mutacionNames;
@@ -198,25 +201,25 @@ public class OptionsView {
     optionsPanel.add(runButton, c);
   }
 
-  // TODO change to the actual classes
+  // TODO Add all the implemented classes
   private void initArrayLists() {
     funcionList.add(new IndividuoFuncion1(precision));
-
     funcionNames = new String[funcionList.size()];
     for (Individuo individuo : funcionList) {
       funcionNames[funcionList.indexOf(individuo)] = individuo.toString();
     }
     
+    seleccionList.add(new SeleccionRuleta());
+    seleccionNames = new String[seleccionList.size()];
+    for (ISeleccion seleccion : seleccionList) {
+      seleccionNames[seleccionList.indexOf(seleccion)] = seleccion.toString();
+    }
 
-    seleccionList.add("Seleccion 1");
-    seleccionList.add("Seleccion 2");
-    seleccionList.add("Seleccion 3");
-    seleccionNames = seleccionList.toArray(new String[0]);
-
-    cruceList.add("Cruce 1");
-    cruceList.add("Cruce 2");
-    cruceList.add("Cruce 3");
-    cruceNames = cruceList.toArray(new String[0]);
+    cruceList.add(new CruceMonopunto());
+    cruceNames = new String[cruceList.size()];
+    for (ICruce cruce : cruceList) {
+      cruceNames[cruceList.indexOf(cruce)] = cruce.toString();
+    }
 
     mutacionList.add(new MutacionBoolean());
     mutacionNames = new String[mutacionList.size()];
