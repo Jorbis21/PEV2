@@ -1,7 +1,9 @@
 package src.individuo;
 import java.util.ArrayList;
 
-public abstract class IndividuoBinario extends Individuo<Boolean>{
+public abstract class IndividuoBinario extends Individuo{
+
+  protected ArrayList<Boolean> cromosoma;
 
   public IndividuoBinario(ArrayList<Double> min, ArrayList<Double> max, int dimension, boolean tipo, double precision) {
     super(min, max, dimension, tipo, precision);

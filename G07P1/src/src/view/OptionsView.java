@@ -2,7 +2,6 @@ package src.view;
 
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
@@ -11,11 +10,10 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import src.cruce.ICruce;
 import src.individuo.Individuo;
 import src.individuo.IndividuoFuncion1;
 import src.mutacion.IMutacion;
-import src.seleccion.ISeleccion;
+import src.mutacion.MutacionBoolean;
 
 /* 
  * Class where all the options will be added to a panel. Will be later added to the main frame.
@@ -34,7 +32,7 @@ public class OptionsView {
   String[] seleccionNames;
   ArrayList<String> cruceList = new ArrayList<>();
   String[] cruceNames;
-  ArrayList<String> mutacionList = new ArrayList<>();
+  ArrayList<IMutacion> mutacionList = new ArrayList<>();
   String[] mutacionNames;
 
   JPanel optionsPanel;
@@ -220,10 +218,11 @@ public class OptionsView {
     cruceList.add("Cruce 3");
     cruceNames = cruceList.toArray(new String[0]);
 
-    mutacionList.add("Mutacion 1");
-    mutacionList.add("Mutacion 2");
-    mutacionList.add("Mutacion 3");
-    mutacionNames = mutacionList.toArray(new String[0]);
+    mutacionList.add(new MutacionBoolean());
+    mutacionNames = new String[mutacionList.size()];
+    for (IMutacion mutacion : mutacionList) {
+      mutacionNames[mutacionList.indexOf(mutacion)] = mutacion.toString();
+    }
   }
 
   public JPanel getOptionsPanel() {

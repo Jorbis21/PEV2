@@ -3,20 +3,19 @@ package src.individuo;
 import java.util.ArrayList;
 import java.util.Random;
 
-public abstract class Individuo<T> {
+public abstract class Individuo {
   static protected Random rand  = new Random();
   static protected int tamCromosoma;
   static protected boolean maximizacion;
   static protected ArrayList<Double> min, max;
   static protected double precision;
 
-  protected ArrayList<T> cromosoma;
   protected ArrayList<Integer> tamGenes;
   protected int dimension;
 	protected double fitness;
   
   abstract public double getFenotipo(int x);
-  abstract public ArrayList<T> getGenotipo();
+  abstract public <T> ArrayList<T> getGenotipo();
 
   public Individuo(ArrayList<Double> min, ArrayList<Double> max, int dimension, boolean tipo, double precision) {
 		Individuo.min = min;
@@ -37,14 +36,9 @@ public abstract class Individuo<T> {
     Individuo.tamCromosoma = tamTotal;
 	}
   
-  public Individuo(Individuo<T> i){
-    this.cromosoma = new ArrayList<T>();
+  public Individuo(Individuo i){
     this.dimension = i.dimension;
 		this.fitness = i.fitness;
-
-    for (int index = 0; index < i.cromosoma.size(); index++) {
-      this.cromosoma.add(i.cromosoma.get(index));
-    }
   }
 
   public int tamGen(double precision, double min, double max) {

@@ -13,7 +13,7 @@ public class IndividuoFuncion1 extends IndividuoBinario {
   public IndividuoFuncion1(double precision) {
     super(MINIMUM, MAXIMUM, DIM, MAXIMICIZACION, precision);
     this.fitness = calcularFitness();
-  } 
+  }
 
   public IndividuoFuncion1(IndividuoFuncion1 i) {
     super(i);
@@ -26,6 +26,7 @@ public class IndividuoFuncion1 extends IndividuoBinario {
   }
 
   @Override
+  @SuppressWarnings("unchecked")
   public ArrayList<Boolean> getGenotipo() {
     return cromosoma;
   }
