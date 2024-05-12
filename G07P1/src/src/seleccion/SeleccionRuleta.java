@@ -10,26 +10,32 @@ public class SeleccionRuleta implements ISeleccion{
 
   @Override
   public ArrayList<Individuo> select(ArrayList<Individuo> poblacion, Random random) {
-    ArrayList<Individuo> seleccionados = new ArrayList<>();
-    ArrayList<Double> fitness = new ArrayList<>();
-    double sumaFitness = 0;
+
+    double totalFitness = 0;
+    ArrayList<Individuo> selected = new ArrayList<>();
     
-    for (Individuo individuo : poblacion) {
-      fitness.add(individuo.getFitness());
-      sumaFitness += individuo.getFitness();
+    ArrayList<Individuo> sortedPob = new ArrayList<>();
+    sortedPob.addAll(poblacion);
+    Utils.sortSample(sortedPob);
+
+    ArrayList<Double> fitness = new ArrayList<>();
+    for(int i = 0; i < sortedPob.size(); i++)
+      fitness.add(sortedPob.get(i).getFitness());
+
+    for(int i = 0; i < fitness.size(); i++)
+			totalFitness += fitness.get(i);
+
+    for(int i = 0; i < sortedPob.size(); i++)
+			fitness.set(i, (fitness.get(i) / totalFitness) + (i > 0 ? fitness.get(i-1) : 0));
+    
+    for(int i = 0; i < sortedPob.size(); i++){
+      double r = random.nextDouble();
+      int index = Utils.findInterval(r, fitness);
+      Individuo ind = sortedPob.get(index);
+      selected.add(ind.build(ind, ind.getGenotipo()));
     }
 
-    for(int i = 0; i < poblacion.size(); ++i) {
-      fitness.set(i, ((fitness.get(i) / sumaFitness) + (i == 0 ? 0 : fitness.get(i - 1))));
-    }
-
-    for(int i = 0; i < poblacion.size(); ++i) {
-      double randomValue = random.nextDouble();
-      int index = Utils.findInterval(randomValue, fitness);
-      seleccionados.add(poblacion.get(index));
-    }
-
-    return seleccionados;
+    return selected;
   }
 
   

@@ -10,6 +10,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import src.AlgoritmoGenetico;
 import src.cruce.CruceMonopunto;
 import src.cruce.ICruce;
 import src.individuo.Individuo;
@@ -18,6 +19,7 @@ import src.mutacion.IMutacion;
 import src.mutacion.MutacionBoolean;
 import src.seleccion.ISeleccion;
 import src.seleccion.SeleccionRuleta;
+import src.seleccion.SeleccionTruncamiento;
 
 /* 
  * Class where all the options will be added to a panel. Will be later added to the main frame.
@@ -26,8 +28,11 @@ import src.seleccion.SeleccionRuleta;
 public class OptionsView {
   // grid baglayout variables
   final boolean shouldFill = false;
-
+  
   double precision = 0.001;
+
+  AlgoritmoGenetico ag;
+
 
   ArrayList<Individuo> funcionList = new ArrayList<>();
   String[] funcionNames;
@@ -199,7 +204,54 @@ public class OptionsView {
     c.gridy = 11; // twelfth row
     c.gridwidth = 2; // 2 columns wide
     optionsPanel.add(runButton, c);
+
+    // Mejor Historico Panel -------------------------------------------------------
+    JLabel mejorHistoricoLabel = new JLabel("Mejor Historico:");
+    c.gridx = 0; // leftmost column
+    c.gridy = 12; // thirteenth row
+    c.gridwidth = 1; // 1 column wide
+    optionsPanel.add(mejorHistoricoLabel, c);
+
+    JLabel mejorHistoricoText = new JLabel("");
+    c.gridx = 1; // rightmost column
+    c.gridy = 12; // thirteenth row
+    optionsPanel.add(mejorHistoricoText, c);
+    
+    runButton.addActionListener(e -> {
+      System.out.println("Run button pressed");
+
+      ag = new AlgoritmoGenetico(Integer.parseInt(tamPobText.getText()),
+                                Integer.parseInt(numGenText.getText()),
+                                Double.parseDouble(probCruceText.getText()) / 100, 
+                                Double.parseDouble(probMutText.getText()) / 100,
+                                Double.parseDouble(elitismoText.getText()) / 100, 
+                                Double.parseDouble(precisionText.getText()),
+                                funcionList.get(funcionCombo.getSelectedIndex()), 
+                                cruceList.get(cruceCombo.getSelectedIndex()),
+                                mutacionList.get(mutacionCombo.getSelectedIndex()), 
+                                seleccionList.get(seleccionCombo.getSelectedIndex()));
+
+      ag.run();
+
+      Individuo mejor = ag.getMejorHistorico();
+			double[] mejorHistoricoArray = ag.getMejorHistoricoArray();
+			double[] mejorGeneracionArray = ag.getMejorGeneracionArray();
+			double[] mediaFitnessArray = ag.getMediaFitnessArray();
+			double[] numGeneraciones = new double[ag.getNumGen()];
+			for (int i = 0; i < ag.getNumGen(); ++i) {
+				numGeneraciones[i] = i;
+			}
+      GraphView.plotLines(numGeneraciones, mejorHistoricoArray, mejorGeneracionArray, mediaFitnessArray);
+
+      String mejorHistorico = "";
+      mejorHistorico = mejor.showable();
+
+      mejorHistoricoText.setText(mejorHistorico);
+    });
+  
   }
+
+
 
   // TODO Add all the implemented classes
   private void initArrayLists() {
@@ -210,6 +262,7 @@ public class OptionsView {
     }
     
     seleccionList.add(new SeleccionRuleta());
+    seleccionList.add(new SeleccionTruncamiento());
     seleccionNames = new String[seleccionList.size()];
     for (ISeleccion seleccion : seleccionList) {
       seleccionNames[seleccionList.indexOf(seleccion)] = seleccion.toString();

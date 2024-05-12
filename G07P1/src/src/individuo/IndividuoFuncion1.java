@@ -20,13 +20,16 @@ public class IndividuoFuncion1 extends IndividuoBinario {
     this.fitness = calcularFitness();
   }
 
-  @Override
-  public String toString() {
-    return "Funcion 1";
+  public <T> IndividuoFuncion1(IndividuoFuncion1 i, ArrayList<Boolean> cromosoma) {
+    super(i, cromosoma);
+    this.fitness = calcularFitness();
+  }
+
+  public Individuo build(IndividuoFuncion1 i, ArrayList<Boolean> cromosoma) {
+    return new IndividuoFuncion1(i, cromosoma);
   }
 
   @Override
-  @SuppressWarnings("unchecked")
   public ArrayList<Boolean> getGenotipo() {
     return cromosoma;
   }
@@ -36,5 +39,28 @@ public class IndividuoFuncion1 extends IndividuoBinario {
     double x1 = getFenotipo(0);
     double x2 = getFenotipo(1);
     return Math.pow(x1, 2) + (2 * Math.pow(x2, 2));
+  }
+
+  @Override
+  public String showable() {
+    double x1 = getFenotipo(0);
+    double x2 = getFenotipo(1);
+    return "X1: " + x1 + " X2: " + x2;
+  }
+
+  @Override
+  @SuppressWarnings("unchecked")
+  public <T> Individuo build(Individuo i, ArrayList<T> valores){
+    return new IndividuoFuncion1((IndividuoFuncion1)i , (ArrayList<Boolean>) valores);
+  }
+
+  @Override
+  public Individuo generaPoblacion(double precision) {
+    return new IndividuoFuncion1(precision);
+  }
+
+  @Override
+  public String toString() {
+    return "Funcion 1";
   }
 }
