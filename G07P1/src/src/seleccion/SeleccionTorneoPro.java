@@ -6,7 +6,7 @@ import java.util.Random;
 import src.individuo.Individuo;
 import src.utils.Utils;
 
-public class SeleccionTorneoDet implements ISeleccion{
+public class SeleccionTorneoPro implements ISeleccion {
 
   final private int tamTournament = 3;
 
@@ -24,8 +24,13 @@ public class SeleccionTorneoDet implements ISeleccion{
       }
 
       // Ordenamos y cogemos el mejor
+      Individuo winner = null;
       sortedTournament = Utils.sortSample(tournament);
-      Individuo winner = sortedTournament.get(0);
+      if (random.nextDouble() < 0.75)
+        winner = sortedTournament.get(0);
+      else
+        winner = sortedTournament.get(tamTournament - 1);
+        
       selected.add(winner);
     }
     return selected;
@@ -33,7 +38,7 @@ public class SeleccionTorneoDet implements ISeleccion{
 
   @Override
   public String toString() {
-    return "Seleccion Torneo Determinista";
+    return "Seleccion Torneo Probabilista";
   }
-  
+
 }

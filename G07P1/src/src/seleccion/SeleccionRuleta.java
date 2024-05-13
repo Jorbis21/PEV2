@@ -13,10 +13,9 @@ public class SeleccionRuleta implements ISeleccion{
 
     double totalFitness = 0;
     ArrayList<Individuo> selected = new ArrayList<>();
-    
     ArrayList<Individuo> sortedPob = new ArrayList<>();
-    sortedPob.addAll(poblacion);
-    Utils.sortSample(sortedPob);
+    
+    sortedPob = Utils.sortSample(poblacion);
 
     ArrayList<Double> fitness = new ArrayList<>();
     for(int i = 0; i < sortedPob.size(); i++)

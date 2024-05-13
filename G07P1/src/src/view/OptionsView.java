@@ -19,8 +19,11 @@ import src.individuo.IndividuoFuncion1;
 import src.mutacion.IMutacion;
 import src.mutacion.MutacionBoolean;
 import src.seleccion.ISeleccion;
+import src.seleccion.SeleccionEstocasticaUniversal;
+import src.seleccion.SeleccionRestos;
 import src.seleccion.SeleccionRuleta;
 import src.seleccion.SeleccionTorneoDet;
+import src.seleccion.SeleccionTorneoPro;
 import src.seleccion.SeleccionTruncamiento;
 
 /* 
@@ -30,11 +33,10 @@ import src.seleccion.SeleccionTruncamiento;
 public class OptionsView {
   // grid baglayout variables
   final boolean shouldFill = false;
-  
+
   double precision = 0.001;
 
   AlgoritmoGenetico ag;
-
 
   ArrayList<Individuo> funcionList = new ArrayList<>();
   String[] funcionNames;
@@ -218,31 +220,31 @@ public class OptionsView {
     c.gridx = 1; // rightmost column
     c.gridy = 12; // thirteenth row
     optionsPanel.add(mejorHistoricoText, c);
-    
+
     runButton.addActionListener(e -> {
       System.out.println("Run button pressed");
 
       ag = new AlgoritmoGenetico(Integer.parseInt(tamPobText.getText()),
-                                Integer.parseInt(numGenText.getText()),
-                                Double.parseDouble(probCruceText.getText()) / 100, 
-                                Double.parseDouble(probMutText.getText()) / 100,
-                                Double.parseDouble(elitismoText.getText()) / 100, 
-                                Double.parseDouble(precisionText.getText()),
-                                funcionList.get(funcionCombo.getSelectedIndex()), 
-                                cruceList.get(cruceCombo.getSelectedIndex()),
-                                mutacionList.get(mutacionCombo.getSelectedIndex()), 
-                                seleccionList.get(seleccionCombo.getSelectedIndex()));
+          Integer.parseInt(numGenText.getText()),
+          Double.parseDouble(probCruceText.getText()) / 100,
+          Double.parseDouble(probMutText.getText()) / 100,
+          Double.parseDouble(elitismoText.getText()) / 100,
+          Double.parseDouble(precisionText.getText()),
+          funcionList.get(funcionCombo.getSelectedIndex()),
+          cruceList.get(cruceCombo.getSelectedIndex()),
+          mutacionList.get(mutacionCombo.getSelectedIndex()),
+          seleccionList.get(seleccionCombo.getSelectedIndex()));
 
       ag.run();
 
       Individuo mejor = ag.getMejorHistorico();
-			double[] mejorHistoricoArray = ag.getMejorHistoricoArray();
-			double[] mejorGeneracionArray = ag.getMejorGeneracionArray();
-			double[] mediaFitnessArray = ag.getMediaFitnessArray();
-			double[] numGeneraciones = new double[ag.getNumGen()];
-			for (int i = 0; i < ag.getNumGen(); ++i) {
-				numGeneraciones[i] = i;
-			}
+      double[] mejorHistoricoArray = ag.getMejorHistoricoArray();
+      double[] mejorGeneracionArray = ag.getMejorGeneracionArray();
+      double[] mediaFitnessArray = ag.getMediaFitnessArray();
+      double[] numGeneraciones = new double[ag.getNumGen()];
+      for (int i = 0; i < ag.getNumGen(); ++i) {
+        numGeneraciones[i] = i;
+      }
       GraphView.plotLines(numGeneraciones, mejorHistoricoArray, mejorGeneracionArray, mediaFitnessArray);
 
       String mejorHistorico = "";
@@ -252,8 +254,6 @@ public class OptionsView {
     });
   }
 
-
-
   // TODO Add all the implemented classes
   private void initArrayLists() {
     funcionList.add(new IndividuoFuncion1(precision));
@@ -261,11 +261,14 @@ public class OptionsView {
     for (Individuo individuo : funcionList) {
       funcionNames[funcionList.indexOf(individuo)] = individuo.toString();
     }
-    
+
     seleccionList.add(new SeleccionRuleta());
     seleccionList.add(new SeleccionTorneoDet());
+    seleccionList.add(new SeleccionTorneoPro());
+    seleccionList.add(new SeleccionEstocasticaUniversal());
     seleccionList.add(new SeleccionTruncamiento());
-    
+    seleccionList.add(new SeleccionRestos());
+
     seleccionNames = new String[seleccionList.size()];
     for (ISeleccion seleccion : seleccionList) {
       seleccionNames[seleccionList.indexOf(seleccion)] = seleccion.toString();

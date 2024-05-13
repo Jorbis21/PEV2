@@ -21,8 +21,6 @@ public class MainView {
 		windowPanel.setSize(new Dimension(1600, 800));
 
 		window.add(windowPanel);
-
-		
 		
 		// Graph panel ---------------------------------------------------------------------------------
 		JPanel graphPanel = new JPanel();
@@ -31,9 +29,6 @@ public class MainView {
 		Plot2DPanel plot = new GraphView().getPlot();
 		graphPanel.add(plot);
 		windowPanel.add(graphPanel);
-
-
-
 
 		// Option panel ---------------------------------------------------------------------------------
 		
