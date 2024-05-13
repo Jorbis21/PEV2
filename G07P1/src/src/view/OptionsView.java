@@ -12,6 +12,7 @@ import javax.swing.JTextField;
 
 import src.AlgoritmoGenetico;
 import src.cruce.CruceMonopunto;
+import src.cruce.CruceUniforme;
 import src.cruce.ICruce;
 import src.individuo.Individuo;
 import src.individuo.IndividuoFuncion1;
@@ -19,6 +20,7 @@ import src.mutacion.IMutacion;
 import src.mutacion.MutacionBoolean;
 import src.seleccion.ISeleccion;
 import src.seleccion.SeleccionRuleta;
+import src.seleccion.SeleccionTorneoDet;
 import src.seleccion.SeleccionTruncamiento;
 
 /* 
@@ -248,7 +250,6 @@ public class OptionsView {
 
       mejorHistoricoText.setText(mejorHistorico);
     });
-  
   }
 
 
@@ -262,13 +263,16 @@ public class OptionsView {
     }
     
     seleccionList.add(new SeleccionRuleta());
+    seleccionList.add(new SeleccionTorneoDet());
     seleccionList.add(new SeleccionTruncamiento());
+    
     seleccionNames = new String[seleccionList.size()];
     for (ISeleccion seleccion : seleccionList) {
       seleccionNames[seleccionList.indexOf(seleccion)] = seleccion.toString();
     }
 
     cruceList.add(new CruceMonopunto());
+    cruceList.add(new CruceUniforme());
     cruceNames = new String[cruceList.size()];
     for (ICruce cruce : cruceList) {
       cruceNames[cruceList.indexOf(cruce)] = cruce.toString();
