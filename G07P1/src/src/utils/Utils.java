@@ -14,7 +14,7 @@ public class Utils {
 	 * 
 	 * @ return ArrayList<Boolean>
 	 */
-	public static <T> ArrayList<T> deepCopy(ArrayList<T> values) { // TODO si la convergencia es muy rapida es por esto
+	public static <T> ArrayList<T> deepCopy(ArrayList<T> values) {
 		ArrayList<T> copyArr = new ArrayList<>();
 		for (T value : values) {
 			copyArr.add(value);

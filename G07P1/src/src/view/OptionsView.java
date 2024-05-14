@@ -16,6 +16,7 @@ import src.cruce.CruceUniforme;
 import src.cruce.ICruce;
 import src.individuo.Individuo;
 import src.individuo.IndividuoFuncion1;
+import src.individuo.IndividuoFuncion2;
 import src.mutacion.IMutacion;
 import src.mutacion.MutacionBoolean;
 import src.seleccion.ISeleccion;
@@ -257,6 +258,7 @@ public class OptionsView {
   // TODO Add all the implemented classes
   private void initArrayLists() {
     funcionList.add(new IndividuoFuncion1(precision));
+    funcionList.add(new IndividuoFuncion2(precision));
     funcionNames = new String[funcionList.size()];
     for (Individuo individuo : funcionList) {
       funcionNames[funcionList.indexOf(individuo)] = individuo.toString();
