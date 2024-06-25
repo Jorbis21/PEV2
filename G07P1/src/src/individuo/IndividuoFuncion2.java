@@ -34,7 +34,7 @@ public class IndividuoFuncion2 extends IndividuoBinario{
   public double calcularFitness() {
     double x1 = getFenotipo(0);
     double x2 = getFenotipo(1);
-    return Math.sin(x2)*(Math.pow(Math.E, Math.pow(1-Math.cos(x1), 2))) + Math.cos(x1)*(Math.pow(Math.E, Math.pow(1-Math.sin(x2), 2))) + Math.pow(x1-x2, 2);
+    return Math.sin(x2) * Math.exp(Math.pow(1 - Math.cos(x1), 2)) + Math.cos(x1) * Math.exp(Math.pow(1 - Math.sin(x2), 2)) + Math.pow(x1 - x2, 2);
   }
 
   @Override
